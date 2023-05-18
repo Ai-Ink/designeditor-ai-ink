@@ -34,7 +34,7 @@ const SelectEditor = () => {
             flexDirection="column"
             gap="0.5rem"
           >
-            <Images size={34} />
+            <Images size={34} color="red" />
             <Box>Graphic</Box>
           </Box>
           <Box
@@ -54,7 +54,7 @@ const SelectEditor = () => {
             flexDirection="column"
             gap="0.5rem"
           >
-            <Presentation size={36} />
+            <Presentation size={36} color="red" />
             <Box>Presentation</Box>
           </Box>
           <Box
@@ -70,7 +70,7 @@ const SelectEditor = () => {
             flexDirection="column"
             gap="0.5rem"
           >
-            <Video size={36} />
+            <Video size={36} color="red" />
             <Box>Video</Box>
           </Box>
         </Box>
@@ -80,7 +80,12 @@ const SelectEditor = () => {
           justifyContent="center"
           padding="2rem"
         >
-          <Button width="180px" onClick={() => setEditorType(selectedEditor)}>
+          <Button
+            width="180px"
+            color="white"
+            bgColor="black"
+            onClick={() => setEditorType(selectedEditor)}
+          >
             Continue
           </Button>
         </Box>

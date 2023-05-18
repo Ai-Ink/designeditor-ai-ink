@@ -1,16 +1,19 @@
 import React from 'react';
-import {Box, Button, Slider, Input, Tooltip} from '@chakra-ui/react';
 import {
-  Layers,
-  Expand,
-  Compress,
-  RemoveCircleOutline,
-  AddCircleOutline,
-  Refresh,
-  Undo,
-  Redo,
-  TimePast,
-} from 'react-icons/io5';
+  Box,
+  Button,
+  Slider,
+  Input,
+  Tooltip,
+  InputGroup,
+  InputRightAddon,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderMark,
+} from '@chakra-ui/react';
+import Icons from '@/components/Icons';
+import {useEditor, useZoomRatio} from '@layerhub-io/react';
 
 const Container = ({children}) => {
   return (
@@ -26,6 +29,17 @@ const Container = ({children}) => {
   );
 };
 
+interface Options {
+  zoomRatio: number;
+  zoomRatioTemp: number;
+}
+
+const labelStyles = {
+  mt: '2',
+  ml: '-2.5',
+  fontSize: 'sm',
+};
+
 const Common = () => {
   const zoomMin = 10;
   const zoomMax = 240;
@@ -35,6 +49,9 @@ const Common = () => {
   });
   const editor = useEditor();
   const zoomRatio = useZoomRatio();
+
+  const [sliderValue, setSliderValue] = React.useState(5);
+  const [showTooltip, setShowTooltip] = React.useState(false);
 
   React.useEffect(() => {
     setOptions({...options, zoomRatio: Math.round(zoomRatio * 100)});
@@ -75,7 +92,7 @@ const Common = () => {
     <Container>
       <div>
         <Button variant="unstyled" size="sm">
-          <Layers size={20} />
+          <Icons.Layers size={20} color="black" />
         </Button>
       </div>
       <div
@@ -86,27 +103,28 @@ const Common = () => {
         }}
       >
         <Button variant="unstyled" size="sm">
-          <Expand size={16} />
+          <Icons.Expand size={16} color="black" />
         </Button>
         <Button
           variant="unstyled"
           size="sm"
           onClick={() => editor.zoom.zoomToFit()}
         >
-          <Compress size={16} />
+          <Icons.Compress size={16} color="black" />
         </Button>
-        <Box>
-          <Tooltip label="Zoom Out" placement="bottom" hasArrow>
-            <Button
-              variant="unstyled"
-              size="sm"
-              onClick={() => editor.zoom.zoomOut()}
-            >
-              <RemoveCircleOutline size={24} />
-            </Button>
-          </Tooltip>
-        </Box>
-        <Slider
+        <Box display="flex" alignItems="center">
+          <Box>
+            <Tooltip label="Zoom Out" placement="bottom" hasArrow>
+              <Button
+                variant="unstyled"
+                size="md"
+                onClick={() => editor.zoom.zoomOut()}
+              >
+                <Icons.RemoveCircleOutline size={24} color="black" />
+              </Button>
+            </Tooltip>
+          </Box>
+          {/* <Slider
           style={{width: '140px'}}
           value={[options.zoomRatio]}
           onChange={({value}) =>
@@ -114,62 +132,123 @@ const Common = () => {
           }
           min={zoomMin}
           max={zoomMax}
-        />
-        <Box>
-          <Tooltip label="Zoom In" placement="bottom" hasArrow>
-            <Button
-              variant="unstyled"
-              size="sm"
-              onClick={() => editor.zoom.zoomIn()}
+        /> */}
+          <Box width="200px" mr="1">
+            <Slider
+              id="slider"
+              value={options.zoomRatio}
+              min={zoomMin}
+              max={zoomMax}
+              colorScheme="teal"
+              onChange={(value) =>
+                applyZoomRatio('zoomRatio', {target: {value: value[0]}})
+              }
+              onMouseEnter={() => setShowTooltip(true)}
+              onMouseLeave={() => setShowTooltip(false)}
             >
-              <AddCircleOutline size={24} />
-            </Button>
-          </Tooltip>
+              <SliderMark value={25} mt="1" ml="-2.5" fontSize="sm">
+                25%
+              </SliderMark>
+              <SliderMark value={50} mt="1" ml="-2.5" fontSize="sm">
+                50%
+              </SliderMark>
+              <SliderMark value={75} mt="1" ml="-2.5" fontSize="sm">
+                75%
+              </SliderMark>
+              <SliderTrack>
+                <SliderFilledTrack />
+              </SliderTrack>
+              <Tooltip
+                hasArrow
+                bg="teal.500"
+                color="white"
+                placement="top"
+                isOpen={showTooltip}
+                label={`${sliderValue}%`}
+              >
+                <SliderThumb />
+              </Tooltip>
+            </Slider>
+          </Box>
+
+          <Box>
+            <Tooltip label="Zoom In" placement="bottom" hasArrow>
+              <Button
+                variant="unstyled"
+                size="sm"
+                onClick={() => editor.zoom.zoomIn()}
+              >
+                <Icons.AddCircleOutline size={24} color="black" />
+              </Button>
+            </Tooltip>
+          </Box>
+          {/* <InputGroup>
+            <Input
+              type="number"
+              style={{
+                backgroundColor: 'white',
+                color: 'black',
+                textAlign: 'center',
+                paddingLeft: 0,
+                paddingRight: 0,
+                borderBottomColor: 'rgba(0,0,0,0.15)',
+                borderTopColor: 'rgba(0,0,0,0.15)',
+                borderRightColor: 'rgba(0,0,0,0.15)',
+                borderLeftColor: 'rgba(0,0,0,0.15)',
+                borderTopWidth: '1px',
+                borderBottomWidth: '1px',
+                borderRightWidth: '1px',
+                borderLeftWidth: '1px',
+                height: '20px',
+                width: '52px',
+              }}
+              size="medium"
+              max={zoomMax}
+              min={zoomMin}
+              onChange={(e) =>
+                handleChange('zoomRatioTemp', parseFloat(e.target.value))
+              }
+              onKeyUp={(e) => applyZoomRatio('zoomRatio', e)}
+              value={options.zoomRatioTemp}
+            />
+            <InputRightAddon
+              children="%"
+              style={{
+                backgroundColor: 'gray',
+                color: 'black',
+                textAlign: 'center',
+                paddingLeft: 0,
+                paddingRight: 0,
+                borderBottomColor: 'rgba(0,0,0,0.15)',
+                borderTopColor: 'rgba(0,0,0,0.15)',
+                borderRightColor: 'rgba(0,0,0,0.15)',
+                borderLeftColor: 'rgba(0,0,0,0.15)',
+                borderTopWidth: '1px',
+                borderBottomWidth: '1px',
+                borderRightWidth: '1px',
+                borderLeftWidth: '1px',
+                height: '20px',
+                width: '52px',
+              }}
+              size="xs"
+            />
+          </InputGroup> */}
         </Box>
-        <Input
-          type="number"
-          endAdornment="%"
-          style={{
-            backgroundColor: '#ffffff',
-            textAlign: 'center',
-            paddingLeft: 0,
-            paddingRight: 0,
-            borderBottomColor: 'rgba(0,0,0,0.15)',
-            borderTopColor: 'rgba(0,0,0,0.15)',
-            borderRightColor: 'rgba(0,0,0,0.15)',
-            borderLeftColor: 'rgba(0,0,0,0.15)',
-            borderTopWidth: '1px',
-            borderBottomWidth: '1px',
-            borderRightWidth: '1px',
-            borderLeftWidth: '1px',
-            height: '20px',
-            width: '52px',
-            paddingRight: 0,
-          }}
-          size="xs"
-          max={zoomMax}
-          min={zoomMin}
-          onChange={(e) =>
-            handleChange('zoomRatioTemp', parseFloat(e.target.value))
-          }
-          onKeyUp={(e) => applyZoomRatio('zoomRatio', e)}
-          value={options.zoomRatioTemp}
-        />
       </div>
       <div
         style={{display: 'flex', alignItems: 'center', justifyContent: 'end'}}
       >
         <Button variant="unstyled" size="sm">
-          <Refresh size={16} />
+          <Icons.Refresh size={16} color="black" />
         </Button>
         <Button variant="unstyled" size="sm">
-          <Undo size={22} />
+          <Icons.Undo size={22} color="black" />
         </Button>
         <Button variant="unstyled" size="sm">
-          <Redo size={22} />
+          <Icons.Redo size={22} color="black" />
         </Button>
         <Button variant="unstyled" size="sm">
-          <TimePast size={16} />
+          <Icons.TimePast size={16} color="black" />
         </Button>
       </div>
     </Container>

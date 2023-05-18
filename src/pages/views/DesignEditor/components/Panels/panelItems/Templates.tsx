@@ -3,7 +3,7 @@ import {useEditor} from '@layerhub-io/react';
 import {Box, Flex, Text} from '@chakra-ui/react';
 import {loadTemplateFonts} from '@/utils/fonts';
 import Scrollable from '@/components/Scrollable';
-import AngleDoubleLeftIcon from '@/components/Icons/AngleDoubleLeftIcon';
+import AngleDoubleLeft from '@/components/Icons/AngleDoubleLeft';
 import useSetIsSidebarOpen from '@/hooks/useSetIsSidebarOpen';
 import useDesignEditorContext from '@/hooks/useDesignEditorContext';
 import {useSelector} from 'react-redux';
@@ -72,7 +72,7 @@ export default function TemplateSelector() {
           onClick={() => setIsSidebarOpen(false)}
           _hover={{opacity: 0.7}}
         >
-          <AngleDoubleLeftIcon boxSize={6} />
+          <AngleDoubleLeft size={6} color="black" />
         </Flex>
       </Flex>
       <Scrollable>

@@ -21,7 +21,11 @@ import {
 } from '@dnd-kit/modifiers';
 import SceneItem from './SceneItem';
 import {Box} from '@chakra-ui/react';
+
+import Add from '@/components/Icons/Add';
 import useContextMenuTimelineRequest from '@/hooks/useContextMenuTimelineRequest';
+import useDesignEditorPages from '@/hooks/useDesignEditorScenes';
+import {DesignEditorContext} from '@/contexts/DesignEditor';
 import SceneContextMenu from './SceneContextMenu';
 
 const Scenes = () => {
@@ -37,6 +41,7 @@ const Scenes = () => {
   const frame = useFrame();
   const [draggedScene, setDraggedScene] = React.useState<IScene | null>(null);
   const contextMenuTimelineRequest = useContextMenuTimelineRequest();
+  const [currentPreview, setCurrentPreview] = React.useState('');
 
   const sensors = [
     useSensor(PointerSensor, {
@@ -234,7 +239,7 @@ const Scenes = () => {
                   cursor: 'pointer',
                 }}
               >
-                <Add size={20} />
+                <Add size={20} color="black" />
               </div>
             </div>
           </SortableContext>

@@ -43,7 +43,7 @@ const Opacity = () => {
     <Popover>
       <PopoverTrigger>
         <Button variant="unstyled" size="sm">
-          <OpacityIcon size={24} />
+          <OpacityIcon size={24} color="black" />
         </Button>
       </PopoverTrigger>
       <PopoverContent>

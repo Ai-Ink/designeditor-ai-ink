@@ -4,11 +4,11 @@ import {Box, Input, Spinner} from '@chakra-ui/react';
 import Scrollable from '@/components/Scrollable';
 import InfiniteScrolling from '@/components/InfiniteScrolling';
 import {IStaticImage} from '@layerhub-io/types';
-import SearchIcon from '@/components/Icons/SearchIcon';
+import Search from '@/components/Icons/Search';
 import LazyLoadImage from '@/components/LazyLoadImage';
-import AngleDoubleLeftIcon from '@/components/Icons/AngleDoubleLeftIcon';
+import AngleDoubleLeft from '@/components/Icons/AngleDoubleLeft';
 import useSetIsSidebarOpen from '@/hooks/useSetIsSidebarOpen';
-import {getPixabayImages} from '@/services/api';
+import api from '@/services/api';
 
 const Pixabay = () => {
   const editor = useEditor();
@@ -36,7 +36,7 @@ const Pixabay = () => {
     async (reset?: boolean) => {
       setIsLoading(true);
 
-      const newImages = await getPixabayImages({
+      const newImages = await api.getPixabayImages({
         query: category || 'nature',
         perPage: 12,
         page: pageNumber,
@@ -82,7 +82,7 @@ const Pixabay = () => {
           onClick={() => setIsSidebarOpen(false)}
           _hover={{opacity: 0.7}}
         >
-          <AngleDoubleLeftIcon boxSize={6} />
+          <AngleDoubleLeft size={6} color="black" />
         </Box>
       </Box>
       <Box padding="1.5rem 1.5rem 1rem">
@@ -94,7 +94,7 @@ const Pixabay = () => {
           onKeyDown={(e) => e.code === 'Enter' && makeSearch()}
           onBlur={makeSearch}
           placeholder="Search"
-          startIcon={<SearchIcon boxSize={4} />}
+          startEnhancer={<Search size={4} color="black" />}
         />
       </Box>
       <Scrollable>

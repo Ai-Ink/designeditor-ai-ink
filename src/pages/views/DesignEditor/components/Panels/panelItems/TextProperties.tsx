@@ -19,7 +19,7 @@ import {loadFonts} from '@/utils/fonts';
 import {defaultTextOptions} from '@/constants/contants';
 import Shadow from './Common/Shadow';
 import {TextOptions} from '@/interfaces/editor';
-import InformationOutlineIcon from '@/components/Icons/InformationOutline';
+import InformationCircleOutline from '@/components/Icons/InformationCircleOutline';
 import SpacingIcon from '@/components/Icons/Spacing';
 import UnderlineIcon from '@/components/Icons/Underline';
 
@@ -112,7 +112,7 @@ const TextProperties = () => {
         padding="1.5rem"
       >
         <Box>Text properties</Box>
-        <InformationOutlineIcon boxSize={6} />
+        <InformationCircleOutline size={24} color="black" />
       </Flex>
       <Box display="grid" gap="0.5rem">
         <Box padding="0 1.5rem">
@@ -155,14 +155,14 @@ const TextProperties = () => {
           onClick={() => handleChange('underline', !activeObject.underline)}
           variant="tertiary"
         >
-          <SpacingIcon boxSize={6} />
+          <SpacingIcon size={6} color="black" />
         </Button>
         <Button
           size="sm"
           onClick={() => handleChange('underline', !activeObject.underline)}
           variant="tertiary"
         >
-          <UnderlineIcon boxSize={6} />
+          <UnderlineIcon size={6} color="black" />
         </Button>
       </Box>
       <Box>
