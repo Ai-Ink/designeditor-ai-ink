@@ -7,8 +7,11 @@ import AngleDoubleLeft from '~/components/Icons/AngleDoubleLeft';
 import Scrollable from '~/components/Scrollable';
 import {graphics} from '~/constants/mock-data';
 import useSetIsSidebarOpen from '~/hooks/useSetIsSidebarOpen';
+import SVGItem from './SVGItem';
+import SVGItemsGrid from './SVGItemsGrid';
 
 const Elements = () => {
+  const [css] = useStyletron();
   const editor = useEditor();
   const setIsSidebarOpen = useSetIsSidebarOpen();
 
@@ -65,13 +68,30 @@ const Elements = () => {
               gridTemplateColumns: '1fr 1fr 1fr 1fr',
             }}
           >
-            {graphics.map((graphic, index) => (
+            {/* {graphics.map((graphic, index) => (
               <ImageItem
                 onClick={() => addObject(graphic)}
                 key={index}
                 preview={graphic.preview}
               />
-            ))}
+            ))} */}
+            <div
+              className={css({
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'flex-start',
+              })}
+            >
+              {graphics.map((graphic, index) => (
+                <SVGItem
+                  key={index}
+                  id={index}
+                  graphic={graphic}
+                  addObject={addObject}
+                />
+              ))}
+            </div>
+            {/* <SVGItemsGrid graphics={graphics} addObject={addObject} /> */}
           </Block>
         </Block>
       </Scrollable>
