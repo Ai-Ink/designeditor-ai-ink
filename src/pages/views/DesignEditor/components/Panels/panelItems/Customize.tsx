@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Box,
   Button,
   Input,
   Modal,
@@ -18,7 +19,6 @@ import {
 } from '@chakra-ui/react';
 import {PlusIcon, SwapHorizontalIcon} from '@chakra-ui/icons';
 import {HexColorPicker} from 'react-colorful';
-import {Block} from 'baseui/block';
 import AngleDoubleLeftIcon from './components/Icons/AngleDoubleLeft';
 import Scrollable from './components/Scrollable';
 import {sampleFrames} from './constants/editor';
@@ -58,39 +58,28 @@ const Customize = () => {
   };
 
   return (
-    <Block
-      style={{
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-      <Block
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          fontWeight: 500,
-          justifyContent: 'space-between',
-          padding: '1.5rem',
-        }}
+    <Box flex={1} display="flex" flexDirection="column">
+      <Box
+        display="flex"
+        alignItems="center"
+        fontWeight={500}
+        justifyContent="space-between"
+        padding="1.5rem"
       >
-        <Block>Customize</Block>
-
-        <Block
+        Customize
+        <Box
           onClick={() => setIsSidebarOpen(false)}
-          style={{
-            cursor: 'pointer',
-            display: 'flex',
-          }}
+          cursor="pointer"
+          display="flex"
         >
-          <AngleDoubleLeftIcon size={18} />
-        </Block>
-      </Block>
+          <AngleDoubleLeftIcon boxSize={18} />
+        </Box>
+      </Box>
       <Scrollable>
-        <Block style={{padding: '0 1.5rem'}}>
-          <Block>
+        <Box padding="0 1.5rem">
+          <Box>
             <ResizeTemplate />
-            <Block
+            <Box
               style={{
                 fontSize: '14px',
                 textAlign: 'center',
@@ -98,79 +87,68 @@ const Customize = () => {
               }}
             >
               1080 x 1920px
-            </Block>
-          </Block>
+            </Box>
+          </Box>
 
-          <Block paddingTop="0.5rem">
-            <div
-              style={{
-                background: '#fafafa',
-                borderRadius: '8px',
-                border: '1px solid #ececf5',
-                padding: '0.45rem 1rem',
-                fontSize: '14px',
-              }}
+          <Box paddingTop="0.5rem">
+            <Box
+              background="#fafafa"
+              borderRadius="8px"
+              border="1px solid #ececf5"
+              padding="0.45rem 1rem"
+              fontSize="14px"
             >
-              <div>Background color</div>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(5, 1fr)',
-                  gap: '0.5rem',
-                  paddingTop: '0.25rem',
-                }}
+              Background color
+              <Box
+                display="grid"
+                gridTemplateColumns="repeat(5, 1fr)"
+                gap="0.5rem"
+                paddingTop="0.25rem"
               >
-                <Block>
-                  <Block
+                <Box>
+                  <Box
                     as="div"
-                    style={{
-                      height: '40px',
-                      width: '40px',
-                      backgroundSize: '100% 100%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      backgroundImage:
-                        'url("https://static.canva.com/web/images/788ee7a68293bd0264fc31f22c31e62d.png")',
-                    }}
+                    height="40px"
+                    width="40px"
+                    backgroundSize="100% 100%"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    cursor="pointer"
+                    backgroundImage="url('https://static.canva.com/web/images/788ee7a68293bd0264fc31f22c31e62d.png')"
                   >
-                    <Block
+                    <Box
                       as="div"
-                      style={{
-                        height: '32px',
-                        width: '32px',
-                        background: '#ffffff',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '1.3rem',
-                      }}
+                      height="32px"
+                      width="32px"
+                      background="#ffffff"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      fontSize="1.3rem"
                     >
                       <PlusIcon boxSize={6} />
-                    </Block>
-                  </Block>
-                </Block>
+                    </Box>
+                  </Box>
+                </Box>
 
                 {colors.map((color) => (
-                  <Block
+                  <Box
                     onClick={() => handleChange('backgroundColor', color)}
                     key={color}
-                    style={{
-                      background: color,
-                      borderRadius: '4px',
-                      border: '1px solid #d7d8e3',
-                      height: '34px',
-                      cursor: 'pointer',
-                    }}
+                    background={color}
+                    borderRadius="4px"
+                    border="1px solid #d7d8e3"
+                    height="34px"
+                    cursor="pointer"
                   />
                 ))}
-              </div>
-            </div>
-          </Block>
-        </Block>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
       </Scrollable>
-    </Block>
+    </Box>
   );
 };
 
@@ -254,16 +232,16 @@ const ResizeTemplate = () => {
               </TabList>
               <TabPanels>
                 <TabPanel>
-                  <Block style={{width: '100%', height: '400px'}}>
+                  <Box style={{width: '100%', height: '400px'}}>
                     <Scrollbar>
-                      <Block
+                      <Box
                         style={{
                           display: 'grid',
                           gridTemplateColumns: '1fr 1fr 1fr',
                         }}
                       >
                         {sampleFrames.map((sampleFrame, index) => (
-                          <Block
+                          <Box
                             onClick={() => setSelectedFrame(sampleFrame)}
                             style={{
                               padding: '0.5rem',
@@ -276,100 +254,95 @@ const ResizeTemplate = () => {
                                 cursor: 'pointer',
                               },
                             }}
-                            key={index}
+                            key={sampleFrame.id}
                           >
-                            <Block
+                            <Box
                               style={{
-                                height: '120px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
+                                width: '100%',
+                                paddingBottom: '100%',
+                                backgroundImage: `url(${sampleFrame.image})`,
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                                borderRadius: '8px',
+                              }}
+                            />
+                            <Box
+                              style={{
+                                fontSize: '14px',
+                                textAlign: 'center',
+                                paddingTop: '0.35rem',
                               }}
                             >
-                              <img
-                                src={sampleFrame.preview}
-                                alt={sampleFrame.name}
-                              />
-                            </Block>
-                            <Block
-                              style={{fontSize: '13px', textAlign: 'center'}}
-                            >
-                              <Block style={{fontWeight: 500}}>
-                                {sampleFrame.name}
-                              </Block>
-                              <Block style={{color: 'rgb(119,119,119)'}}>
-                                {sampleFrame.width} x {sampleFrame.height}px
-                              </Block>
-                            </Block>
-                          </Block>
+                              {sampleFrame.width} x {sampleFrame.height}
+                            </Box>
+                          </Box>
                         ))}
-                      </Block>
+                      </Box>
                     </Scrollbar>
-                  </Block>
+                  </Box>
                 </TabPanel>
                 <TabPanel>
-                  <Block style={{padding: '2rem 2rem'}}>
-                    <Block
-                      style={{
-                        display: 'grid',
-                        gridTemplateColumns: '1fr 50px 1fr',
-                        alignItems: 'end',
-                        fontSize: '14px',
-                      }}
-                    >
+                  <Box
+                    display="grid"
+                    gridTemplateColumns="1fr 1fr"
+                    gridGap="0.75rem"
+                  >
+                    <Box>
+                      <Box
+                        style={{
+                          fontSize: '14px',
+                          paddingBottom: '0.5rem',
+                        }}
+                      >
+                        Width (px)
+                      </Box>
                       <Input
-                        onChange={(e: any) =>
+                        size="sm"
+                        value={desiredFrame.width}
+                        onChange={(e) =>
                           setDesiredFrame({
                             ...desiredFrame,
                             width: e.target.value,
                           })
                         }
-                        value={desiredFrame.width}
-                        startElement={<Box as={WIcon} boxSize={4} />}
-                        size="sm"
                       />
-                      <Button
-                        size="sm"
-                        variant="ghost"
+                    </Box>
+                    <Box>
+                      <Box
                         style={{
-                          height: '32px',
+                          fontSize: '14px',
+                          paddingBottom: '0.5rem',
                         }}
                       >
-                        <Box as={SwapHorizontalIcon} boxSize={6} />
-                      </Button>
+                        Height (px)
+                      </Box>
                       <Input
-                        onChange={(e: any) =>
+                        size="sm"
+                        value={desiredFrame.height}
+                        onChange={(e) =>
                           setDesiredFrame({
                             ...desiredFrame,
                             height: e.target.value,
                           })
                         }
-                        value={desiredFrame.height}
-                        startElement={<Box as={HIcon} boxSize={4} />}
-                        size="sm"
                       />
-                    </Block>
-                  </Block>
+                    </Box>
+                  </Box>
                 </TabPanel>
               </TabPanels>
             </Tabs>
           </ModalBody>
-          <ModalFooter
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              paddingBottom: '2rem',
-            }}
-          >
+          <ModalFooter style={{padding: '1.5rem'}}>
             <Button
-              disabled={!isEnabled}
-              onClick={applyResize}
-              style={{
-                width: '190px',
-              }}
+              size="sm"
+              variant="outline"
+              style={{marginRight: '1rem'}}
+              onClick={onClose}
             >
-              Resize template
+              Cancel
+            </Button>
+            <Button size="sm" disabled={!isEnabled} onClick={applyResize}>
+              Apply
             </Button>
           </ModalFooter>
         </ModalContent>
@@ -377,5 +350,3 @@ const ResizeTemplate = () => {
     </>
   );
 };
-
-export default Customize;
