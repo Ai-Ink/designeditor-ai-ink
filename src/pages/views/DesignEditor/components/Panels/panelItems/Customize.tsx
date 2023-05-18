@@ -67,7 +67,9 @@ const Customize = () => {
         justifyContent="space-between"
         padding="1.5rem"
       >
-        Customize
+        <Text color="black" fontFamily="Poppins" fontSize="20px">
+          Customize
+        </Text>
         <Box
           onClick={() => setIsSidebarOpen(false)}
           cursor="pointer"
@@ -209,7 +211,10 @@ const ResizeTemplate = () => {
         style={{
           width: '100%',
         }}
-        colorScheme="teal"
+        colorScheme="custom"
+        variant="solid"
+        bg="custom.blackButtonBg"
+        color="custom.blackButtonText"
       >
         Resize template
       </Button>

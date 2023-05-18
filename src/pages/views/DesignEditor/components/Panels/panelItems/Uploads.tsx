@@ -73,7 +73,15 @@ const Uploads = () => {
         </Flex>
         <Scrollable>
           <Box padding="0 1.5rem">
-            <Button onClick={handleInputFileRefClick} size="sm" width="100%">
+            <Button
+              onClick={handleInputFileRefClick}
+              size="sm"
+              width="100%"
+              colorScheme="custom"
+              variant="solid"
+              bg="custom.blackButtonBg"
+              color="custom.blackButtonText"
+            >
               Computer
             </Button>
             <input
