@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import {useEditor} from '@layerhub-io/react';
+import {useEditor} from '@/canvascore/react';
 import {Box, Input, Spinner} from '@chakra-ui/react';
 import Scrollable from '@/components/Scrollable';
 import InfiniteScrolling from '@/components/InfiniteScrolling';
-import {IStaticImage} from '@layerhub-io/types';
+import {IStaticImage} from '@/canvascore/types';
 import Search from '@/components/Icons/Search';
 import LazyLoadImage from '@/components/LazyLoadImage';
 import AngleDoubleLeft from '@/components/Icons/AngleDoubleLeft';

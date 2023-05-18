@@ -1,18 +1,28 @@
-import React from "react";
-import { styled } from "@chakra-ui/react";
-import { Theme } from "@chakra-ui/react";
-import { Button, Slider, Input, Box } from "@chakra-ui/react";
-import { useEditor, useZoomRatio } from "@layerhub-io/react";
-import { Tooltip } from "@chakra-ui/react";
-import { BiLayer, BiExpand, BiCompress, BiMinusCircle, BiPlusCircle, BiRefresh, BiUndo, BiRedo, BiTime } from "react-icons/bi";
+import React from 'react';
+import {styled} from '@chakra-ui/react';
+import {Theme} from '@chakra-ui/react';
+import {Button, Slider, Input, Box} from '@chakra-ui/react';
+import {useEditor, useZoomRatio} from '@/canvascore/react';
+import {Tooltip} from '@chakra-ui/react';
+import {
+  BiLayer,
+  BiExpand,
+  BiCompress,
+  BiMinusCircle,
+  BiPlusCircle,
+  BiRefresh,
+  BiUndo,
+  BiRedo,
+  BiTime,
+} from 'react-icons/bi';
 
-const Container = styled("div", {
-  baseStyle: ({ $theme }) => ({
-    height: "50px",
+const Container = styled('div', {
+  baseStyle: ({$theme}) => ({
+    height: '50px',
     background: $theme.colors.white,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   }),
 });
 
@@ -32,13 +42,13 @@ const Common = () => {
   const zoomRatio: number = useZoomRatio();
 
   React.useEffect(() => {
-    setOptions({ ...options, zoomRatio: Math.round(zoomRatio * 100) });
+    setOptions({...options, zoomRatio: Math.round(zoomRatio * 100)});
   }, [zoomRatio]);
 
   const handleChange = (type: string, value: number) => {
     if (editor) {
-      if (type.includes("emp")) {
-        setOptions({ ...options, zoomRatioTemp: value });
+      if (type.includes('emp')) {
+        setOptions({...options, zoomRatioTemp: value});
       }
     }
   };
@@ -46,8 +56,12 @@ const Common = () => {
   const applyZoomRatio = (type: string, e: any) => {
     const value = e.target.value;
     if (editor) {
-      if (value === "") {
-        setOptions({ ...options, zoomRatio: options.zoomRatio, zoomRatioTemp: options.zoomRatio });
+      if (value === '') {
+        setOptions({
+          ...options,
+          zoomRatio: options.zoomRatio,
+          zoomRatioTemp: options.zoomRatio,
+        });
       } else {
         let parsedValue = parseFloat(value);
 
@@ -73,36 +87,50 @@ const Common = () => {
         <Button variant="ghost" size="sm">
           <BiExpand size={16} />
         </Button>
-        <Button variant="ghost" size="sm" onClick={() => editor.zoom.zoomToFit()}>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => editor.zoom.zoomToFit()}
+        >
           <BiCompress size={16} />
         </Button>
         <Box>
           <Tooltip label="Zoom Out" placement="bottom" hasArrow>
-            <Button variant="ghost" size="sm" onClick={() => editor.zoom.zoomOut()}>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => editor.zoom.zoomOut()}
+            >
               <BiMinusCircle size={24} />
             </Button>
           </Tooltip>
         </Box>
         <Slider
           sx={{
-            ".chakra-slider__thumb": {
-              height: "12px",
-              width: "12px",
+            '.chakra-slider__thumb': {
+              height: '12px',
+              width: '12px',
               paddingLeft: 0,
             },
-            ".chakra-slider__track": {
+            '.chakra-slider__track': {
               paddingLeft: 0,
               paddingRight: 0,
             },
           }}
           value={[options.zoomRatio]}
-          onChange={({ value }) => applyZoomRatio("zoomRatio", { target: { value: value[0] } })}
+          onChange={({value}) =>
+            applyZoomRatio('zoomRatio', {target: {value: value[0]}})
+          }
           min={zoomMin}
           max={zoomMax}
         />
         <Box>
           <Tooltip label="Zoom In" placement="bottom" hasArrow>
-            <Button variant="ghost" size="sm" onClick={() => editor.zoom.zoomIn()}>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => editor.zoom.zoomIn()}
+            >
               <BiPlusCircle size={24} />
             </Button>
           </Tooltip>
@@ -112,8 +140,10 @@ const Common = () => {
           size="xs"
           max={zoomMax}
           min={zoomMin}
-          onChange={(e) => handleChange("zoomRatioTemp", parseFloat(e.target.value))}
-          onKeyUp={(e) => applyZoomRatio("zoomRatio", e)}
+          onChange={(e) =>
+            handleChange('zoomRatioTemp', parseFloat(e.target.value))
+          }
+          onKeyUp={(e) => applyZoomRatio('zoomRatio', e)}
           value={options.zoomRatioTemp}
         />
       </Box>

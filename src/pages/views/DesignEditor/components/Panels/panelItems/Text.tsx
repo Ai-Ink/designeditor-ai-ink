@@ -1,9 +1,9 @@
 import React from 'react';
 import {Button, Flex} from '@chakra-ui/react';
-import {useEditor} from '@layerhub-io/react';
+import {useEditor} from '@/canvascore/react';
 import {FontItem} from '@/interfaces/common';
 import {loadFonts} from '@/utils/fonts';
-import {ILayer} from '@layerhub-io/types';
+import {ILayer} from '@/canvascore/types';
 import {nanoid} from 'nanoid';
 import {Box, Image} from '@chakra-ui/react';
 import AngleDoubleLeft from '@/components/Icons/AngleDoubleLeft';

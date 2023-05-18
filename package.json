@@ -24,6 +24,7 @@
     "@layerhub-io/react-custom-scrollbar": "^0.0.1",
     "@layerhub-io/use-timer": "^0.1.1",
     "@reduxjs/toolkit": "^1.8.1",
+    "@supercharge/promise-pool": "^2.4.0",
     "@types/node": "^18.16.1",
     "@types/react": "^18.2.0",
     "@vitejs/plugin-react-swc": "^3.3.0",
@@ -31,7 +32,9 @@
     "axios": "^0.27.2",
     "eslint-config-next": "^13.3.1",
     "eslint-config-prettier": "^8.8.0",
+    "fabric": "^5.3.0",
     "framer-motion": "^10.12.12",
+    "fs-extra": "^11.1.1",
     "i18next": "^21.8.13",
     "immutability-helper": "^3.1.1",
     "install": "^0.13.0",
@@ -47,6 +50,7 @@
     "react-i18next": "^11.18.0",
     "react-icons": "^4.8.0",
     "react-player": "^2.10.1",
+    "react-popover": "^0.5.10",
     "react-redux": "^8.0.1",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.3.0",
@@ -56,5 +60,8 @@
     "use-debounce": "^8.0.4",
     "use-latest": "^1.2.1",
     "vitest": "^0.30.1"
+  },
+  "devDependencies": {
+    "@types/fabric": "^5.3.2"
   }
 }

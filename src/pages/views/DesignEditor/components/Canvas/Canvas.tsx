@@ -1,5 +1,5 @@
 import React from 'react';
-import {Canvas as LayerhubCanvas} from '@layerhub-io/react';
+import {Canvas as LayerhubCanvas} from '@/canvascore/react';
 import Playback from '../Playback';
 import useDesignEditorContext from '@/hooks/useDesignEditorContext';
 import ContextMenu from '../ContextMenu';

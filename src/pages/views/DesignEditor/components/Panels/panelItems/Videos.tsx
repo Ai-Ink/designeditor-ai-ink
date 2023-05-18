@@ -2,7 +2,7 @@ import React from 'react';
 import {Box, Flex, IconButton} from '@chakra-ui/react';
 import {ArrowLeftIcon} from '@chakra-ui/icons';
 import Scrollable from '@/components/Scrollable';
-import {useEditor} from '@layerhub-io/react';
+import {useEditor} from '@/canvascore/react';
 import useSetIsSidebarOpen from '@/hooks/useSetIsSidebarOpen';
 import {getPixabayVideos} from '@/services/pixabay';
 import {getPexelsVideos} from '@/services/pexels';

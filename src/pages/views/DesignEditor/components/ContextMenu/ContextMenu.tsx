@@ -4,7 +4,7 @@ import {
   useActiveObject,
   useContextMenuRequest,
   useEditor,
-} from '@layerhub-io/react';
+} from '@/canvascore/react';
 import BringToFront from '@/components/Icons/BringToFront';
 import Delete from '@/components/Icons/Delete';
 import Duplicate from '@/components/Icons/Duplicate';

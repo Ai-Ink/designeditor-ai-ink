@@ -1,8 +1,8 @@
 import React from 'react';
 import {nanoid} from 'nanoid';
 import {getDefaultTemplate} from '@/constants/design-editor';
-import {useEditor, useFrame} from '@layerhub-io/react';
-import {IScene} from '@layerhub-io/types';
+import {useEditor, useFrame} from '@/canvascore/react';
+import {IScene} from '@/canvascore/types';
 import {
   DndContext,
   closestCenter,

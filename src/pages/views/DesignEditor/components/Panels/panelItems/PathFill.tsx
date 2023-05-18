@@ -4,7 +4,7 @@ import Scrollable from '@/components/Scrollable';
 import {HexColorPicker} from 'react-colorful';
 import {DeleteIcon} from '@chakra-ui/icons';
 import {throttle} from 'lodash';
-import {useActiveObject, useEditor} from '@layerhub-io/react';
+import {useActiveObject, useEditor} from '@/canvascore/react';
 
 const PRESET_COLORS = [
   '#f44336',

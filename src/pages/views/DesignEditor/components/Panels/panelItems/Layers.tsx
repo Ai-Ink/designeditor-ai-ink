@@ -1,9 +1,9 @@
 import React from 'react';
 import {Box} from '@chakra-ui/react';
-import {useEditor, useObjects} from '@layerhub-io/react';
+import {useEditor, useObjects} from '@/canvascore/react';
 import AngleDoubleLeft from '@/components/Icons/AngleDoubleLeft';
 import Scrollable from '@/components/Scrollable';
-import {ILayer} from '@layerhub-io/types';
+import {ILayer} from '@/canvascore/types';
 import Locked from '@/components/Icons/Locked';
 import Unlocked from '@/components/Icons/Unlocked';
 import Eye from '@/components/Icons/Eye';

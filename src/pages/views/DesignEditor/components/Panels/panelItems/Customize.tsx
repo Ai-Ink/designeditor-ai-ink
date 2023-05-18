@@ -24,7 +24,7 @@ import AngleDoubleLeft from '@/components/Icons/AngleDoubleLeft';
 import Scrollable from '@/components/Scrollable';
 import {sampleFrames} from '@/constants/editor';
 import Scrollbar from '@layerhub-io/react-custom-scrollbar';
-import {useEditor, useFrame} from '@layerhub-io/react';
+import {useEditor, useFrame} from '@/canvascore/react';
 import useSetIsSidebarOpen from '@/hooks/useSetIsSidebarOpen';
 import useDesignEditorContext from '@/hooks/useDesignEditorContext';
 

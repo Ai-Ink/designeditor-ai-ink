@@ -2,7 +2,7 @@ import React from 'react';
 import {Box} from '@chakra-ui/react';
 import Common from './Common';
 import useAppContext from '@/hooks/useAppContext';
-import {useActiveObject, useEditor} from '@layerhub-io/react';
+import {useActiveObject, useEditor} from '@/canvascore/react';
 
 const Canvas = () => {
   const [state, setState] = React.useState({fill: '#000000'});

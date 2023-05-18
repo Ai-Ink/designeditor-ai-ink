@@ -3,7 +3,7 @@ import {Box, Flex} from '@chakra-ui/react';
 import Scrollable from '@/components/Scrollable';
 import {DeleteIcon} from '@chakra-ui/icons';
 import {throttle} from 'lodash';
-import {useActiveObject, useEditor} from '@layerhub-io/react';
+import {useActiveObject, useEditor} from '@/canvascore/react';
 import {TEXT_EFFECTS} from '@/constants/design-editor';
 import Outline from './Common/Outline';
 import Shadow from './Common/Shadow';

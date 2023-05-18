@@ -9,7 +9,7 @@ import {
 } from '@/views/DesignEditor/utils/scenes';
 import {useTimer} from '@layerhub-io/use-timer';
 import {getDefaultTemplate} from '@/constants/design-editor';
-import {useEditor, useFrame} from '@layerhub-io/react';
+import {useEditor, useFrame} from '@/canvascore/react';
 
 const TimelineContextMenu = () => {
   const {time, setTime} = useTimer();

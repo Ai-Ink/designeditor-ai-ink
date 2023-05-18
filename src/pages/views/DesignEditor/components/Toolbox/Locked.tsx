@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box, Flex} from '@chakra-ui/react';
-import {useEditor} from '@layerhub-io/react';
+import {useEditor} from '@/canvascore/react';
 import {Tooltip} from '@chakra-ui/react';
 import {Button} from '@chakra-ui/react';
 import UnlockedIcon from '@/components/Icons/Unlocked';

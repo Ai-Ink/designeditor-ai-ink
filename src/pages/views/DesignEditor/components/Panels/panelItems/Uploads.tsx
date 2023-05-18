@@ -4,11 +4,11 @@ import {ArrowLeftIcon} from '@chakra-ui/icons';
 import Scrollable from '@/components/Scrollable';
 import DropZone from '@/components/Dropzone';
 import {Button} from '@chakra-ui/button';
-import {useEditor} from '@layerhub-io/react';
+import {useEditor} from '@/canvascore/react';
 import useSetIsSidebarOpen from '@/hooks/useSetIsSidebarOpen';
 import {nanoid} from 'nanoid';
 import {captureFrame, loadVideoResource} from '@/utils/video';
-import {ILayer} from '@layerhub-io/types';
+import {ILayer} from '@/canvascore/types';
 import {toBase64} from '@/utils/data';
 
 const Uploads = () => {

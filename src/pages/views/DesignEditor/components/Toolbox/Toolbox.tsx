@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {useActiveObject, useEditor} from '@layerhub-io/react';
+import {useActiveObject, useEditor} from '@/canvascore/react';
 import getSelectionType from '@/utils/get-selection-type';
 import {Box} from '@chakra-ui/react';
 import Items from './Items';
 import useAppContext from '@/hooks/useAppContext';
-import {ILayer} from '@layerhub-io/types';
+import {ILayer} from '@/canvascore/types';
 
 const DEFAULT_TOOLBOX = 'Canvas';
 

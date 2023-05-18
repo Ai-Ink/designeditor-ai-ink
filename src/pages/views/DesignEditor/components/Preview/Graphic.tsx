@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box} from '@chakra-ui/react';
-import {useEditor} from '@layerhub-io/react';
+import {useEditor} from '@/canvascore/react';
 
 const Graphic = () => {
   const editor = useEditor();

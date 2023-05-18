@@ -1,4 +1,4 @@
-import {IScene} from '@layerhub-io/types';
+import {IScene} from '@/canvascore/types';
 import React from 'react';
 import {
   ContextMenuSceneRequest,

@@ -1,6 +1,6 @@
 import React from 'react';
 import {DesignEditorContext} from '@/contexts/DesignEditor';
-import {useEditor, useFrame} from '@layerhub-io/react';
+import {useEditor, useFrame} from '@/canvascore/react';
 import {
   DndContext,
   closestCenter,
@@ -18,7 +18,7 @@ import {
   restrictToHorizontalAxis,
 } from '@dnd-kit/modifiers';
 import TimelineItem from './TimelineItem';
-import {IScene} from '@layerhub-io/types';
+import {IScene} from '@/canvascore/types';
 
 const TimelineItems = () => {
   const {currentScene, scenes, currentPreview, setCurrentPreview, setScenes} =

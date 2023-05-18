@@ -13,7 +13,7 @@ import {
   SliderMark,
 } from '@chakra-ui/react';
 import Icons from '@/components/Icons';
-import {useEditor, useZoomRatio} from '@layerhub-io/react';
+import {useEditor, useZoomRatio} from '@/canvascore/react';
 
 const Container = ({children}) => {
   return (

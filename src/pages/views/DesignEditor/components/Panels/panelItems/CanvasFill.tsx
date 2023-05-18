@@ -3,7 +3,7 @@ import {Box, Grid, GridItem} from '@chakra-ui/react';
 import {HexColorPicker} from 'react-colorful';
 import {DeleteIcon} from '@chakra-ui/icons';
 import {throttle} from 'lodash';
-import {useEditor} from '@layerhub-io/react';
+import {useEditor} from '@/canvascore/react';
 
 const PRESET_COLORS = [
   '#f44336',

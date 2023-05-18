@@ -1,0 +1,17 @@
+export {FrameObject} from './Frame';
+export type {FrameOptions} from './Frame';
+export {StaticTextObject} from './StaticText';
+export type {StaticTextOptions} from './StaticText';
+export {StaticImageObject} from './StaticImage';
+export type {StaticImageOptions} from './StaticImage';
+export {StaticPathObject} from './StaticPath';
+export type {StaticPathOptions} from './StaticPath';
+export {BackgroundObject} from './Background';
+export type {BackgroundOptions} from './Background';
+export {BackgroundImageObject} from './BackgroundImage';
+export type {BackgroundImageOptions} from './BackgroundImage';
+export {StaticVideoObject} from './StaticVideo';
+export {StaticAudioObject} from './StaticAudio';
+export type {StaticAudioOptions} from './StaticAudio';
+export type {SvgOptions} from './StaticVector';
+export {default as StaticVectorObject} from './StaticVector';

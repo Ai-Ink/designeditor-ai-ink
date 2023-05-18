@@ -2,7 +2,7 @@ import React from 'react';
 import Search from '@/components/Icons/Search';
 import {Input, InputGroup, InputLeftElement, Box} from '@chakra-ui/react';
 import useAppContext from '@/hooks/useAppContext';
-import {useEditor} from '@layerhub-io/react';
+import {useEditor} from '@/canvascore/react';
 import {loadFonts} from '@/utils/fonts';
 import {groupBy} from 'lodash';
 import Scrollable from '@/components/Scrollable';

@@ -9,7 +9,7 @@ import {
 import {HexColorPicker} from 'react-colorful';
 import {Slider} from '@chakra-ui/react';
 import {Input} from '@chakra-ui/react';
-import {useActiveObject, useEditor} from '@layerhub-io/react';
+import {useActiveObject, useEditor} from '@/canvascore/react';
 
 interface Options {
   angle: number;

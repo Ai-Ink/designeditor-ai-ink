@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Box, Button} from '@chakra-ui/react';
 import Icons from '@/components/Icons';
-import {useZoomRatio} from '@layerhub-io/react';
+import {useZoomRatio} from '@/canvascore/react';
 import {useTimer} from '@layerhub-io/use-timer';
 import useDesignEditorContext from '@/hooks/useDesignEditorContext';
 

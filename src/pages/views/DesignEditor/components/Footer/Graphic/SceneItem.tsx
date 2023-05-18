@@ -1,5 +1,5 @@
 import React from 'react';
-import {IScene} from '@layerhub-io/types';
+import {IScene} from '@/canvascore/types';
 import {Box} from '@chakra-ui/react';
 import {useSortable} from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';

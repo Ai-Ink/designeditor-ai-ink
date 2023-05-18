@@ -1,5 +1,5 @@
 // import React, {useState, useEffect, useCallback} from 'react';
-// import {useActiveObject, useEditor} from '@layerhub-io/react';
+// import {useActiveObject, useEditor} from '@/canvascore/react';
 // import {Input} from 'baseui/input';
 // import {Block} from 'baseui/block';
 // import {ChevronDown} from 'baseui/icon';
@@ -20,7 +20,7 @@
 // import {Slider} from 'baseui/slider';
 // import useAppContext from '@/hooks/useAppContext';
 // import {FONT_SIZES} from '@/constants/editor';
-// import {IStaticText} from '@layerhub-io/types';
+// import {IStaticText} from '@/canvascore/types';
 // import {getTextProperties} from '../../utils/text';
 // import {loadFonts} from '@/utils/fonts';
 // import Scrollbar from '@layerhub-io/react-custom-scrollbar';
@@ -660,7 +660,7 @@
 // ----------------------------------------------------
 
 // import React from "react"
-// import { useActiveObject, useEditor } from "@layerhub-io/react"
+// import { useActiveObject, useEditor } from "@/canvascore/react"
 // import { Input } from "baseui/input"
 // import { Block } from "baseui/block"
 // import { ChevronDown } from "baseui/icon"
@@ -681,7 +681,7 @@
 // import { Slider } from "baseui/slider"
 // import useAppContext from "@/hooks/useAppContext"
 // import { FONT_SIZES } from "@/constants/editor"
-// import { IStaticText } from "@layerhub-io/types"
+// import { IStaticText } from "@/canvascore/types"
 // import { getTextProperties } from "../../utils/text"
 // import { loadFonts } from "@/utils/fonts"
 // import Scrollbar from "@layerhub-io/react-custom-scrollbar"

@@ -1,6 +1,6 @@
 import React from 'react';
 import {nanoid} from 'nanoid';
-import {useEditor, useFrame} from '@layerhub-io/react';
+import {useEditor, useFrame} from '@/canvascore/react';
 import {
   DndContext,
   closestCenter,

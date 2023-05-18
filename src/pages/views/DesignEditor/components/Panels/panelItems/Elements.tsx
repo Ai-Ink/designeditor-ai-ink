@@ -1,5 +1,5 @@
 import React from 'react';
-import {useEditor} from '@layerhub-io/react';
+import {useEditor} from '@/canvascore/react';
 import {Box, Image} from '@chakra-ui/react';
 import AngleDoubleLeft from '@/components/Icons/AngleDoubleLeft';
 import Scrollable from '@/components/Scrollable';

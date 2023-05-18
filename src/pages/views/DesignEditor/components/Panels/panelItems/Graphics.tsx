@@ -3,7 +3,7 @@ import {Box, Button} from '@chakra-ui/react';
 import AngleDoubleLeft from '@/components/Icons/AngleDoubleLeft';
 import Scrollable from '@/components/Scrollable';
 import {vectors} from '@/constants/mock-data';
-import {useEditor} from '@layerhub-io/react';
+import {useEditor} from '@/canvascore/react';
 import useSetIsSidebarOpen from '@/hooks/useSetIsSidebarOpen';
 
 const Graphics = () => {

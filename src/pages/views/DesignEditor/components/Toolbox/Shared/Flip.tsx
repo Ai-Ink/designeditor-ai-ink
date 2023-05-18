@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import FlipHorizontal from '@/components/Icons/FlipHorizontal';
 import FlipVertical from '@/components/Icons/FlipVertical';
-import {useActiveObject, useEditor} from '@layerhub-io/react';
+import {useActiveObject, useEditor} from '@/canvascore/react';
 
 const Flip = () => {
   const editor = useEditor();

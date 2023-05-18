@@ -1,7 +1,6 @@
 import React from 'react';
-import {Box, Button, Checkbox, Flex, Tooltip} from '@chakra-ui/react';
-import {useActiveObject, useEditor} from '@layerhub-io/react';
-import {StatefulPopover, Placement} from 'react-tiny-popover';
+import {Box, Button, Checkbox, Flex, Popover, Tooltip} from '@chakra-ui/react';
+import {useActiveObject, useEditor} from '@/canvascore/react';
 import DeleteIcon from '@/components/Icons/Delete';
 import UnlockedIcon from '@/components/Icons/Unlocked';
 import LockedIcon from '@/components/Icons/Locked';
@@ -14,6 +13,7 @@ import AlignTopIcon from '@/components/Icons/AlignTop';
 import AlignMiddleIcon from '@/components/Icons/AlignMiddle';
 import BringToFrontIcon from '@/components/Icons/BringToFront';
 import SendToBackIcon from '@/components/Icons/SendToBack';
+import AlignBottomIcon from '@/components/Icons/AlignBottom';
 import Opacity from './Shared/Opacity';
 
 const Common = () => {
@@ -88,7 +88,7 @@ const Common = () => {
           size="xs"
           variant="ghost"
         >
-          <DuplicateIcon size={22} />
+          <DuplicateIcon size={22} color="black" />
         </Button>
       </Tooltip>
       <Tooltip label="Delete" placement="bottom">
@@ -97,7 +97,7 @@ const Common = () => {
           size="xs"
           variant="ghost"
         >
-          <DeleteIcon size={24} />
+          <DeleteIcon size={24} color="black" />
         </Button>
       </Tooltip>
     </Flex>
@@ -117,13 +117,13 @@ const CommonLayers = () => {
   }, [activeObject]);
 
   return (
-    <StatefulPopover
-      placement={Placement.BOTTOM_RIGHT}
+    <Popover
+      placement="bottom-end"
       content={() => (
         <Box p="12px" backgroundColor="#ffffff">
           <Flex gridTemplateColumns="1fr 1fr" gridGap="8px">
             <Button
-              startIcon={<BringToFrontIcon size={24} />}
+              startIcon={<BringToFrontIcon size={24} color="black" />}
               onClick={() => editor.objects.bringToFront()}
               size="xs"
               variant="ghost"
@@ -131,7 +131,7 @@ const CommonLayers = () => {
               Bring to front
             </Button>
             <Button
-              startIcon={<SendToBackIcon size={24} />}
+              startIcon={<SendToBackIcon size={24} color="black" />}
               onClick={() => editor.objects.sendToBack()}
               size="xs"
               variant="ghost"
@@ -171,11 +171,11 @@ const CommonLayers = () => {
       <Box>
         <Tooltip label="Layers" placement="bottom">
           <Button size="xs" variant="ghost">
-            <LayersIcon size={19} />
+            <LayersIcon size={19} color="black" />
           </Button>
         </Tooltip>
       </Box>
-    </StatefulPopover>
+    </Popover>
   );
 };
 
@@ -183,8 +183,8 @@ const CommonAlign = () => {
   const editor = useEditor();
 
   return (
-    <StatefulPopover
-      placement={Placement.BOTTOM_RIGHT}
+    <Popover
+      placement="bottom-end"
       content={() => (
         <Box
           p="12px"
@@ -198,42 +198,42 @@ const CommonAlign = () => {
             size="xs"
             variant="ghost"
           >
-            <AlignLeftIcon size={24} />
+            <AlignLeftIcon size={24} color="black" />
           </Button>
           <Button
             onClick={() => editor.objects.alignCenter()}
             size="xs"
             variant="ghost"
           >
-            <AlignCenterIcon size={24} />
+            <AlignCenterIcon size={24} color="black" />
           </Button>
           <Button
             onClick={() => editor.objects.alignRight()}
             size="xs"
             variant="ghost"
           >
-            <AlignRightIcon size={24} />
+            <AlignRightIcon size={24} color="black" />
           </Button>
           <Button
             onClick={() => editor.objects.alignTop()}
             size="xs"
             variant="ghost"
           >
-            <AlignTopIcon size={24} />
+            <AlignTopIcon size={24} color="black" />
           </Button>
           <Button
             onClick={() => editor.objects.alignMiddle()}
             size="xs"
             variant="ghost"
           >
-            <AlignMiddleIcon size={24} />
+            <AlignMiddleIcon size={24} color="black" />
           </Button>
           <Button
             onClick={() => editor.objects.alignBottom()}
             size="xs"
             variant="ghost"
           >
-            <AlignBottomIcon size={24} />
+            <AlignBottomIcon size={24} color="black" />
           </Button>
         </Box>
       )}
@@ -243,11 +243,11 @@ const CommonAlign = () => {
       <Box>
         <Tooltip label="Align" placement="bottom">
           <Button size="xs" variant="ghost">
-            <AlignCenterIcon size={24} />
+            <AlignCenterIcon size={24} color="black" />
           </Button>
         </Tooltip>
       </Box>
-    </StatefulPopover>
+    </Popover>
   );
 };
 
@@ -273,7 +273,7 @@ const LockUnlock = () => {
         size="xs"
         variant="ghost"
       >
-        <UnlockedIcon size={24} />
+        <UnlockedIcon size={24} color="black" />
       </Button>
     </Tooltip>
   ) : (
@@ -286,7 +286,7 @@ const LockUnlock = () => {
         size="xs"
         variant="ghost"
       >
-        <LockedIcon size={24} />
+        <LockedIcon size={24} color="black" />
       </Button>
     </Tooltip>
   );

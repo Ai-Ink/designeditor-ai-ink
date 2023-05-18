@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import {HexColorPicker} from 'react-colorful';
 import Common from './Common';
-import {useActiveObject} from '@layerhub-io/react';
+import {useActiveObject} from '@/canvascore/react';
 import {groupBy} from 'lodash';
 import Flip from './Shared/Flip';
 

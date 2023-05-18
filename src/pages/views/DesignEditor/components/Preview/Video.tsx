@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box} from '@chakra-ui/react';
 import ReactPlayer from 'react-player';
-import {useEditor} from '@layerhub-io/react';
+import {useEditor} from '@/canvascore/react';
 import Loading from '@/components/Loading';
 import useDesignEditorPages from '@/hooks/useDesignEditorScenes';
 

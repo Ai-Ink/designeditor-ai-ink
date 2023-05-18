@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Box, Flex} from '@chakra-ui/react';
-import {useActiveObject, useEditor} from '@layerhub-io/react';
+import {useActiveObject, useEditor} from '@/canvascore/react';
 import Common from './Common';
 import Flip from './Shared/Flip';
 import useAppContext from '@/hooks/useAppContext';

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box, Image} from '@chakra-ui/react';
-import {IScene} from '@layerhub-io/types';
+import {IScene} from '@/canvascore/types';
 import {useSortable} from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
 import useDesignEditorContext from '@/hooks/useDesignEditorContext';
