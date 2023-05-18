@@ -272,7 +272,7 @@ const Navbar = () => {
       alignItems="center"
     >
       <Flex color="#ffffff">
-        <Logo size={36} />
+        <Logo size={36} color="white" />
       </Flex>
       <DesignTitle />
       <Flex alignItems="center" justifyContent="flex-end">

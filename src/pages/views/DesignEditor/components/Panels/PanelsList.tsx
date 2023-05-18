@@ -51,7 +51,6 @@ const PanelListItem = ({label, icon, activePanel, name}) => {
       alignItems="center"
       flexDirection="column"
       justifyContent="center"
-      fontFamily="Poppins"
       fontWeight="semibold" // Adjusted fontWeight value
       fontSize="0.8rem"
       userSelect="none"
@@ -59,8 +58,8 @@ const PanelListItem = ({label, icon, activePanel, name}) => {
       gap="0.1rem"
       _hover={{
         cursor: 'pointer',
-        backgroundColor: 'white',
-        transition: 'all 1s',
+        backgroundColor: 'primary.950',
+        transition: 'all 0.5s',
       }}
     >
       <Icon size={24} color={name === activePanel ? 'primary.900' : 'white'} />

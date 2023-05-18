@@ -3,7 +3,7 @@ function Customize({size, color}: {size: number; color: string}) {
     <svg
       height={size}
       viewBox="0 0 24 24"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

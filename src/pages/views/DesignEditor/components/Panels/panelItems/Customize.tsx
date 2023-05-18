@@ -15,6 +15,7 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
+  Text,
   useDisclosure,
 } from '@chakra-ui/react';
 import {FaPlus} from 'react-icons/fa';
@@ -79,15 +80,14 @@ const Customize = () => {
         <Box padding="0 1.5rem">
           <Box>
             <ResizeTemplate />
-            <Box
-              style={{
-                fontSize: '14px',
-                textAlign: 'center',
-                paddingTop: '0.35rem',
-              }}
+            <Text
+              fontSize="18px"
+              textAlign="center"
+              paddingTop="0.35rem"
+              color="black"
             >
               1080 x 1920px
-            </Box>
+            </Text>
           </Box>
 
           <Box paddingTop="0.5rem">
@@ -154,6 +154,7 @@ const Customize = () => {
 
 const ResizeTemplate = () => {
   const {isOpen, onOpen, onClose} = useDisclosure();
+  const [activeKey, setActiveKey] = React.useState<string | number>('0');
   const {currentDesign, setCurrentDesign} = useDesignEditorContext();
   const editor = useEditor();
   const [desiredFrame, setDesiredFrame] = React.useState({
@@ -208,6 +209,7 @@ const ResizeTemplate = () => {
         style={{
           width: '100%',
         }}
+        colorScheme="teal"
       >
         Resize template
       </Button>
@@ -350,3 +352,5 @@ const ResizeTemplate = () => {
     </>
   );
 };
+
+export default Customize;

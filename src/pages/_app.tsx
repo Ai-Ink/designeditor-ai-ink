@@ -4,7 +4,7 @@ import Router from './Router';
 import Container from './Container';
 import './styles/styles.css';
 import {useEffect, useState} from 'react';
-import {ChakraProvider} from '@chakra-ui/react';
+import {CSSReset, ChakraProvider} from '@chakra-ui/react';
 
 // 1. Import the extendTheme function
 import {extendTheme} from '@chakra-ui/react';
@@ -24,6 +24,10 @@ const theme = extendTheme({
       900: '#323F4B',
     },
   },
+  fonts: {
+    heading: "'Roboto', sans-serif",
+    body: "'Roboto', sans-serif",
+  },
 });
 
 function MyApp({Component, pageProps}) {
@@ -31,6 +35,7 @@ function MyApp({Component, pageProps}) {
   useEffect(() => setRender(true), []);
   return render ? (
     <ChakraProvider theme={theme}>
+      <CSSReset />
       <Provider>
         <Container>
           <Router />

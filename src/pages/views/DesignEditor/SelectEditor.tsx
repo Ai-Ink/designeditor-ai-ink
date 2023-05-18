@@ -82,8 +82,7 @@ const SelectEditor = () => {
         >
           <Button
             width="180px"
-            color="white"
-            bgColor="black"
+            colorScheme="yellow"
             onClick={() => setEditorType(selectedEditor)}
           >
             Continue

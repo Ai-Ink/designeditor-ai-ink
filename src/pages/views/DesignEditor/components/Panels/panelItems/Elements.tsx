@@ -37,7 +37,7 @@ const Elements = () => {
           cursor="pointer"
           display="flex"
         >
-          <AngleDoubleLeft size={4} color="black" />
+          <AngleDoubleLeft size={18} color="black" />
         </Box>
       </Box>
       <Scrollable>

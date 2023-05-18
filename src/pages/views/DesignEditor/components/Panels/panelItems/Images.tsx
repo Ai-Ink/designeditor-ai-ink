@@ -38,7 +38,7 @@ const Images = () => {
           cursor="pointer"
           display="flex"
         >
-          <AngleDoubleLeft size={18} />
+          <AngleDoubleLeft size={18} color="black" />
         </Box>
       </Box>
       <Scrollable>
