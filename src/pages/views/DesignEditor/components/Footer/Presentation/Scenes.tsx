@@ -19,11 +19,11 @@ import {
 } from '@dnd-kit/modifiers';
 import SceneItem from './SceneItem';
 import {Box, Flex, IconButton} from '@chakra-ui/react';
-import useContextMenuTimelineRequest from '~/hooks/useContextMenuTimelineRequest';
+import useContextMenuTimelineRequest from '@/hooks/useContextMenuTimelineRequest';
 import SceneContextMenu from './SceneContextMenu';
-import {getDefaultTemplate} from '~/constants/design-editor';
-import useDesignEditorPages from '~/hooks/useDesignEditorScenes';
-import {DesignEditorContext} from '~/contexts/DesignEditor';
+import {getDefaultTemplate} from '@/constants/design-editor';
+import useDesignEditorPages from '@/hooks/useDesignEditorScenes';
+import {DesignEditorContext} from '@/contexts/DesignEditor';
 import {AddIcon} from '@chakra-ui/icons';
 
 const Scenes = () => {

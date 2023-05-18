@@ -9,19 +9,19 @@ import {
   Select,
 } from '@chakra-ui/react';
 import {ChevronRightIcon} from '@chakra-ui/icons';
-import useAppContext from '~/hooks/useAppContext';
+import useAppContext from '@/hooks/useAppContext';
 import {useActiveObject, useEditor} from '@layerhub-io/react';
 import {useSelector} from 'react-redux';
-import {selectFonts} from '~/store/slices/fonts/selectors';
-import {getTextOptions} from '~/utils/object-options';
-import {fontStyleLabels} from '~/constants/fonts';
-import {loadFonts} from '~/utils/fonts';
-import {defaultTextOptions} from '~/constants/contants';
+import {selectFonts} from '@/store/slices/fonts/selectors';
+import {getTextOptions} from '@/utils/object-options';
+import {fontStyleLabels} from '@/constants/fonts';
+import {loadFonts} from '@/utils/fonts';
+import {defaultTextOptions} from '@/constants/contants';
 import Shadow from './Common/Shadow';
-import {TextOptions} from '~/interfaces/editor';
-import InformationOutlineIcon from '~/components/Icons/InformationOutline';
-import SpacingIcon from '~/components/Icons/Spacing';
-import UnderlineIcon from '~/components/Icons/Underline';
+import {TextOptions} from '@/interfaces/editor';
+import InformationOutlineIcon from '@/components/Icons/InformationOutline';
+import SpacingIcon from '@/components/Icons/Spacing';
+import UnderlineIcon from '@/components/Icons/Underline';
 
 const TextProperties = () => {
   const fonts = useSelector(selectFonts);

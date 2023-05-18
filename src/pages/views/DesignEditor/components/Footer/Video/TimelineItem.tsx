@@ -1,10 +1,10 @@
 import React from 'react';
 import {useSortable} from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
-import {Resizable} from '~/components/Resizable';
+import {Resizable} from '@/components/Resizable';
 import {Box} from '@chakra-ui/react';
-import useDesignEditorContext from '~/hooks/useDesignEditorContext';
-import useDesignEditorScenes from '~/hooks/useDesignEditorScenes';
+import useDesignEditorContext from '@/hooks/useDesignEditorContext';
+import useDesignEditorScenes from '@/hooks/useDesignEditorScenes';
 import {useTimer} from '@layerhub-io/use-timer';
 
 const VerticalLine = ({size}) => {

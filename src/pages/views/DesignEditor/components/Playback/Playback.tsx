@@ -3,7 +3,7 @@ import {Box} from '@chakra-ui/react';
 import {useEditor, useZoomRatio} from '@layerhub-io/react';
 import {useTimer} from '@layerhub-io/use-timer';
 import Controller from './Controler';
-import useDesignEditorPages from '~/hooks/useDesignEditorScenes';
+import useDesignEditorPages from '@/hooks/useDesignEditorScenes';
 
 const Playback = () => {
   const editor = useEditor();

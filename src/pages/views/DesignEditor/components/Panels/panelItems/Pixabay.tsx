@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import {useEditor} from '@layerhub-io/react';
 import {Box, Input, Spinner} from '@chakra-ui/react';
-import Scrollable from '~/components/Scrollable';
-import InfiniteScrolling from '~/components/InfiniteScrolling';
+import Scrollable from '@/components/Scrollable';
+import InfiniteScrolling from '@/components/InfiniteScrolling';
 import {IStaticImage} from '@layerhub-io/types';
-import SearchIcon from '~/components/Icons/SearchIcon';
-import LazyLoadImage from '~/components/LazyLoadImage';
-import AngleDoubleLeftIcon from '~/components/Icons/AngleDoubleLeftIcon';
-import useSetIsSidebarOpen from '~/hooks/useSetIsSidebarOpen';
-import {getPixabayImages} from '~/services/api';
+import SearchIcon from '@/components/Icons/SearchIcon';
+import LazyLoadImage from '@/components/LazyLoadImage';
+import AngleDoubleLeftIcon from '@/components/Icons/AngleDoubleLeftIcon';
+import useSetIsSidebarOpen from '@/hooks/useSetIsSidebarOpen';
+import {getPixabayImages} from '@/services/api';
 
 const Pixabay = () => {
   const editor = useEditor();

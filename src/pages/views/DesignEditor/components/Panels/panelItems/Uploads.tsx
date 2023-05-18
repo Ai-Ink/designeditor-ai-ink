@@ -1,15 +1,15 @@
 import React from 'react';
 import {Box, Flex} from '@chakra-ui/react';
 import {ArrowLeftIcon} from '@chakra-ui/icons';
-import Scrollable from '~/components/Scrollable';
-import DropZone from '~/components/Dropzone';
+import Scrollable from '@/components/Scrollable';
+import DropZone from '@/components/Dropzone';
 import {Button} from '@chakra-ui/button';
 import {useEditor} from '@layerhub-io/react';
-import useSetIsSidebarOpen from '~/hooks/useSetIsSidebarOpen';
+import useSetIsSidebarOpen from '@/hooks/useSetIsSidebarOpen';
 import {nanoid} from 'nanoid';
-import {captureFrame, loadVideoResource} from '~/utils/video';
+import {captureFrame, loadVideoResource} from '@/utils/video';
 import {ILayer} from '@layerhub-io/types';
-import {toBase64} from '~/utils/data';
+import {toBase64} from '@/utils/data';
 
 const Uploads = () => {
   const inputFileRef = React.useRef(null);

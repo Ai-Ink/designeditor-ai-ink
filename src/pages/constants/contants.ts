@@ -1,13 +1,13 @@
-import { TextOptions } from "~/interfaces/editor"
+import {TextOptions} from '@/interfaces/editor';
 
-export const propertiesToInclude = ["id", "selectable"]
+export const propertiesToInclude = ['id', 'selectable'];
 
 export const defaultTextOptions: TextOptions = {
   underline: false,
-  textAlign: "left",
+  textAlign: 'left',
   charSpacing: 0,
-  fill: "#000000",
-  fontFamily: "Open Sans",
+  fill: '#000000',
+  fontFamily: 'Open Sans',
   fontSize: 12,
   lineHeight: 12,
   isGroup: false,
@@ -15,4 +15,4 @@ export const defaultTextOptions: TextOptions = {
   styles: [],
   font: {},
   activeStyle: {},
-}
+};

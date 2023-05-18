@@ -3,7 +3,7 @@ import {Box, Image} from '@chakra-ui/react';
 import {IScene} from '@layerhub-io/types';
 import {useSortable} from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
-import useDesignEditorContext from '~/hooks/useDesignEditorContext';
+import useDesignEditorContext from '@/hooks/useDesignEditorContext';
 
 interface Props {
   isCurrentScene: boolean;

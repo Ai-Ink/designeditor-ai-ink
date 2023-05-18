@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box} from '@chakra-ui/react';
-import Scrollable from '~/components/Scrollable';
+import Scrollable from '@/components/Scrollable';
 import {HexColorPicker} from 'react-colorful';
 import {DeleteIcon} from '@chakra-ui/icons';
 import {throttle} from 'lodash';

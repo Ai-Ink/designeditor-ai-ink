@@ -8,17 +8,17 @@ import {
   InputRightElement,
 } from '@chakra-ui/react';
 import {SunIcon} from '@chakra-ui/icons';
-import Logo from '~/components/Icons/Logo';
-import useDesignEditorContext from '~/hooks/useDesignEditorContext';
-import Play from '~/components/Icons/Play';
+import Logo from '@/components/Icons/Logo';
+import useDesignEditorContext from '@/hooks/useDesignEditorContext';
+import Play from '@/components/Icons/Play';
 import {useEditor} from '@layerhub-io/react';
-import useEditorType from '~/hooks/useEditorType';
+import useEditorType from '@/hooks/useEditorType';
 import {IScene} from '@layerhub-io/types';
-import {loadTemplateFonts} from '~/utils/fonts';
-import {loadVideoEditorAssets} from '~/utils/video';
+import {loadTemplateFonts} from '@/utils/fonts';
+import {loadVideoEditorAssets} from '@/utils/video';
 import DesignTitle from './DesignTitle';
-import {IDesign} from '~/interfaces/DesignEditor';
-import Github from '~/components/Icons/Github';
+import {IDesign} from '@/interfaces/DesignEditor';
+import Github from '@/components/Icons/Github';
 
 const Navbar = () => {
   const {

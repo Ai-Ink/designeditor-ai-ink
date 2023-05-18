@@ -1,9 +1,9 @@
 import React, {useRef} from 'react';
 import {Box} from '@chakra-ui/react';
-import useDesignEditorContext from '~/hooks/useDesignEditorContext';
+import useDesignEditorContext from '@/hooks/useDesignEditorContext';
 import {nanoid} from 'nanoid';
-import useOnClickOutside from '~/hooks/useOnClickOutside';
-import {getDefaultTemplate} from '~/constants/design-editor';
+import useOnClickOutside from '@/hooks/useOnClickOutside';
+import {getDefaultTemplate} from '@/constants/design-editor';
 import {useEditor, useFrame} from '@layerhub-io/react';
 
 const SceneContextMenu = () => {

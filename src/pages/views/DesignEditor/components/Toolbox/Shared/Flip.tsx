@@ -9,8 +9,8 @@ import {
   PopoverArrow,
   PopoverBody,
 } from '@chakra-ui/react';
-import FlipHorizontal from '~/components/Icons/FlipHorizontal';
-import FlipVertical from '~/components/Icons/FlipVertical';
+import FlipHorizontal from '@/components/Icons/FlipHorizontal';
+import FlipVertical from '@/components/Icons/FlipVertical';
 import {useActiveObject, useEditor} from '@layerhub-io/react';
 
 const Flip = () => {

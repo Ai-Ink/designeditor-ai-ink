@@ -3,7 +3,7 @@ import {Box, Flex} from '@chakra-ui/react';
 import {useEditor} from '@layerhub-io/react';
 import {Tooltip} from '@chakra-ui/react';
 import {Button} from '@chakra-ui/react';
-import UnlockedIcon from '~/components/Icons/Unlocked';
+import UnlockedIcon from '@/components/Icons/Unlocked';
 
 const Locked = () => {
   const editor = useEditor();

@@ -1,9 +1,9 @@
 import React from 'react';
 import {Box} from '@chakra-ui/react';
 import {useTimer} from '@layerhub-io/use-timer';
-import Pause from '~/components/Icons/Pause';
-import PlaySolid from '~/components/Icons/PlaySolid';
-import useDesignEditorContext from '~/hooks/useDesignEditorContext';
+import Pause from '@/components/Icons/Pause';
+import PlaySolid from '@/components/Icons/PlaySolid';
+import useDesignEditorContext from '@/hooks/useDesignEditorContext';
 
 const TimelineControl = () => {
   const {pause, status} = useTimer();

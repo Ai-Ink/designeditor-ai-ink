@@ -3,8 +3,8 @@ import {IScene} from '@layerhub-io/types';
 import {Box} from '@chakra-ui/react';
 import {useSortable} from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
-import useDesignEditorContext from '~/hooks/useDesignEditorContext';
-import useOnClickOutside from '~/hooks/useOnClickOutside';
+import useDesignEditorContext from '@/hooks/useDesignEditorContext';
+import useOnClickOutside from '@/hooks/useOnClickOutside';
 
 interface Props {
   isCurrentScene: boolean;

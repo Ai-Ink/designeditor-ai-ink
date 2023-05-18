@@ -1,18 +1,18 @@
 import React from 'react';
 import {Button, Flex} from '@chakra-ui/react';
 import {useEditor} from '@layerhub-io/react';
-import {FontItem} from '~/interfaces/common';
-import {loadFonts} from '~/utils/fonts';
+import {FontItem} from '@/interfaces/common';
+import {loadFonts} from '@/utils/fonts';
 import {ILayer} from '@layerhub-io/types';
 import {nanoid} from 'nanoid';
 import {Box, Image} from '@chakra-ui/react';
-import AngleDoubleLeft from '~/components/Icons/AngleDoubleLeft';
-import Scrollable from '~/components/Scrollable';
-import useSetIsSidebarOpen from '~/hooks/useSetIsSidebarOpen';
+import AngleDoubleLeft from '@/components/Icons/AngleDoubleLeft';
+import Scrollable from '@/components/Scrollable';
+import useSetIsSidebarOpen from '@/hooks/useSetIsSidebarOpen';
 import {useSelector} from 'react-redux';
-import {selectPublicComponents} from '~/store/slices/components/selectors';
-import api from '~/services/api';
-import {IComponent} from '~/interfaces/DesignEditor';
+import {selectPublicComponents} from '@/store/slices/components/selectors';
+import api from '@/services/api';
+import {IComponent} from '@/interfaces/DesignEditor';
 
 const textOptions = {
   id: nanoid(),

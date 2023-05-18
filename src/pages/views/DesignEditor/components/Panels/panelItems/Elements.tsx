@@ -3,9 +3,9 @@ import {useEditor} from '@layerhub-io/react';
 import {useStyletron} from 'styletron-react';
 import {Box, Button} from '@chakra-ui/react';
 import {AngleDoubleLeftIcon} from '@chakra-ui/icons';
-import Scrollable from '~/components/Scrollable';
-import {graphics} from '~/constants/mock-data';
-import useSetIsSidebarOpen from '~/hooks/useSetIsSidebarOpen';
+import Scrollable from '@/components/Scrollable';
+import {graphics} from '@/constants/mock-data';
+import useSetIsSidebarOpen from '@/hooks/useSetIsSidebarOpen';
 import SVGItem from './SVGItem';
 import SVGItemsGrid from './SVGItemsGrid';
 

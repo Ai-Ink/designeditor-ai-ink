@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {Box, Button} from '@chakra-ui/react';
-import {DesignType} from '~/interfaces/DesignEditor';
-import useDesignEditorContext from '~/hooks/useDesignEditorContext';
-import Video from '~/components/Icons/Video';
-import Images from '~/components/Icons/Images';
-import Presentation from '~/components/Icons/Presentation';
+import {DesignType} from '@/interfaces/DesignEditor';
+import useDesignEditorContext from '@/hooks/useDesignEditorContext';
+import Video from '@/components/Icons/Video';
+import Images from '@/components/Icons/Images';
+import Presentation from '@/components/Icons/Presentation';
 
 const SelectEditor = () => {
   const [selectedEditor, setSelectedEditor] = useState<DesignType>('GRAPHIC');

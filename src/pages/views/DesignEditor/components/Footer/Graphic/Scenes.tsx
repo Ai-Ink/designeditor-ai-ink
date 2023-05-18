@@ -1,6 +1,6 @@
 import React from 'react';
 import {nanoid} from 'nanoid';
-import {getDefaultTemplate} from '~/constants/design-editor';
+import {getDefaultTemplate} from '@/constants/design-editor';
 import {useEditor, useFrame} from '@layerhub-io/react';
 import {IScene} from '@layerhub-io/types';
 import {
@@ -21,7 +21,7 @@ import {
 } from '@dnd-kit/modifiers';
 import SceneItem from './SceneItem';
 import {Box} from '@chakra-ui/react';
-import useContextMenuTimelineRequest from '~/hooks/useContextMenuTimelineRequest';
+import useContextMenuTimelineRequest from '@/hooks/useContextMenuTimelineRequest';
 import SceneContextMenu from './SceneContextMenu';
 
 const Scenes = () => {

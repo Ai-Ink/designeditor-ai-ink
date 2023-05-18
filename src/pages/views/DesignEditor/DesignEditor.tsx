@@ -1,11 +1,11 @@
-import useEditorType from '~/hooks/useEditorType';
-import SelectEditor from './SelectEditor';
-import GraphicEditor from './GraphicEditor';
-import PresentationEditor from './PresentationEditor';
-import VideoEditor from './VideoEditor';
-import useDesignEditorContext from '~/hooks/useDesignEditorContext';
-import Preview from './components/Preview';
-import ContextMenu from './components/ContextMenu';
+import useEditorType from '@/hooks/useEditorType';
+import SelectEditor from '@/views/DesignEditor/SelectEditor';
+import GraphicEditor from '@/views/DesignEditor/GraphicEditor';
+import PresentationEditor from '@/views/DesignEditor/PresentationEditor';
+import VideoEditor from '@/views/DesignEditor/VideoEditor';
+import useDesignEditorContext from '@/hooks/useDesignEditorContext';
+import Preview from '@/views/DesignEditor/components/Preview';
+import ContextMenu from '@/views/DesignEditor/components/ContextMenu';
 
 const DesignEditor = () => {
   const editorType = useEditorType();

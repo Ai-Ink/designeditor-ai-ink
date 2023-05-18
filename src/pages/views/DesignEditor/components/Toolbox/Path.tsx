@@ -3,7 +3,7 @@ import {Box, Flex} from '@chakra-ui/react';
 import {useActiveObject, useEditor} from '@layerhub-io/react';
 import Common from './Common';
 import Flip from './Shared/Flip';
-import useAppContext from '~/hooks/useAppContext';
+import useAppContext from '@/hooks/useAppContext';
 
 const Path = () => {
   const [state, setState] = useState({fill: '#000000'});

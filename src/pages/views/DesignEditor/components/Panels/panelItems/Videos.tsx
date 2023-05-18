@@ -1,12 +1,12 @@
 import React from 'react';
 import {Box, Flex, IconButton} from '@chakra-ui/react';
 import {ArrowLeftIcon} from '@chakra-ui/icons';
-import Scrollable from '~/components/Scrollable';
+import Scrollable from '@/components/Scrollable';
 import {useEditor} from '@layerhub-io/react';
-import useSetIsSidebarOpen from '~/hooks/useSetIsSidebarOpen';
-import {getPixabayVideos} from '~/services/pixabay';
-import {getPexelsVideos} from '~/services/pexels';
-import useDesignEditorContext from '~/hooks/useDesignEditorContext';
+import useSetIsSidebarOpen from '@/hooks/useSetIsSidebarOpen';
+import {getPixabayVideos} from '@/services/pixabay';
+import {getPexelsVideos} from '@/services/pexels';
+import useDesignEditorContext from '@/hooks/useDesignEditorContext';
 
 const loadVideoResource = (videoSrc) => {
   return new Promise(function (resolve, reject) {

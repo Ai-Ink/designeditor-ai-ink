@@ -1,5 +1,5 @@
-import { AppContext } from "~/contexts/AppContext"
-import { useContext } from "react"
+import {AppContext} from '@/contexts/AppContext';
+import {useContext} from 'react';
 
 const useAppContext = () => {
   const {
@@ -17,7 +17,7 @@ const useAppContext = () => {
     setUploads,
     currentTemplate,
     setCurrentTemplate,
-  } = useContext(AppContext)
+  } = useContext(AppContext);
   return {
     isMobile,
     setIsMobile,
@@ -33,7 +33,7 @@ const useAppContext = () => {
     setUploads,
     currentTemplate,
     setCurrentTemplate,
-  }
-}
+  };
+};
 
-export default useAppContext
+export default useAppContext;

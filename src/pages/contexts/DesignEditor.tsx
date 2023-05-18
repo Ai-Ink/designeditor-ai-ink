@@ -1,30 +1,39 @@
-import { IScene } from "@layerhub-io/types"
-import React from "react"
-import {ContextMenuSceneRequest, ContextMenuTimelineRequest, DesignType, IDesign} from "~/interfaces/DesignEditor"
+import {IScene} from '@layerhub-io/types';
+import React from 'react';
+import {
+  ContextMenuSceneRequest,
+  ContextMenuTimelineRequest,
+  DesignType,
+  IDesign,
+} from '@/interfaces/DesignEditor';
 
 interface ISceneEditorContext {
-  scenes: IScene[]
-  setScenes: (value: ((prevState: IScene[]) => IScene[]) | IScene[]) => void
-  currentScene: IScene | null
-  setCurrentScene: React.Dispatch<React.SetStateAction<IScene | null>>
-  currentDesign: IDesign
-  setCurrentDesign: React.Dispatch<React.SetStateAction<IDesign>>
-  isSidebarOpen: boolean
-  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
-  editorType: DesignType
-  setEditorType: React.Dispatch<React.SetStateAction<DesignType>>
-  displayPlayback: boolean
-  setDisplayPlayback: React.Dispatch<React.SetStateAction<boolean>>
-  displayPreview: boolean
-  setDisplayPreview: React.Dispatch<React.SetStateAction<boolean>>
-  currentPreview: string
-  setCurrentPreview: React.Dispatch<React.SetStateAction<string>>
-  maxTime: number
-  setMaxTime: React.Dispatch<React.SetStateAction<number>>
-  contextMenuTimelineRequest: ContextMenuTimelineRequest
-  setContextMenuTimelineRequest: React.Dispatch<React.SetStateAction<ContextMenuTimelineRequest>>
-  contextMenuSceneRequest: ContextMenuTimelineRequest
-  setContextMenuSceneRequest: React.Dispatch<React.SetStateAction<ContextMenuTimelineRequest>>
+  scenes: IScene[];
+  setScenes: (value: ((prevState: IScene[]) => IScene[]) | IScene[]) => void;
+  currentScene: IScene | null;
+  setCurrentScene: React.Dispatch<React.SetStateAction<IScene | null>>;
+  currentDesign: IDesign;
+  setCurrentDesign: React.Dispatch<React.SetStateAction<IDesign>>;
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  editorType: DesignType;
+  setEditorType: React.Dispatch<React.SetStateAction<DesignType>>;
+  displayPlayback: boolean;
+  setDisplayPlayback: React.Dispatch<React.SetStateAction<boolean>>;
+  displayPreview: boolean;
+  setDisplayPreview: React.Dispatch<React.SetStateAction<boolean>>;
+  currentPreview: string;
+  setCurrentPreview: React.Dispatch<React.SetStateAction<string>>;
+  maxTime: number;
+  setMaxTime: React.Dispatch<React.SetStateAction<number>>;
+  contextMenuTimelineRequest: ContextMenuTimelineRequest;
+  setContextMenuTimelineRequest: React.Dispatch<
+    React.SetStateAction<ContextMenuTimelineRequest>
+  >;
+  contextMenuSceneRequest: ContextMenuTimelineRequest;
+  setContextMenuSceneRequest: React.Dispatch<
+    React.SetStateAction<ContextMenuTimelineRequest>
+  >;
 }
 
 export const DesignEditorContext = React.createContext<ISceneEditorContext>({
@@ -33,80 +42,85 @@ export const DesignEditorContext = React.createContext<ISceneEditorContext>({
   currentScene: null,
   setCurrentScene: () => {},
   currentDesign: {
-    id: "",
+    id: '',
     frame: {
       width: 1,
       height: 1,
     },
     metadata: {},
-    name: "",
-    preview: "",
+    name: '',
+    preview: '',
     scenes: [],
-    type: "",
+    type: '',
   },
   setCurrentDesign: () => {},
   isSidebarOpen: true,
   setIsSidebarOpen: () => {},
-  editorType: "NONE",
+  editorType: 'NONE',
   setEditorType: () => {},
   displayPlayback: false,
   setDisplayPlayback: () => {},
   displayPreview: false,
   setDisplayPreview: () => {},
-  currentPreview: "",
+  currentPreview: '',
   setCurrentPreview: () => {},
   maxTime: 0,
   setMaxTime: () => {},
   contextMenuTimelineRequest: {
-    id: "",
+    id: '',
     left: 0,
     top: 0,
     visible: false,
   },
   setContextMenuTimelineRequest: () => {},
   contextMenuSceneRequest: {
-    id: "",
+    id: '',
     left: 0,
     top: 0,
     visible: false,
   },
   setContextMenuSceneRequest: () => {},
+});
 
-})
-
-export const DesignEditorProvider = ({ children }: { children: React.ReactNode }) => {
-  const [scenes, setScenes] = React.useState<IScene[]>([])
-  const [currentScene, setCurrentScene] = React.useState<IScene | null>(null)
+export const DesignEditorProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const [scenes, setScenes] = React.useState<IScene[]>([]);
+  const [currentScene, setCurrentScene] = React.useState<IScene | null>(null);
   const [currentDesign, setCurrentDesign] = React.useState<IDesign>({
-    id: "",
+    id: '',
     frame: {
       width: 1,
       height: 1,
     },
     metadata: {},
-    name: "",
-    preview: "",
+    name: '',
+    preview: '',
     scenes: [],
-    type: "",
-  })
-  const [isSidebarOpen, setIsSidebarOpen] = React.useState(true)
-  const [editorType, setEditorType] = React.useState<DesignType>("NONE")
-  const [displayPlayback, setDisplayPlayback] = React.useState<boolean>(false)
-  const [displayPreview, setDisplayPreview] = React.useState<boolean>(false)
-  const [currentPreview, setCurrentPreview] = React.useState<string>("")
-  const [maxTime, setMaxTime] = React.useState(5000)
-  const [contextMenuTimelineRequest, setContextMenuTimelineRequest] = React.useState<ContextMenuTimelineRequest>({
-    id: "",
-    left: 0,
-    top: 0,
-    visible: false,
-  })
-  const [contextMenuSceneRequest, setContextMenuSceneRequest] = React.useState<ContextMenuSceneRequest>({
-    id: "",
-    left: 0,
-    top: 0,
-    visible: false,
-  })
+    type: '',
+  });
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
+  const [editorType, setEditorType] = React.useState<DesignType>('NONE');
+  const [displayPlayback, setDisplayPlayback] = React.useState<boolean>(false);
+  const [displayPreview, setDisplayPreview] = React.useState<boolean>(false);
+  const [currentPreview, setCurrentPreview] = React.useState<string>('');
+  const [maxTime, setMaxTime] = React.useState(5000);
+  const [contextMenuTimelineRequest, setContextMenuTimelineRequest] =
+    React.useState<ContextMenuTimelineRequest>({
+      id: '',
+      left: 0,
+      top: 0,
+      visible: false,
+    });
+  const [contextMenuSceneRequest, setContextMenuSceneRequest] =
+    React.useState<ContextMenuSceneRequest>({
+      id: '',
+      left: 0,
+      top: 0,
+      visible: false,
+    });
   const context = {
     scenes,
     setScenes,
@@ -130,6 +144,10 @@ export const DesignEditorProvider = ({ children }: { children: React.ReactNode }
     setContextMenuTimelineRequest,
     contextMenuSceneRequest,
     setContextMenuSceneRequest,
-  }
-  return <DesignEditorContext.Provider value={context}>{children}</DesignEditorContext.Provider>
-}
+  };
+  return (
+    <DesignEditorContext.Provider value={context}>
+      {children}
+    </DesignEditorContext.Provider>
+  );
+};

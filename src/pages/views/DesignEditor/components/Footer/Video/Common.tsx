@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {Box, Button, useStyletron} from '@chakra-ui/react';
-import Icons from '~/components/Icons';
+import Icons from '@/components/Icons';
 import {useZoomRatio} from '@layerhub-io/react';
 import {useTimer} from '@layerhub-io/use-timer';
-import useDesignEditorContext from '~/hooks/useDesignEditorContext';
+import useDesignEditorContext from '@/hooks/useDesignEditorContext';
 
 const Common = () => {
   const {time} = useTimer();

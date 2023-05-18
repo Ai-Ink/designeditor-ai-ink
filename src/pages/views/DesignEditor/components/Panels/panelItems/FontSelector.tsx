@@ -1,5 +1,5 @@
 import React from 'react';
-import Search from '~/components/Icons/Search';
+import Search from '@/components/Icons/Search';
 import {
   Input,
   InputGroup,
@@ -8,19 +8,19 @@ import {
   Button,
   CloseIcon,
 } from '@chakra-ui/react';
-import useAppContext from '~/hooks/useAppContext';
+import useAppContext from '@/hooks/useAppContext';
 import {useStyletron} from 'styletron-react';
 import {useEditor} from '@layerhub-io/react';
-import {loadFonts} from '~/utils/fonts';
+import {loadFonts} from '@/utils/fonts';
 import {groupBy} from 'lodash';
-import Scrollable from '~/components/Scrollable';
+import Scrollable from '@/components/Scrollable';
 import {Block} from '@chakra-ui/layout';
 import {DeleteIcon} from '@chakra-ui/icons';
 import {useSelector} from 'react-redux';
-import {selectFonts} from '~/store/slices/fonts/selectors';
-import {useAppDispatch} from '~/store/store';
-import {queryFonts} from '~/store/slices/fonts/actions';
-import InfiniteScrolling from '~/components/InfiniteScrolling';
+import {selectFonts} from '@/store/slices/fonts/selectors';
+import {useAppDispatch} from '@/store/store';
+import {queryFonts} from '@/store/slices/fonts/actions';
+import InfiniteScrolling from '@/components/InfiniteScrolling';
 import {useDebounce} from 'use-debounce';
 
 export default function () {

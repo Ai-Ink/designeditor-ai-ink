@@ -11,7 +11,7 @@ import {
   PopoverBody,
 } from '@chakra-ui/react';
 import {useState} from 'react';
-import OpacityIcon from '~/components/Icons/Opacity';
+import OpacityIcon from '@/components/Icons/Opacity';
 
 const Opacity = () => {
   const [state, setState] = useState({

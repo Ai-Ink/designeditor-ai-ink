@@ -1,18 +1,18 @@
 import React from 'react';
 import {useEditor} from '@layerhub-io/react';
 import {Box, Flex, Text} from '@chakra-ui/react';
-import {loadTemplateFonts} from '~/utils/fonts';
-import Scrollable from '~/components/Scrollable';
-import AngleDoubleLeftIcon from '~/components/Icons/AngleDoubleLeftIcon';
-import useSetIsSidebarOpen from '~/hooks/useSetIsSidebarOpen';
-import useDesignEditorContext from '~/hooks/useDesignEditorContext';
+import {loadTemplateFonts} from '@/utils/fonts';
+import Scrollable from '@/components/Scrollable';
+import AngleDoubleLeftIcon from '@/components/Icons/AngleDoubleLeftIcon';
+import useSetIsSidebarOpen from '@/hooks/useSetIsSidebarOpen';
+import useDesignEditorContext from '@/hooks/useDesignEditorContext';
 import {useSelector} from 'react-redux';
-import {selectPublicDesigns} from '~/store/slices/designs/selectors';
-import {IDesign} from '~/interfaces/DesignEditor';
+import {selectPublicDesigns} from '@/store/slices/designs/selectors';
+import {IDesign} from '@/interfaces/DesignEditor';
 import {IScene} from '@layerhub-io/types';
 import {nanoid} from 'nanoid';
-import api from '~/services/api';
-import useEditorType from '~/hooks/useEditorType';
+import api from '@/services/api';
+import useEditorType from '@/hooks/useEditorType';
 
 export default function TemplateSelector() {
   const editor = useEditor();

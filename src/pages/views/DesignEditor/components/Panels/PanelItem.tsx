@@ -1,8 +1,8 @@
 import React from 'react';
 import {Box} from '@chakra-ui/react';
-import useAppContext from '~/hooks/useAppContext';
+import useAppContext from '@/hooks/useAppContext';
 import panelItems from './panelItems';
-import useIsSidebarOpen from '~/hooks/useIsSidebarOpen';
+import useIsSidebarOpen from '@/hooks/useIsSidebarOpen';
 
 interface State {
   panel: string;

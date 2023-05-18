@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box} from '@chakra-ui/react';
 import Common from './Common';
-import useAppContext from '~/hooks/useAppContext';
+import useAppContext from '@/hooks/useAppContext';
 import {useActiveObject, useEditor} from '@layerhub-io/react';
 
 const Canvas = () => {

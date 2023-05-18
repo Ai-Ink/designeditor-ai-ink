@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Input, Tooltip} from '@chakra-ui/react';
-import useDesignEditorContext from '~/hooks/useDesignEditorContext';
-import CloudCheck from '~/components/Icons/CloudCheck';
+import useDesignEditorContext from '@/hooks/useDesignEditorContext';
+import CloudCheck from '@/components/Icons/CloudCheck';
 
 interface State {
   name: string;

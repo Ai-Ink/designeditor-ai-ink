@@ -6,7 +6,7 @@ import {
   ModalContent,
   ModalCloseButton,
 } from '@chakra-ui/react';
-import useEditorType from '~/hooks/useEditorType';
+import useEditorType from '@/hooks/useEditorType';
 import {Box} from '@chakra-ui/react';
 import Video from './Video';
 import Presentation from './Presentation';
