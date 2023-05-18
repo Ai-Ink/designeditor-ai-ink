@@ -1,20 +1,21 @@
-import React from "react"
-import { styled } from "baseui"
-import { Theme } from "baseui/theme"
-import Common from "./Common"
-import Scenes from "./Scenes"
+import React from 'react';
+import {Box, ChakraProvider} from '@chakra-ui/react';
+import Common from './Common';
+import Scenes from './Scenes';
 
-const Container = styled<"div", {}, Theme>("div", ({ $theme }) => ({
-  background: $theme.colors.white,
-}))
+const Container = (props) => {
+  return <Box bg="white" {...props} />;
+};
 
 const Presentation = () => {
   return (
-    <Container>
-      <Scenes />
-      <Common />
-    </Container>
-  )
-}
+    <ChakraProvider>
+      <Container>
+        <Scenes />
+        <Common />
+      </Container>
+    </ChakraProvider>
+  );
+};
 
-export default Presentation
+export default Presentation;

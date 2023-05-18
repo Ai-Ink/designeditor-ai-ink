@@ -1,21 +1,19 @@
-import React from "react"
-import { Block } from "baseui/block"
+import React from 'react';
+import {Box} from '@chakra-ui/react';
 
-const EditorContainer = ({ children }: { children: React.ReactNode }) => {
+const EditorContainer = ({children}) => {
   return (
-    <Block
-      $style={{
-        width: "100vw",
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        background: "#FFFFFF",
-        fontFamily: "Poppins",
-      }}
+    <Box
+      w="100vw"
+      h="100vh"
+      display="flex"
+      flexDirection="column"
+      bg="#FFFFFF"
+      fontFamily="Poppins"
     >
       {children}
-    </Block>
-  )
-}
+    </Box>
+  );
+};
 
-export default EditorContainer
+export default EditorContainer;

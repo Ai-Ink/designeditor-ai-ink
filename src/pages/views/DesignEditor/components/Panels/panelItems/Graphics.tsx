@@ -1,118 +1,116 @@
-import React from "react"
-import { useStyletron } from "baseui"
-import { Block } from "baseui/block"
-import { Button, SIZE } from "baseui/button"
-import AngleDoubleLeft from "~/components/Icons/AngleDoubleLeft"
-import Scrollable from "~/components/Scrollable"
-import { vectors } from "~/constants/mock-data"
-import { useEditor } from "@layerhub-io/react"
-import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
+import React from 'react';
+import {Box, Button} from '@chakra-ui/react';
+import AngleDoubleLeft from '~/components/Icons/AngleDoubleLeft';
+import Scrollable from '~/components/Scrollable';
+import {vectors} from '~/constants/mock-data';
+import {useEditor} from '@layerhub-io/react';
+import useSetIsSidebarOpen from '~/hooks/useSetIsSidebarOpen';
 
 const Graphics = () => {
-  const inputFileRef = React.useRef<HTMLInputElement>(null)
-
-  const editor = useEditor()
-  const setIsSidebarOpen = useSetIsSidebarOpen()
+  const inputFileRef = React.useRef<HTMLInputElement>(null);
+  const editor = useEditor();
+  const setIsSidebarOpen = useSetIsSidebarOpen();
 
   const addObject = React.useCallback(
     (url: string) => {
       if (editor) {
         const options = {
-          type: "StaticVector",
+          type: 'StaticVector',
           src: url,
-        }
-        editor.objects.add(options)
+        };
+        editor.objects.add(options);
       }
     },
-    [editor]
-  )
+    [editor],
+  );
 
   const handleDropFiles = (files: FileList) => {
-    const file = files[0]
-    const url = URL.createObjectURL(file)
+    const file = files[0];
+    const url = URL.createObjectURL(file);
     editor.objects.add({
       src: url,
-      type: "StaticVector",
-    })
-  }
+      type: 'StaticVector',
+    });
+  };
 
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleDropFiles(e.target.files!)
-  }
+    handleDropFiles(e.target.files!);
+  };
 
   const handleInputFileRefClick = () => {
-    inputFileRef.current?.click()
-  }
+    inputFileRef.current?.click();
+  };
 
   return (
-    <Block $style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-      <Block
-        $style={{
-          display: "flex",
-          alignItems: "center",
-          fontWeight: 500,
-          justifyContent: "space-between",
-          padding: "1.5rem",
-        }}
+    <Box flex={1} display="flex" flexDirection="column">
+      <Box
+        display="flex"
+        alignItems="center"
+        fontWeight={500}
+        justifyContent="space-between"
+        padding="1.5rem"
       >
-        <Block>Graphics</Block>
-
-        <Block onClick={() => setIsSidebarOpen(false)} $style={{ cursor: "pointer", display: "flex" }}>
-          <AngleDoubleLeft size={18} />
-        </Block>
-      </Block>
-
-      <Block padding="0 1.5rem">
-        <Button
-          onClick={handleInputFileRefClick}
-          size={SIZE.compact}
-          overrides={{
-            Root: {
-              style: {
-                width: "100%",
-              },
-            },
-          }}
+        <Box>Graphics</Box>
+        <Box
+          onClick={() => setIsSidebarOpen(false)}
+          cursor="pointer"
+          display="flex"
         >
+          <AngleDoubleLeft size={18} />
+        </Box>
+      </Box>
+      <Box padding="0 1.5rem">
+        <Button onClick={handleInputFileRefClick} size="sm" width="100%">
           Computer
         </Button>
-      </Block>
+      </Box>
       <Scrollable>
-        <input onChange={handleFileInput} type="file" id="file" ref={inputFileRef} style={{ display: "none" }} />
-        <Block>
-          <Block $style={{ display: "grid", gap: "8px", padding: "1.5rem", gridTemplateColumns: "1fr 1fr" }}>
-            {vectors.map((vector, index) => (
-              <GraphicItem onClick={() => addObject(vector)} key={index} preview={vector} />
-            ))}
-          </Block>
-        </Block>
+        <input
+          onChange={handleFileInput}
+          type="file"
+          id="file"
+          ref={inputFileRef}
+          style={{display: 'none'}}
+        />
+        <Box
+          display="grid"
+          gap="8px"
+          padding="1.5rem"
+          gridTemplateColumns="1fr 1fr"
+        >
+          {vectors.map((vector, index) => (
+            <GraphicItem
+              onClick={() => addObject(vector)}
+              key={index}
+              preview={vector}
+            />
+          ))}
+        </Box>
       </Scrollable>
-    </Block>
-  )
-}
+    </Box>
+  );
+};
 
-const GraphicItem = ({ preview, onClick }: { preview: any; onClick?: (option: any) => void }) => {
-  const [css] = useStyletron()
+const GraphicItem = ({
+  preview,
+  onClick,
+}: {
+  preview: any;
+  onClick?: (option: any) => void;
+}) => {
   return (
-    <div
+    <Box
       onClick={onClick}
-      // onClick={() => onClick(component.layers[0])}
-      className={css({
-        position: "relative",
-        height: "84px",
-        background: "#f8f8fb",
-        cursor: "pointer",
-        padding: "12px",
-        borderRadius: "8px",
-        overflow: "hidden",
-        "::before:hover": {
-          opacity: 1,
-        },
-      })}
-    >
-      <div
-        className={css({
-          backgroundImage: `linear-gradient(to bottom,
+      position="relative"
+      height="84px"
+      background="#f8f8fb"
+      cursor="pointer"
+      padding="12px"
+      borderRadius="8px"
+      overflow="hidden"
+      _before={{
+        content: "''",
+        backgroundImage: `linear-gradient(to bottom,
           rgba(0, 0, 0, 0) 0,
           rgba(0, 0, 0, 0.006) 8.1%,
           rgba(0, 0, 0, 0.022) 15.5%,
@@ -129,32 +127,30 @@ const GraphicItem = ({ preview, onClick }: { preview: any; onClick?: (option: an
           rgba(0, 0, 0, 0.428) 84.5%,
           rgba(0, 0, 0, 0.444) 91.9%,
           rgba(0, 0, 0, 0.45) 100%)`,
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          opacity: 0,
-          transition: "opacity 0.3s ease-in-out",
-          height: "100%",
-          width: "100%",
-          ":hover": {
-            opacity: 1,
-          },
-        })}
-      />
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        opacity: 0,
+        transition: 'opacity 0.3s ease-in-out',
+        height: '100%',
+        width: '100%',
+        _hover: {
+          opacity: 1,
+        },
+      }}
+    >
       <img
         src={preview}
-        className={css({
-          width: "100%",
-          height: "100%",
-          objectFit: "contain",
-          pointerEvents: "none",
-          verticalAlign: "middle",
-        })}
+        width="100%"
+        height="100%"
+        objectFit="contain"
+        pointerEvents="none"
+        verticalAlign="middle"
       />
-    </div>
-  )
-}
+    </Box>
+  );
+};
 
-export default Graphics
+export default Graphics;

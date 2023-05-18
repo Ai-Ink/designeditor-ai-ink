@@ -1,146 +1,130 @@
-import React, { useState } from "react"
-import { useEditor } from "@layerhub-io/react"
-import { Block } from "baseui/block"
-import Scrollable from "~/components/Scrollable"
-import InfiniteScrolling from "~/components/InfiniteScrolling"
-import { IStaticImage } from "@layerhub-io/types"
-import Search from "~/components/Icons/Search"
-import { Input } from "baseui/input"
-import LazyLoadImage from "~/components/LazyLoadImage"
-import { SIZE, Spinner } from "baseui/spinner"
-import api from "~/services/api"
-import AngleDoubleLeft from "~/components/Icons/AngleDoubleLeft"
-import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
+import React, {useState} from 'react';
+import {useEditor} from '@layerhub-io/react';
+import {Box, Input, Spinner} from '@chakra-ui/react';
+import Scrollable from '~/components/Scrollable';
+import InfiniteScrolling from '~/components/InfiniteScrolling';
+import {IStaticImage} from '@layerhub-io/types';
+import SearchIcon from '~/components/Icons/SearchIcon';
+import LazyLoadImage from '~/components/LazyLoadImage';
+import AngleDoubleLeftIcon from '~/components/Icons/AngleDoubleLeftIcon';
+import useSetIsSidebarOpen from '~/hooks/useSetIsSidebarOpen';
+import {getPixabayImages} from '~/services/api';
 
 const Pixabay = () => {
-  const editor = useEditor()
-  const [hasMore, setHasMore] = React.useState(true)
-  const [images, setImages] = useState<IStaticImage[]>([])
-  const [pageNumber, setPageNumber] = React.useState(1)
-  const [isloading, setIsloading] = React.useState(true)
-  const [category, setCategory] = useState<string>("")
-  const setIsSidebarOpen = useSetIsSidebarOpen()
+  const editor = useEditor();
+  const [hasMore, setHasMore] = React.useState(true);
+  const [images, setImages] = useState<IStaticImage[]>([]);
+  const [pageNumber, setPageNumber] = React.useState(1);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [category, setCategory] = useState<string>('');
+  const setIsSidebarOpen = useSetIsSidebarOpen();
 
   const addObject = React.useCallback(
     (url: string) => {
       if (editor) {
         const options = {
-          type: "StaticImage",
+          type: 'StaticImage',
           src: url,
-        }
-        editor.objects.add(options)
+        };
+        editor.objects.add(options);
       }
     },
-    [editor]
-  )
+    [editor],
+  );
 
   const fetchData = React.useCallback(
     async (reset?: boolean) => {
-      setIsloading(true)
+      setIsLoading(true);
 
-      const newImages = await api.getPixabayImages({
-        query: category || "nature",
+      const newImages = await getPixabayImages({
+        query: category || 'nature',
         perPage: 12,
         page: pageNumber,
-      })
+      });
 
       if (newImages.length === 0) {
-        setHasMore(false)
-        setIsloading(false)
-        return
+        setHasMore(false);
+        setIsLoading(false);
+        return;
       }
 
-      let all = [...images, ...newImages]
-      // Set only new images if reset = true. It should be useful for new queries
+      let all = [...images, ...newImages];
       if (reset) {
-        all = newImages
+        all = newImages;
       }
-      // @ts-ignore
-      setImages(all)
-      setPageNumber(pageNumber + 1)
-      setIsloading(false)
+      setImages(all);
+      setPageNumber(pageNumber + 1);
+      setIsLoading(false);
     },
-    [pageNumber, hasMore, category, images]
-  )
+    [pageNumber, hasMore, category, images],
+  );
 
   const makeSearch = () => {
-    setImages([])
-    setPageNumber(1)
-    setIsloading(true)
-    fetchData(true)
-  }
+    setImages([]);
+    setPageNumber(1);
+    setIsLoading(true);
+    fetchData(true);
+  };
+
   return (
-    <Block flex={1} flexDirection="column" display={"flex"}>
-      <Block
-        $style={{
-          display: "flex",
-          alignItems: "center",
-          fontWeight: 500,
-          justifyContent: "space-between",
-          padding: "1.5rem 1.5rem 0",
-        }}
+    <Box flex={1} flexDirection="column" display="flex">
+      <Box
+        display="flex"
+        alignItems="center"
+        fontWeight={500}
+        justifyContent="space-between"
+        padding="1.5rem 1.5rem 0"
       >
-        <Block>Pixabay images</Block>
-
-        <Block onClick={() => setIsSidebarOpen(false)} $style={{ cursor: "pointer", display: "flex" }}>
-          <AngleDoubleLeft size={18} />
-        </Block>
-      </Block>
-
-      <Block $style={{ padding: "1.5rem 1.5rem 1rem" }}>
+        <Box>Pixabay images</Box>
+        <Box
+          cursor="pointer"
+          display="flex"
+          onClick={() => setIsSidebarOpen(false)}
+          _hover={{opacity: 0.7}}
+        >
+          <AngleDoubleLeftIcon boxSize={6} />
+        </Box>
+      </Box>
+      <Box padding="1.5rem 1.5rem 1rem">
         <Input
-          overrides={{
-            Root: {
-              style: {
-                paddingLeft: "8px",
-              },
-            },
-          }}
-          onKeyDown={(key) => key.code === "Enter" && makeSearch()}
-          onBlur={makeSearch}
+          variant="filled"
+          size="sm"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
+          onKeyDown={(e) => e.code === 'Enter' && makeSearch()}
+          onBlur={makeSearch}
           placeholder="Search"
-          size={"compact"}
-          startEnhancer={<Search size={16} />}
+          startIcon={<SearchIcon boxSize={4} />}
         />
-      </Block>
+      </Box>
       <Scrollable>
-        <Block padding={"0 1.5rem"}>
+        <Box padding="0 1.5rem">
           <InfiniteScrolling fetchData={fetchData} hasMore={hasMore}>
-            <Block
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(2, 1fr)",
-                gap: "0.5rem",
-              }}
+            <Box
+              display="grid"
+              gridTemplateColumns="repeat(2, 1fr)"
+              gap="0.5rem"
             >
-              {images.map((image) => {
-                return (
-                  <Block
-                    $style={{ cursor: "pointer", borderRadius: "10px", overflow: "hidden" }}
-                    onClick={() => addObject(image.src)}
-                    key={image.id}
-                  >
-                    <LazyLoadImage url={image.src} />
-                  </Block>
-                )
-              })}
-            </Block>
-            <Block
-              $style={{
-                display: "flex",
-                justifyContent: "center",
-                paddingY: "2rem",
-              }}
-            >
-              {isloading && <Spinner $size={SIZE.small} />}
-            </Block>
+              {images.map((image) => (
+                <Box
+                  key={image.id}
+                  borderRadius="10px"
+                  overflow="hidden"
+                  cursor="pointer"
+                  onClick={() => addObject(image.src)}
+                >
+                  <LazyLoadImage url={image.src} />
+                </Box>
+              ))}
+            </Box>
+            <Box display="flex" justifyContent="center" py="2rem">
+              {isLoading && <Spinner size="sm" />}
+            </Box>
           </InfiniteScrolling>
-        </Block>
+        </Box>
       </Scrollable>
-    </Block>
-  )
-}
+    </Box>
+  );
+};
 
-export default Pixabay
+export default Pixabay;

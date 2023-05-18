@@ -1,148 +1,163 @@
-import React from "react"
-import { useStyletron } from "baseui"
-import { Block } from "baseui/block"
-import AngleDoubleLeft from "~/components/Icons/AngleDoubleLeft"
-import Scrollable from "~/components/Scrollable"
-import { useEditor } from "@layerhub-io/react"
-import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
-import { getPixabayVideos } from "~/services/pixabay"
-import { getPexelsVideos } from "~/services/pexels"
-import useDesignEditorContext from "~/hooks/useDesignEditorContext"
+import React from 'react';
+import {Box, Flex, IconButton} from '@chakra-ui/react';
+import {ArrowLeftIcon} from '@chakra-ui/icons';
+import Scrollable from '~/components/Scrollable';
+import {useEditor} from '@layerhub-io/react';
+import useSetIsSidebarOpen from '~/hooks/useSetIsSidebarOpen';
+import {getPixabayVideos} from '~/services/pixabay';
+import {getPexelsVideos} from '~/services/pexels';
+import useDesignEditorContext from '~/hooks/useDesignEditorContext';
 
-const loadVideoResource = (videoSrc: string): Promise<HTMLVideoElement> => {
+const loadVideoResource = (videoSrc) => {
   return new Promise(function (resolve, reject) {
-    var video = document.createElement("video")
-    video.src = videoSrc
-    video.crossOrigin = "anonymous"
-    video.addEventListener("loadedmetadata", function (event) {
-      video.currentTime = 1
-    })
+    var video = document.createElement('video');
+    video.src = videoSrc;
+    video.crossOrigin = 'anonymous';
+    video.addEventListener('loadedmetadata', function (event) {
+      video.currentTime = 1;
+    });
 
-    video.addEventListener("seeked", function () {
-      resolve(video)
-    })
+    video.addEventListener('seeked', function () {
+      resolve(video);
+    });
 
-    video.addEventListener("error", function (error) {
-      reject(error)
-    })
-  })
-}
+    video.addEventListener('error', function (error) {
+      reject(error);
+    });
+  });
+};
 
-const captureFrame = (video: HTMLVideoElement) => {
+const captureFrame = (video) => {
   return new Promise(function (resolve) {
-    var canvas = document.createElement("canvas") as HTMLCanvasElement
-    canvas.width = video.videoWidth
-    canvas.height = video.videoHeight
-    canvas.getContext("2d")!.drawImage(video, 0, 0, canvas.width, canvas.height)
-    URL.revokeObjectURL(video.src)
+    var canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas
+      .getContext('2d')
+      ?.drawImage(video, 0, 0, canvas.width, canvas.height);
+    URL.revokeObjectURL(video.src);
 
-    const data = canvas.toDataURL()
+    const data = canvas.toDataURL();
 
     fetch(data)
       .then((res) => {
-        return res.blob()
+        return res.blob();
       })
       .then((blob) => {
-        const url = URL.createObjectURL(blob)
-        resolve(url)
-      })
-  })
-}
+        const url = URL.createObjectURL(blob);
+        resolve(url);
+      });
+  });
+};
 
-const captureDuration = (video: HTMLVideoElement): Promise<number> => {
+const captureDuration = (video) => {
   return new Promise((resolve) => {
-    resolve(video.duration)
-  })
-}
+    resolve(video.duration);
+  });
+};
 
 const Videos = () => {
-  const editor = useEditor()
-  const setIsSidebarOpen = useSetIsSidebarOpen()
-  const [videos, setVideos] = React.useState<any[]>([])
-  const { scenes, setScenes, currentScene } = useDesignEditorContext()
+  const editor = useEditor();
+  const setIsSidebarOpen = useSetIsSidebarOpen();
+  const [videos, setVideos] = React.useState([]);
+  const {scenes, setScenes, currentScene} = useDesignEditorContext();
   const loadPixabayVideos = async () => {
-    const videos = await getPixabayVideos("people")
-    setVideos(videos)
-  }
+    const videos = await getPixabayVideos('people');
+    setVideos(videos);
+  };
 
   const loadPexelsVideos = async () => {
-    const videos = (await getPexelsVideos("people")) as any
-    setVideos(videos)
-  }
+    const videos = await getPexelsVideos('people');
+    setVideos(videos);
+  };
   React.useEffect(() => {
-    loadPexelsVideos()
-  }, [])
+    loadPexelsVideos();
+  }, []);
 
   const addObject = React.useCallback(
-    async (options: any) => {
+    async (options) => {
       if (editor) {
-        const video = await loadVideoResource(options.src)
-        const frame = await captureFrame(video)
-        const duration = await captureDuration(video)
-        editor.objects.add({ ...options, duration, preview: frame })
+        const video = await loadVideoResource(options.src);
+        const frame = await captureFrame(video);
+        const duration = await captureDuration(video);
+        editor.objects.add({...options, duration, preview: frame});
         const updatedScenes = scenes.map((scn) => {
           if (scn.id === currentScene?.id) {
             return {
               ...currentScene,
-              duration: duration * 1000 > currentScene.duration! ? duration * 1000 : currentScene.duration!,
-            }
+              duration:
+                duration * 1000 > currentScene.duration
+                  ? duration * 1000
+                  : currentScene.duration,
+            };
           }
-          return scn
-        })
-        setScenes(updatedScenes)
+          return scn;
+        });
+        setScenes(updatedScenes);
       }
     },
-    [editor, scenes, currentScene]
-  )
+    [editor, scenes, currentScene],
+  );
 
   return (
-    <Block $style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-      <Block
-        $style={{
-          display: "flex",
-          alignItems: "center",
-          fontWeight: 500,
-          justifyContent: "space-between",
-          padding: "1.5rem",
-        }}
+    <Box flex={1} display="flex" flexDirection="column">
+      <Flex
+        alignItems="center"
+        fontWeight={500}
+        justifyContent="space-between"
+        padding="1.5rem"
       >
-        <Block>Videos</Block>
-
-        <Block onClick={() => setIsSidebarOpen(false)} $style={{ cursor: "pointer", display: "flex" }}>
-          <AngleDoubleLeft size={18} />
-        </Block>
-      </Block>
+        Videos
+        <IconButton
+          aria-label="Close"
+          variant="ghost"
+          onClick={() => setIsSidebarOpen(false)}
+          icon={<ArrowLeftIcon />}
+          size="sm"
+          cursor="pointer"
+        />
+      </Flex>
       <Scrollable>
-        <Block padding="0 1.5rem">
-          <div style={{ display: "grid", gap: "8px", gridTemplateColumns: "1fr 1fr" }}>
+        <Box padding="0 1.5rem">
+          <div
+            style={{
+              display: 'grid',
+              gap: '8px',
+              gridTemplateColumns: '1fr 1fr',
+            }}
+          >
             {videos.map((video, index) => {
-              return <img width="120px" key={index} src={video.preview} onClick={() => addObject(video)} />
+              return (
+                <img
+                  width="120px"
+                  key={index}
+                  src={video.preview}
+                  onClick={() => addObject(video)}
+                  alt=""
+                />
+              );
             })}
           </div>
-        </Block>
+        </Box>
       </Scrollable>
-    </Block>
-  )
-}
+    </Box>
+  );
+};
 
-const ImageItem = ({ preview, onClick }: { preview: any; onClick?: (option: any) => void }) => {
-  const [css] = useStyletron()
+const ImageItem = ({preview, onClick}) => {
   return (
     <div
       onClick={onClick}
-      className={css({
-        position: "relative",
-        background: "#f8f8fb",
-        cursor: "pointer",
-        borderRadius: "8px",
-        overflow: "hidden",
-        "::before:hover": {
-          opacity: 1,
-        },
-      })}
+      style={{
+        position: 'relative',
+        background: '#f8f8fb',
+        cursor: 'pointer',
+        borderRadius: '8px',
+        overflow: 'hidden',
+      }}
     >
       <div
-        className={css({
+        style={{
           backgroundImage: `linear-gradient(to bottom,
           rgba(0, 0, 0, 0) 0,
           rgba(0, 0, 0, 0.006) 8.1%,
@@ -160,32 +175,30 @@ const ImageItem = ({ preview, onClick }: { preview: any; onClick?: (option: any)
           rgba(0, 0, 0, 0.428) 84.5%,
           rgba(0, 0, 0, 0.444) 91.9%,
           rgba(0, 0, 0, 0.45) 100%)`,
-          position: "absolute",
+          position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
           opacity: 0,
-          transition: "opacity 0.3s ease-in-out",
-          height: "100%",
-          width: "100%",
-          ":hover": {
-            opacity: 1,
-          },
-        })}
+          transition: 'opacity 0.3s ease-in-out',
+          height: '100%',
+          width: '100%',
+        }}
       />
       <img
         src={preview}
-        className={css({
-          width: "100%",
-          height: "100%",
-          objectFit: "contain",
-          pointerEvents: "none",
-          verticalAlign: "middle",
-        })}
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'contain',
+          pointerEvents: 'none',
+          verticalAlign: 'middle',
+        }}
+        alt=""
       />
     </div>
-  )
-}
+  );
+};
 
-export default Videos
+export default Videos;

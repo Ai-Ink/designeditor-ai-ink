@@ -1,24 +1,22 @@
-import { Block } from "baseui/block"
-import Common from "./Common"
-import Flip from "./Shared/Flip"
+import React from 'react';
+import {Box, Flex} from '@chakra-ui/react';
+import Common from './Common';
+import Flip from './Shared/Flip';
 
 const Image = () => {
   return (
-    <Block
-      $style={{
-        flex: 1,
-        display: "flex",
-        alignItems: "center",
-        padding: "0 12px",
-        justifyContent: "space-between",
-      }}
+    <Flex
+      flex={1}
+      alignItems="center"
+      padding="0 12px"
+      justifyContent="space-between"
     >
-      <Block>
+      <Box>
         <Flip />
-      </Block>
+      </Box>
       <Common />
-    </Block>
-  )
-}
+    </Flex>
+  );
+};
 
-export default Image
+export default Image;

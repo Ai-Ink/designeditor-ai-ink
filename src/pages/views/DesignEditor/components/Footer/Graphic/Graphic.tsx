@@ -1,12 +1,11 @@
-import React from "react"
-import { styled } from "baseui"
-import { Theme } from "baseui/theme"
-import Common from "./Common"
-import Scenes from "./Scenes"
+import React from 'react';
+import {Box} from '@chakra-ui/react';
+import Common from './Common';
+import Scenes from './Scenes';
 
-const Container = styled<"div", {}, Theme>("div", ({ $theme }) => ({
-  background: $theme.colors.white,
-}))
+const Container = ({children}) => {
+  return <Box bg="white">{children}</Box>;
+};
 
 const Graphic = () => {
   return (
@@ -14,7 +13,7 @@ const Graphic = () => {
       <Scenes />
       <Common />
     </Container>
-  )
-}
+  );
+};
 
-export default Graphic
+export default Graphic;

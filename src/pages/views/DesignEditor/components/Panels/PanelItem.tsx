@@ -1,48 +1,46 @@
-import React from "react"
-import useAppContext from "~/hooks/useAppContext"
-import panelItems from "./panelItems"
-import useIsSidebarOpen from "~/hooks/useIsSidebarOpen"
-import { Block } from "baseui/block"
+import React from 'react';
+import {Box} from '@chakra-ui/react';
+import useAppContext from '~/hooks/useAppContext';
+import panelItems from './panelItems';
+import useIsSidebarOpen from '~/hooks/useIsSidebarOpen';
 
 interface State {
-  panel: string
+  panel: string;
 }
+
 const PanelsList = () => {
-  const [state, setState] = React.useState<State>({ panel: "Text" })
-  const isSidebarOpen = useIsSidebarOpen()
-  const { activePanel, activeSubMenu } = useAppContext()
+  const [state, setState] = React.useState<State>({panel: 'Text'});
+  const isSidebarOpen = useIsSidebarOpen();
+  const {activePanel, activeSubMenu} = useAppContext();
 
   React.useEffect(() => {
-    setState({ panel: activePanel })
-  }, [activePanel])
+    setState({panel: activePanel});
+  }, [activePanel]);
 
   React.useEffect(() => {
     if (activeSubMenu) {
-      setState({ panel: activeSubMenu })
+      setState({panel: activeSubMenu});
     } else {
-      setState({ panel: activePanel })
+      setState({panel: activePanel});
     }
-  }, [activeSubMenu])
+  }, [activeSubMenu, activePanel]);
 
-  // @ts-ignore
-  const Component = panelItems[state.panel]
+  const Component = panelItems[state.panel];
 
   return (
-    <Block
+    <Box
       id="EditorPanelItem"
-      $style={{
-        background: "#ffffff",
-        width: isSidebarOpen ? "306px" : 0,
-        flex: "none",
-        borderRight: "1px solid #d7d8e3",
-        display: "flex",
-        transition: "ease width 0.1s",
-        overflow: "hidden",
-      }}
+      bg="#ffffff"
+      width={isSidebarOpen ? '306px' : 0}
+      flex="none"
+      borderRight="1px solid #d7d8e3"
+      display="flex"
+      transition="ease width 0.1s"
+      overflow="hidden"
     >
       {Component && <Component />}
-    </Block>
-  )
-}
+    </Box>
+  );
+};
 
-export default PanelsList
+export default PanelsList;

@@ -1,53 +1,61 @@
-import React from "react"
-import { useStyletron } from "baseui"
-import Add from "~/components/Icons/Add"
-import { DesignEditorContext } from "~/contexts/DesignEditor"
-import { nanoid } from "nanoid"
-import { getDefaultTemplate } from "~/constants/design-editor"
-import { useEditor } from "@layerhub-io/react"
-import { Block } from "baseui/block"
-import { useTimer } from "@layerhub-io/use-timer"
-import { IScene } from "@layerhub-io/types"
-import TimelineItems from "./TimelineItems"
-import TimeMarker from "./TimeMarker"
-import TimelineControl from "./TimelineControl"
-import TimelineContextMenu from "./TimelineContextMenu"
-import useContextMenuTimelineRequest from "~/hooks/useContextMenuTimelineRequest"
-import { findSceneIndexByTime } from "~/views/DesignEditor/utils/scenes"
+import React, {useEffect, useCallback} from 'react';
+import {Box, useStyletron} from '@chakra-ui/react';
+import Add from '~/components/Icons/Add';
+import {DesignEditorContext} from '~/contexts/DesignEditor';
+import {nanoid} from 'nanoid';
+import {getDefaultTemplate} from '~/constants/design-editor';
+import {useEditor} from '@layerhub-io/react';
+import {useTimer} from '@layerhub-io/use-timer';
+import {IScene} from '@layerhub-io/types';
+import TimelineItems from './TimelineItems';
+import TimeMarker from './TimeMarker';
+import TimelineControl from './TimelineControl';
+import TimelineContextMenu from './TimelineContextMenu';
+import useContextMenuTimelineRequest from '~/hooks/useContextMenuTimelineRequest';
+import {findSceneIndexByTime} from '~/views/DesignEditor/utils/scenes';
 
 const Timeline = () => {
-  const { time, setTime, status } = useTimer()
-  const { setScenes, setCurrentScene, currentScene, scenes, setCurrentPreview, setCurrentDesign, currentDesign } =
-    React.useContext(DesignEditorContext)
-  const contextMenuTimelineRequest = useContextMenuTimelineRequest()
-  const editor = useEditor()
-  const [css] = useStyletron()
+  const {time, setTime, status} = useTimer();
+  const {
+    setScenes,
+    setCurrentScene,
+    currentScene,
+    scenes,
+    setCurrentPreview,
+    setCurrentDesign,
+    currentDesign,
+  } = React.useContext(DesignEditorContext);
+  const contextMenuTimelineRequest = useContextMenuTimelineRequest();
+  const editor = useEditor();
+  const [css] = useStyletron();
 
-  React.useEffect(() => {
+  useEffect(() => {
     let watcher = async () => {
-      const updatedTemplate = editor.scene.exportToJSON()
-      const updatedPreview = (await editor.renderer.render(updatedTemplate)) as any
-      setCurrentPreview(updatedPreview)
-    }
+      const updatedTemplate = editor.scene.exportToJSON();
+      const updatedPreview = (await editor.renderer.render(
+        updatedTemplate,
+      )) as any;
+      setCurrentPreview(updatedPreview);
+    };
     if (editor) {
-      editor.on("history:changed", watcher)
+      editor.on('history:changed', watcher);
     }
     return () => {
       if (editor) {
-        editor.off("history:changed", watcher)
+        editor.off('history:changed', watcher);
       }
-    }
-  }, [editor])
+    };
+  }, [editor]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (editor) {
       if (currentScene) {
-        updateCurrentScene(currentScene)
+        updateCurrentScene(currentScene);
       } else {
         const defaultTemplate = getDefaultTemplate({
           width: 1200,
           height: 1200,
-        })
+        });
 
         editor.scene
           .importFromJSON(defaultTemplate)
@@ -57,121 +65,137 @@ const Timeline = () => {
               id: nanoid(),
               frame: defaultTemplate.frame,
               metadata: {},
-              name: "Untitled Design",
-              preview: "",
+              name: 'Untitled Design',
+              preview: '',
               scenes: [],
-              type: "VIDEO",
-            })
-            const initialDesign = editor.scene.exportToJSON() as any
+              type: 'VIDEO',
+            });
+            const initialDesign = editor.scene.exportToJSON();
             editor.renderer.render(initialDesign).then((data) => {
-              setCurrentScene({ ...initialDesign, preview: data, duration: 5000 })
-              setScenes([{ ...initialDesign, preview: data, duration: 5000 }])
-            })
+              setCurrentScene({
+                ...initialDesign,
+                preview: data,
+                duration: 5000,
+              });
+              setScenes([{...initialDesign, preview: data, duration: 5000}]);
+            });
           })
-          .catch(console.log)
+          .catch(console.log);
       }
     }
-  }, [editor, currentScene])
+  }, [editor, currentScene]);
 
-  const updateCurrentScene = React.useCallback(
+  const updateCurrentScene = useCallback(
     async (design: IScene) => {
-      await editor.scene.importFromJSON(design)
-      const updatedPreview = (await editor.renderer.render(design)) as string
-      setCurrentPreview(updatedPreview)
+      await editor.scene.importFromJSON(design);
+      const updatedPreview = (await editor.renderer.render(design)) as string;
+      setCurrentPreview(updatedPreview);
     },
-    [editor, currentScene]
-  )
+    [editor, currentScene],
+  );
 
-  const addScene = React.useCallback(async () => {
-    setCurrentPreview("")
-    const updatedTemplate = editor.scene.exportToJSON()
-    const updatedPreview = await editor.renderer.render(updatedTemplate)
+  const addScene = useCallback(async () => {
+    setCurrentPreview('');
+    const updatedTemplate = editor.scene.exportToJSON();
+    const updatedPreview = await editor.renderer.render(updatedTemplate);
 
     const updatedPages = scenes.map((p) => {
       if (p.id === updatedTemplate.id) {
-        return { ...updatedTemplate, preview: updatedPreview, duration: p.duration }
+        return {
+          ...updatedTemplate,
+          preview: updatedPreview,
+          duration: p.duration,
+        };
       }
-      return p
-    })
+      return p;
+    });
 
     const maxTime = scenes.reduce(function (previousVal, currentValue) {
-      return previousVal + currentValue.duration!
-    }, 0)
+      return previousVal + currentValue.duration!;
+    }, 0);
 
-    const defaultTemplate = getDefaultTemplate(currentDesign.frame)
-    const newPreview = await editor.renderer.render(defaultTemplate)
+    const defaultTemplate = getDefaultTemplate(currentDesign.frame);
+    const newPreview = await editor.renderer.render(defaultTemplate);
     const newPage = {
       ...defaultTemplate,
       id: nanoid(),
       preview: newPreview,
       duration: 5000,
-    } as any
-    const newPages = [...updatedPages, newPage] as any[]
-    setScenes(newPages)
-    setTime(maxTime)
-  }, [scenes, currentDesign])
+    };
+    const newPages = [...updatedPages, newPage] as any[];
+    setScenes(newPages);
+    setTime(maxTime);
+  }, [scenes, currentDesign]);
 
-  const changePage = React.useCallback(
+  const changePage = useCallback(
     async (page: any) => {
-      setCurrentPreview("")
+      setCurrentPreview('');
       if (editor) {
-        const updatedTemplate = editor.scene.exportToJSON()
-        const updatedPreview = await editor.renderer.render(updatedTemplate)
+        const updatedTemplate = editor.scene.exportToJSON();
+        const updatedPreview = await editor.renderer.render(updatedTemplate);
 
         const updatedPages = scenes.map((p) => {
           if (p.id === updatedTemplate.id) {
-            return { ...updatedTemplate, preview: updatedPreview, duration: p.duration }
+            return {
+              ...updatedTemplate,
+              preview: updatedPreview,
+              duration: p.duration,
+            };
           }
-          return p
-        }) as any[]
-        setScenes(updatedPages)
-        setCurrentScene(page)
+          return p;
+        }) as any[];
+        setScenes(updatedPages);
+        setCurrentScene(page);
       }
     },
-    [editor, scenes, currentScene]
-  )
+    [editor, scenes, currentScene],
+  );
 
-  React.useEffect(() => {
-    if (editor && scenes && currentScene && status !== "RUNNING") {
-      const currentSceneIndex = findSceneIndexByTime(scenes, time)
-      const currentIndex = scenes.findIndex((page) => page.id === currentScene.id)
+  useEffect(() => {
+    if (editor && scenes && currentScene && status !== 'RUNNING') {
+      const currentSceneIndex = findSceneIndexByTime(scenes, time);
+      const currentIndex = scenes.findIndex(
+        (page) => page.id === currentScene.id,
+      );
       if (currentSceneIndex !== currentIndex && scenes[currentSceneIndex]) {
-        changePage(scenes[currentSceneIndex])
+        changePage(scenes[currentSceneIndex]);
       }
     }
-  }, [editor, scenes, time, currentScene, status])
+  }, [editor, scenes, time, currentScene, status]);
 
   return (
-    <Block $style={{ display: "flex", alignItems: "center" }}>
+    <Box display="flex" alignItems="center">
       <TimelineControl />
-      <Block $style={{ background: "#ffffff" }}>
-        <div className={css({ display: "flex", alignItems: "center" })}>
-          <Block
+      <Box background="#ffffff">
+        <div className={css({display: 'flex', alignItems: 'center'})}>
+          <Box
             id="TimelineItemsContainer"
-            $style={{ display: "flex", alignItems: "center", position: "relative", padding: "1rem 0", flex: 1 }}
+            display="flex"
+            alignItems="center"
+            position="relative"
+            padding="1rem 0"
+            flex={1}
           >
             {contextMenuTimelineRequest.visible && <TimelineContextMenu />}
             <TimeMarker />
             <TimelineItems />
-          </Block>
-          <Block
+          </Box>
+          <Box
             onClick={addScene}
-            $style={{
-              width: "100px",
-              height: "56px",
-              background: "rgb(243,244,246)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-            }}
+            width="100px"
+            height="56px"
+            background="rgb(243,244,246)"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            cursor="pointer"
           >
             <Add size={20} />
-          </Block>
+          </Box>
         </div>
-      </Block>
-    </Block>
-  )
-}
+      </Box>
+    </Box>
+  );
+};
 
-export default Timeline
+export default Timeline;

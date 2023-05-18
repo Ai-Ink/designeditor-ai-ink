@@ -1,45 +1,45 @@
-import React from "react"
-import { Block } from "baseui/block"
+import React from 'react';
+import {Box} from '@chakra-ui/react';
 
 interface Props {
-  children: React.ReactNode
-  fetchData: () => void
-  hasMore: boolean
+  children: React.ReactNode;
+  fetchData: () => void;
+  hasMore: boolean;
 }
 
-function InfiniteScrolling({ children, fetchData, hasMore }: Props) {
-  const lastElementRef = React.useRef<HTMLDivElement | null>(null)
+function InfiniteScrolling({children, fetchData, hasMore}: Props) {
+  const lastElementRef = React.useRef<HTMLDivElement | null>(null);
 
   React.useEffect(() => {
-    let observer: IntersectionObserver
+    let observer: IntersectionObserver;
     if (hasMore) {
       if (lastElementRef.current) {
         observer = new IntersectionObserver((entries) => {
-          const first = entries[0]
+          const first = entries[0];
           if (first.isIntersecting) {
             if (hasMore) {
-              fetchData()
+              fetchData();
             }
           }
-        })
+        });
 
-        observer.observe(lastElementRef.current)
+        observer.observe(lastElementRef.current);
       }
     }
 
     return () => {
       if (observer && lastElementRef.current) {
-        observer.unobserve(lastElementRef.current)
+        observer.unobserve(lastElementRef.current);
       }
-    }
-  }, [lastElementRef, fetchData, hasMore])
+    };
+  }, [lastElementRef, fetchData, hasMore]);
 
   return (
-    <Block>
+    <Box>
       {children}
-      <Block ref={lastElementRef}></Block>
-    </Block>
-  )
+      <Box ref={lastElementRef}></Box>
+    </Box>
+  );
 }
 
-export default InfiniteScrolling
+export default InfiniteScrolling;

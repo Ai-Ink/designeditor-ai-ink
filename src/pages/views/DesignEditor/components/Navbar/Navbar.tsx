@@ -1,11 +1,16 @@
 import React from 'react';
-import {styled, ThemeProvider, DarkTheme} from 'baseui';
-import {Theme} from 'baseui/theme';
-// import {Button, KIND} from 'baseui/button';
+import {
+  Box,
+  Flex,
+  Button,
+  Input,
+  InputGroup,
+  InputRightElement,
+} from '@chakra-ui/react';
+import {SunIcon} from '@chakra-ui/icons';
 import Logo from '~/components/Icons/Logo';
 import useDesignEditorContext from '~/hooks/useDesignEditorContext';
 import Play from '~/components/Icons/Play';
-import {Block} from 'baseui/block';
 import {useEditor} from '@layerhub-io/react';
 import useEditorType from '~/hooks/useEditorType';
 import {IScene} from '@layerhub-io/types';
@@ -14,18 +19,6 @@ import {loadVideoEditorAssets} from '~/utils/video';
 import DesignTitle from './DesignTitle';
 import {IDesign} from '~/interfaces/DesignEditor';
 import Github from '~/components/Icons/Github';
-
-import {Box, Flex, Button} from '@chakra-ui/react';
-import {SunIcon} from '@chakra-ui/icons';
-
-const Container = styled<'div', {}, Theme>('div', ({$theme}) => ({
-  height: '64px',
-  background: $theme.colors.black,
-  display: 'grid',
-  padding: '0 1.25rem',
-  gridTemplateColumns: '380px 1fr 380px',
-  alignItems: 'center',
-}));
 
 const Navbar = () => {
   const {
@@ -117,7 +110,7 @@ const Navbar = () => {
           id: scn.id,
           duration: scn.duration,
           layers: currentScene.layers,
-          name: currentScene.name ? currentScene.name : '',
+          name: scn.name ? scn.name : '',
         };
       }
       return {

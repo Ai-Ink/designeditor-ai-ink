@@ -1,15 +1,13 @@
-import * as React from 'react';
-import {Button} from 'baseui/button';
-import {useStyletron} from 'baseui';
+import React from 'react';
+import {Button} from '@chakra-ui/react';
 
-export const sum = (a: number, b: number) => a + b;
+export const sum = (a, b) => a + b;
 
-const Index: React.FC = () => {
-  const [css, theme] = useStyletron();
+const Index = () => {
   return (
     <div>
       <Button onClick={() => console.log('hey')}>Hello</Button>
-      <p className={css({color: theme.colors.accent600})}>Styled by hook</p>
+      <p style={{color: 'blue'}}>Styled by hook</p>
     </div>
   );
 };

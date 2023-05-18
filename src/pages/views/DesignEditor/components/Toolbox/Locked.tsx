@@ -1,36 +1,33 @@
-import React from "react"
-import { Block } from "baseui/block"
-import { useEditor } from "@layerhub-io/react"
-import { PLACEMENT, StatefulTooltip } from "baseui/tooltip"
-import { Button, SIZE, KIND } from "baseui/button"
-import UnlockedIcon from "~/components/Icons/Unlocked"
+import React from 'react';
+import {Box, Flex} from '@chakra-ui/react';
+import {useEditor} from '@layerhub-io/react';
+import {Tooltip} from '@chakra-ui/react';
+import {Button} from '@chakra-ui/react';
+import UnlockedIcon from '~/components/Icons/Unlocked';
 
 const Locked = () => {
-  const editor = useEditor()
+  const editor = useEditor();
 
   return (
-    <Block
-      $style={{
-        flex: 1,
-        display: "flex",
-        alignItems: "center",
-        padding: "0 12px",
-        justifyContent: "flex-end",
-      }}
+    <Flex
+      flex={1}
+      alignItems="center"
+      padding="0 12px"
+      justifyContent="flex-end"
     >
-      <StatefulTooltip placement={PLACEMENT.bottom} showArrow={true} accessibilityType="tooltip" content="Unlock">
+      <Tooltip label="Unlock" placement="bottom" hasArrow>
         <Button
           onClick={() => {
-            editor.objects.unlock()
+            editor.objects.unlock();
           }}
-          size={SIZE.mini}
-          kind={KIND.tertiary}
+          size="sm"
+          variant="ghost"
         >
-          <UnlockedIcon size={24} />
+          <UnlockedIcon size={24} color="black" />
         </Button>
-      </StatefulTooltip>
-    </Block>
-  )
-}
+      </Tooltip>
+    </Flex>
+  );
+};
 
-export default Locked
+export default Locked;

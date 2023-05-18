@@ -1,6 +1,5 @@
 import React from 'react';
 import {Box, Input, Tooltip} from '@chakra-ui/react';
-import {StatefulTooltip} from 'baseui/tooltip';
 import useDesignEditorContext from '~/hooks/useDesignEditorContext';
 import CloudCheck from '~/components/Icons/CloudCheck';
 

@@ -1,14 +1,14 @@
-import Timeline from "./Timeline"
-import Common from "./Common"
-import { Block } from "baseui/block"
+import {Box} from '@chakra-ui/react';
+import Timeline from './Timeline';
+import Common from './Common';
 
 const Video = () => {
   return (
-    <Block $style={{ background: "#ffffff" }}>
+    <Box bg="#ffffff">
       <Timeline />
       <Common />
-    </Block>
-  )
-}
+    </Box>
+  );
+};
 
-export default Video
+export default Video;

@@ -1,78 +1,92 @@
-import React from "react"
-import { useStyletron } from "baseui"
-import { Block } from "baseui/block"
-import AngleDoubleLeft from "~/components/Icons/AngleDoubleLeft"
-import Scrollable from "~/components/Scrollable"
-import { images } from "~/constants/mock-data"
-import { useEditor } from "@layerhub-io/react"
-import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
+import React from 'react';
+import {Box, Image, useStyleConfig} from '@chakra-ui/react';
+import AngleDoubleLeft from '~/components/Icons/AngleDoubleLeft';
+import Scrollable from '~/components/Scrollable';
+import {images} from '~/constants/mock-data';
+import {useEditor} from '@layerhub-io/react';
+import useSetIsSidebarOpen from '~/hooks/useSetIsSidebarOpen';
 
 const Images = () => {
-  const editor = useEditor()
-  const setIsSidebarOpen = useSetIsSidebarOpen()
+  const editor = useEditor();
+  const setIsSidebarOpen = useSetIsSidebarOpen();
 
   const addObject = React.useCallback(
     (url: string) => {
       if (editor) {
         const options = {
-          type: "StaticImage",
+          type: 'StaticImage',
           src: url,
-        }
-        editor.objects.add(options)
+        };
+        editor.objects.add(options);
       }
     },
-    [editor]
-  )
+    [editor],
+  );
 
   return (
-    <Block $style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-      <Block
-        $style={{
-          display: "flex",
-          alignItems: "center",
-          fontWeight: 500,
-          justifyContent: "space-between",
-          padding: "1.5rem",
-        }}
+    <Box flex={1} display="flex" flexDirection="column">
+      <Box
+        display="flex"
+        alignItems="center"
+        fontWeight={500}
+        justifyContent="space-between"
+        padding="1.5rem"
       >
-        <Block>Images</Block>
-
-        <Block onClick={() => setIsSidebarOpen(false)} $style={{ cursor: "pointer", display: "flex" }}>
+        <Box>Images</Box>
+        <Box
+          onClick={() => setIsSidebarOpen(false)}
+          cursor="pointer"
+          display="flex"
+        >
           <AngleDoubleLeft size={18} />
-        </Block>
-      </Block>
+        </Box>
+      </Box>
       <Scrollable>
-        <Block padding="0 1.5rem">
-          <div style={{ display: "grid", gap: "8px", gridTemplateColumns: "1fr 1fr" }}>
-            {images.map((image, index) => {
-              return <ImageItem key={index} onClick={() => addObject(image.src.large)} preview={image.src.small} />
-            })}
-          </div>
-        </Block>
+        <Box
+          padding="0 1.5rem"
+          display="grid"
+          gap="8px"
+          gridTemplateColumns="1fr 1fr"
+        >
+          {images.map((image, index) => (
+            <ImageItem
+              key={index}
+              onClick={() => addObject(image.src.large)}
+              preview={image.src.small}
+            />
+          ))}
+        </Box>
       </Scrollable>
-    </Block>
-  )
-}
+    </Box>
+  );
+};
 
-const ImageItem = ({ preview, onClick }: { preview: any; onClick?: (option: any) => void }) => {
-  const [css] = useStyletron()
+const ImageItem = ({
+  preview,
+  onClick,
+}: {
+  preview: any;
+  onClick?: (option: any) => void;
+}) => {
+  const styles = useStyleConfig('ImageItem');
+
   return (
-    <div
+    <Box
       onClick={onClick}
-      className={css({
-        position: "relative",
-        background: "#f8f8fb",
-        cursor: "pointer",
-        borderRadius: "8px",
-        overflow: "hidden",
-        "::before:hover": {
-          opacity: 1,
-        },
-      })}
-    >
-      <div
-        className={css({
-          backgroundImage: `linear-gradient(to bottom,
+      position="relative"
+      background="#f8f8fb"
+      borderRadius="8px"
+      overflow="hidden"
+      cursor="pointer"
+      _before={{
+        content: "''",
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        opacity: 0,
+        backgroundImage: `linear-gradient(to bottom,
           rgba(0, 0, 0, 0) 0,
           rgba(0, 0, 0, 0.006) 8.1%,
           rgba(0, 0, 0, 0.022) 15.5%,
@@ -89,32 +103,24 @@ const ImageItem = ({ preview, onClick }: { preview: any; onClick?: (option: any)
           rgba(0, 0, 0, 0.428) 84.5%,
           rgba(0, 0, 0, 0.444) 91.9%,
           rgba(0, 0, 0, 0.45) 100%)`,
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          opacity: 0,
-          transition: "opacity 0.3s ease-in-out",
-          height: "100%",
-          width: "100%",
-          ":hover": {
-            opacity: 1,
-          },
-        })}
-      />
-      <img
+        transition: 'opacity 0.3s ease-in-out',
+        height: '100%',
+        width: '100%',
+        _hover: {
+          opacity: 1,
+        },
+      }}
+    >
+      <Image
         src={preview}
-        className={css({
-          width: "100%",
-          height: "100%",
-          objectFit: "contain",
-          pointerEvents: "none",
-          verticalAlign: "middle",
-        })}
+        width="100%"
+        height="100%"
+        objectFit="contain"
+        pointerEvents="none"
+        verticalAlign="middle"
       />
-    </div>
-  )
-}
+    </Box>
+  );
+};
 
-export default Images
+export default Images;

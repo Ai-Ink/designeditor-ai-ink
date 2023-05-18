@@ -1,9 +1,8 @@
 import React from 'react';
 import {useEditor} from '@layerhub-io/react';
-import {useStyletron} from 'baseui';
-import {Block} from 'baseui/block';
-import {Button, SIZE} from 'baseui/button';
-import AngleDoubleLeft from '~/components/Icons/AngleDoubleLeft';
+import {useStyletron} from 'styletron-react';
+import {Box, Button} from '@chakra-ui/react';
+import {AngleDoubleLeftIcon} from '@chakra-ui/icons';
 import Scrollable from '~/components/Scrollable';
 import {graphics} from '~/constants/mock-data';
 import useSetIsSidebarOpen from '~/hooks/useSetIsSidebarOpen';
@@ -25,63 +24,33 @@ const Elements = () => {
   );
 
   return (
-    <Block $style={{flex: 1, display: 'flex', flexDirection: 'column'}}>
-      <Block
-        $style={{
-          display: 'flex',
-          alignItems: 'center',
-          fontWeight: 500,
-          justifyContent: 'space-between',
-          padding: '1.5rem',
-        }}
+    <Box flex={1} display="flex" flexDirection="column">
+      <Box
+        display="flex"
+        alignItems="center"
+        fontWeight={500}
+        justifyContent="space-between"
+        padding="1.5rem"
       >
-        <Block>Elements</Block>
+        <Box>Elements</Box>
 
-        <Block
+        <Box
           onClick={() => setIsSidebarOpen(false)}
-          $style={{cursor: 'pointer', display: 'flex'}}
+          cursor="pointer"
+          display="flex"
         >
-          <AngleDoubleLeft size={18} />
-        </Block>
-      </Block>
+          <AngleDoubleLeftIcon boxSize={4} />
+        </Box>
+      </Box>
       <Scrollable>
-        {/* <Block padding={"0 1.5rem"}>
-          <Button
-            size={SIZE.compact}
-            overrides={{
-              Root: {
-                style: {
-                  width: "100%",
-                },
-              },
-            }}
+        <Box>
+          <Box
+            display="grid"
+            gap="8px"
+            padding="1.5rem"
+            gridTemplateColumns="repeat(4, 1fr)"
           >
-            Computer
-          </Button>
-        </Block> */}
-        <Block>
-          <Block
-            $style={{
-              display: 'grid',
-              gap: '8px',
-              padding: '1.5rem',
-              gridTemplateColumns: '1fr 1fr 1fr 1fr',
-            }}
-          >
-            {/* {graphics.map((graphic, index) => (
-              <ImageItem
-                onClick={() => addObject(graphic)}
-                key={index}
-                preview={graphic.preview}
-              />
-            ))} */}
-            <div
-              className={css({
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'flex-start',
-              })}
-            >
+            <Box display="flex" flexWrap="wrap" justifyContent="flex-start">
               {graphics.map((graphic, index) => (
                 <SVGItem
                   key={index}
@@ -90,12 +59,11 @@ const Elements = () => {
                   addObject={addObject}
                 />
               ))}
-            </div>
-            {/* <SVGItemsGrid graphics={graphics} addObject={addObject} /> */}
-          </Block>
-        </Block>
+            </Box>
+          </Box>
+        </Box>
       </Scrollable>
-    </Block>
+    </Box>
   );
 };
 

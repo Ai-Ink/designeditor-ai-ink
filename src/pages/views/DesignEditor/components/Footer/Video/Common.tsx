@@ -1,66 +1,70 @@
-import React from "react"
-import { styled } from "baseui"
-import { Theme } from "baseui/theme"
-import Icons from "~/components/Icons"
-import { Button, KIND, SIZE } from "baseui/button"
-import { useZoomRatio } from "@layerhub-io/react"
-import { useTimer } from "@layerhub-io/use-timer"
-import { Block } from "baseui/block"
-import useDesignEditorContext from "~/hooks/useDesignEditorContext"
-
-const Container = styled<"div", {}, Theme>("div", ({ $theme }) => ({
-  height: "50px",
-  background: $theme.colors.white,
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-}))
-
-interface Options {
-  zoomRatio: number
-}
+import React, {useState, useEffect} from 'react';
+import {Box, Button, useStyletron} from '@chakra-ui/react';
+import Icons from '~/components/Icons';
+import {useZoomRatio} from '@layerhub-io/react';
+import {useTimer} from '@layerhub-io/use-timer';
+import useDesignEditorContext from '~/hooks/useDesignEditorContext';
 
 const Common = () => {
-  const { time } = useTimer()
-  const { maxTime } = useDesignEditorContext()
-  const [options, setOptions] = React.useState<Options>({
+  const {time} = useTimer();
+  const {maxTime} = useDesignEditorContext();
+  const [options, setOptions] = useState({
     zoomRatio: 20,
-  })
-  const zoomRatio: number = useZoomRatio()
+  });
+  const zoomRatio = useZoomRatio();
+  const [css] = useStyletron();
 
-  React.useEffect(() => {
-    setOptions({ ...options, zoomRatio: Math.round(zoomRatio * 100) })
-  }, [zoomRatio])
+  useEffect(() => {
+    setOptions({...options, zoomRatio: Math.round(zoomRatio * 100)});
+  }, [zoomRatio]);
 
   return (
-    <Container>
-      <Block $style={{ display: "flex", fontWeight: 500, fontSize: "15px", alignItems: "center" }}>
-        <Button kind={KIND.tertiary} size={SIZE.compact}>
+    <Box
+      height="50px"
+      background="#ffffff"
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+    >
+      <Box
+        className={css({
+          display: 'flex',
+          fontWeight: 500,
+          fontSize: '15px',
+          alignItems: 'center',
+        })}
+      >
+        <Button variant="unstyled">
           <Icons.Layers size={20} />
         </Button>
-        <Block>
-          {new Date(time).toISOString().slice(14, 19)} / {new Date(maxTime).toISOString().slice(14, 19)}
-        </Block>
-      </Block>
-      <Block $style={{ display: "flex", alignItems: "center", justifyContent: "end" }}>
-        <Button kind={KIND.tertiary} size={SIZE.compact}>
-          {options.zoomRatio}
-        </Button>
-        <Button kind={KIND.tertiary} size={SIZE.compact}>
+        <Box>
+          {new Date(time).toISOString().slice(14, 19)} /{' '}
+          {new Date(maxTime).toISOString().slice(14, 19)}
+        </Box>
+      </Box>
+      <Box
+        className={css({
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+        })}
+      >
+        <Button variant="unstyled">{options.zoomRatio}</Button>
+        <Button variant="unstyled">
           <Icons.Refresh size={16} />
         </Button>
-        <Button kind={KIND.tertiary} size={SIZE.compact}>
+        <Button variant="unstyled">
           <Icons.Undo size={22} />
         </Button>
-        <Button kind={KIND.tertiary} size={SIZE.compact}>
+        <Button variant="unstyled">
           <Icons.Redo size={22} />
         </Button>
-        <Button kind={KIND.tertiary} size={SIZE.compact}>
+        <Button variant="unstyled">
           <Icons.TimePast size={16} />
         </Button>
-      </Block>
-    </Container>
-  )
-}
+      </Box>
+    </Box>
+  );
+};
 
-export default Common
+export default Common;
