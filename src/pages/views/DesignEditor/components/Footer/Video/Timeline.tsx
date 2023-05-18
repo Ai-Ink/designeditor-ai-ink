@@ -1,5 +1,5 @@
 import React, {useEffect, useCallback} from 'react';
-import {Box, useStyletron} from '@chakra-ui/react';
+import {Box} from '@chakra-ui/react';
 import Add from '@/components/Icons/Add';
 import {DesignEditorContext} from '@/contexts/DesignEditor';
 import {nanoid} from 'nanoid';
@@ -27,7 +27,6 @@ const Timeline = () => {
   } = React.useContext(DesignEditorContext);
   const contextMenuTimelineRequest = useContextMenuTimelineRequest();
   const editor = useEditor();
-  const [css] = useStyletron();
 
   useEffect(() => {
     let watcher = async () => {
@@ -190,7 +189,7 @@ const Timeline = () => {
             justifyContent="center"
             cursor="pointer"
           >
-            <Add size={20} />
+            <Add size={20} color="black" />
           </Box>
         </div>
       </Box>

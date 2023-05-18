@@ -1,20 +1,11 @@
 import React from 'react';
 import Search from '@/components/Icons/Search';
-import {
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Box,
-  Button,
-  CloseIcon,
-} from '@chakra-ui/react';
+import {Input, InputGroup, InputLeftElement, Box} from '@chakra-ui/react';
 import useAppContext from '@/hooks/useAppContext';
-import {useStyletron} from 'styletron-react';
 import {useEditor} from '@layerhub-io/react';
 import {loadFonts} from '@/utils/fonts';
 import {groupBy} from 'lodash';
 import Scrollable from '@/components/Scrollable';
-import {Block} from '@chakra-ui/layout';
 import {DeleteIcon} from '@chakra-ui/icons';
 import {useSelector} from 'react-redux';
 import {selectFonts} from '@/store/slices/fonts/selectors';
@@ -31,7 +22,6 @@ export default function () {
   const fonts = useSelector(selectFonts);
   const [commonFonts, setCommonFonts] = React.useState<any[]>([]);
   const [searchQuery] = useDebounce(query, 250);
-  const [css] = useStyletron();
   const editor = useEditor();
   const dispatch = useAppDispatch();
 
@@ -116,7 +106,7 @@ export default function () {
       <Box padding="0 1.5rem 1rem">
         <InputGroup>
           <InputLeftElement pointerEvents="none">
-            <Search boxSize={4} />
+            <Search size={4} color="black" />
           </InputLeftElement>
           <Input
             paddingLeft="2rem"
@@ -129,7 +119,7 @@ export default function () {
         </InputGroup>
       </Box>
       <Scrollable>
-        <Block padding="0 1.5rem" display="grid" gap="0.2rem">
+        <Box padding="0 1.5rem" display="grid" gap="0.2rem">
           <InfiniteScrolling fetchData={fetchData} hasMore={hasMore}>
             <Box display="grid">
               {commonFonts.map((font, index) => {
@@ -155,7 +145,7 @@ export default function () {
               })}
             </Box>
           </InfiniteScrolling>
-        </Block>
+        </Box>
       </Scrollable>
     </Box>
   );

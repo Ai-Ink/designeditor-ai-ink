@@ -1,8 +1,7 @@
-import {useEffect, useRef} from 'react';
-import {useStyletron} from 'styletron-react';
+import React, {useEffect, useRef} from 'react';
+import {Box} from '@chakra-ui/react';
 
 const SVGItemsGrid = ({graphics, addObject}) => {
-  const [css] = useStyletron();
   const gridRef = useRef(null);
 
   useEffect(() => {
@@ -34,44 +33,34 @@ const SVGItemsGrid = ({graphics, addObject}) => {
   };
 
   return (
-    <div
-      ref={gridRef}
-      className={css({
-        display: 'grid',
-        gridGap: '8px',
-      })}
-    >
+    <Box ref={gridRef} display="grid" gridGap="8px">
       {graphics.map((graphic, index) => (
-        <div
+        <Box
           key={index}
           onClick={() => addObject(graphic)}
-          className={css({
-            position: 'relative',
-            background: '#f8f8fb',
-            cursor: 'pointer',
-            borderRadius: '8px',
-            overflow: 'hidden',
-            ':hover': {
-              opacity: 1,
-              background: 'rgb(233,233,233)',
-            },
-            ...svgItemStyle,
-          })}
+          position="relative"
+          background="#f8f8fb"
+          cursor="pointer"
+          borderRadius="8px"
+          overflow="hidden"
+          _hover={{
+            opacity: 1,
+            background: 'rgb(233,233,233)',
+          }}
+          {...svgItemStyle}
         >
           <svg
             viewBox={`0 0 ${graphic.width} ${graphic.height}`}
             xmlns="http://www.w3.org/2000/svg"
-            className={css({
-              width: '100%',
-              height: '100%',
-              pointerEvents: 'none',
-            })}
+            width="100%"
+            height="100%"
+            pointerEvents="none"
           >
             <path d={graphic.path} fill={graphic.fill} />
           </svg>
-        </div>
+        </Box>
       ))}
-    </div>
+    </Box>
   );
 };
 

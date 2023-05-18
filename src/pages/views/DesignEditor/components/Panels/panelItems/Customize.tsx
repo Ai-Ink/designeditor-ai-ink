@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react';
 import {FaPlus} from 'react-icons/fa';
 import {HexColorPicker} from 'react-colorful';
-import AngleDoubleLeftIcon from '@/components/Icons/AngleDoubleLeft';
+import AngleDoubleLeft from '@/components/Icons/AngleDoubleLeft';
 import Scrollable from '@/components/Scrollable';
 import {sampleFrames} from '@/constants/editor';
 import Scrollbar from '@layerhub-io/react-custom-scrollbar';
@@ -72,7 +72,7 @@ const Customize = () => {
           cursor="pointer"
           display="flex"
         >
-          <AngleDoubleLeftIcon boxSize={18} />
+          <AngleDoubleLeft size={18} color="black" />
         </Box>
       </Box>
       <Scrollable>

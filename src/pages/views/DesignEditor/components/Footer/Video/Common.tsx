@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Box, Button, useStyletron} from '@chakra-ui/react';
+import {Box, Button} from '@chakra-ui/react';
 import Icons from '@/components/Icons';
 import {useZoomRatio} from '@layerhub-io/react';
 import {useTimer} from '@layerhub-io/use-timer';
@@ -12,7 +12,6 @@ const Common = () => {
     zoomRatio: 20,
   });
   const zoomRatio = useZoomRatio();
-  const [css] = useStyletron();
 
   useEffect(() => {
     setOptions({...options, zoomRatio: Math.round(zoomRatio * 100)});
@@ -35,32 +34,26 @@ const Common = () => {
         })}
       >
         <Button variant="unstyled">
-          <Icons.Layers size={20} />
+          <Icons.Layers size={20} color="black" />
         </Button>
         <Box>
           {new Date(time).toISOString().slice(14, 19)} /{' '}
           {new Date(maxTime).toISOString().slice(14, 19)}
         </Box>
       </Box>
-      <Box
-        className={css({
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-        })}
-      >
+      <Box display="flex" alignItems="center" justifyContent="flex-end">
         <Button variant="unstyled">{options.zoomRatio}</Button>
         <Button variant="unstyled">
-          <Icons.Refresh size={16} />
+          <Icons.Refresh size={16} color="black" />
         </Button>
         <Button variant="unstyled">
-          <Icons.Undo size={22} />
+          <Icons.Undo size={22} color="black" />
         </Button>
         <Button variant="unstyled">
-          <Icons.Redo size={22} />
+          <Icons.Redo size={22} color="black" />
         </Button>
         <Button variant="unstyled">
-          <Icons.TimePast size={16} />
+          <Icons.TimePast size={16} color="black" />
         </Button>
       </Box>
     </Box>

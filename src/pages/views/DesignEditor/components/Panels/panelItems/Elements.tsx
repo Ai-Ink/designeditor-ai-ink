@@ -1,8 +1,7 @@
 import React from 'react';
 import {useEditor} from '@layerhub-io/react';
-import {useStyletron} from 'styletron-react';
-import {Box, Button} from '@chakra-ui/react';
-import {AngleDoubleLeftIcon} from '@chakra-ui/icons';
+import {Box, Image} from '@chakra-ui/react';
+import AngleDoubleLeft from '@/components/Icons/AngleDoubleLeft';
 import Scrollable from '@/components/Scrollable';
 import {graphics} from '@/constants/mock-data';
 import useSetIsSidebarOpen from '@/hooks/useSetIsSidebarOpen';
@@ -10,7 +9,6 @@ import SVGItem from './SVGItem';
 import SVGItemsGrid from './SVGItemsGrid';
 
 const Elements = () => {
-  const [css] = useStyletron();
   const editor = useEditor();
   const setIsSidebarOpen = useSetIsSidebarOpen();
 
@@ -39,7 +37,7 @@ const Elements = () => {
           cursor="pointer"
           display="flex"
         >
-          <AngleDoubleLeftIcon boxSize={4} />
+          <AngleDoubleLeft size={4} color="black" />
         </Box>
       </Box>
       <Scrollable>
@@ -74,33 +72,28 @@ const ImageItem = ({
   preview: any;
   onClick?: (option: any) => void;
 }) => {
-  const [css] = useStyletron();
   return (
-    <div
+    <Box
       onClick={onClick}
-      className={css({
-        position: 'relative',
-        background: '#f8f8fb',
-        cursor: 'pointer',
-        borderRadius: '8px',
-        overflow: 'hidden',
-        ':hover': {
-          opacity: 1,
-          background: 'rgb(233,233,233)',
-        },
-      })}
+      position="relative"
+      bg="#f8f8fb"
+      cursor="pointer"
+      borderRadius="8px"
+      overflow="hidden"
+      _hover={{
+        opacity: 1,
+        background: 'rgb(233,233,233)',
+      }}
     >
-      <img
+      <Image
         src={preview}
-        className={css({
-          width: '100%',
-          height: '100%',
-          objectFit: 'contain',
-          pointerEvents: 'none',
-          verticalAlign: 'middle',
-        })}
+        w="100%"
+        h="100%"
+        objectFit="contain"
+        pointerEvents="none"
+        verticalAlign="middle"
       />
-    </div>
+    </Box>
   );
 };
 
