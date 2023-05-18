@@ -17,15 +17,15 @@ import {
   Tabs,
   useDisclosure,
 } from '@chakra-ui/react';
-import {PlusIcon, SwapHorizontalIcon} from '@chakra-ui/icons';
+import {FaPlus} from 'react-icons/fa';
 import {HexColorPicker} from 'react-colorful';
-import AngleDoubleLeftIcon from './components/Icons/AngleDoubleLeft';
-import Scrollable from './components/Scrollable';
-import {sampleFrames} from './constants/editor';
+import AngleDoubleLeftIcon from '@/components/Icons/AngleDoubleLeft';
+import Scrollable from '@/components/Scrollable';
+import {sampleFrames} from '@/constants/editor';
 import Scrollbar from '@layerhub-io/react-custom-scrollbar';
 import {useEditor, useFrame} from '@layerhub-io/react';
-import useSetIsSidebarOpen from './hooks/useSetIsSidebarOpen';
-import useDesignEditorContext from './hooks/useDesignEditorContext';
+import useSetIsSidebarOpen from '@/hooks/useSetIsSidebarOpen';
+import useDesignEditorContext from '@/hooks/useDesignEditorContext';
 
 const colors = [
   '#ffffff',
@@ -127,7 +127,7 @@ const Customize = () => {
                       justifyContent="center"
                       fontSize="1.3rem"
                     >
-                      <PlusIcon boxSize={6} />
+                      <FaPlus size={6} />
                     </Box>
                   </Box>
                 </Box>
