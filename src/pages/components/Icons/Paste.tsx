@@ -1,6 +1,11 @@
-function Paste({ size }: { size: number }) {
+function Paste({size}: {size: number; color: string}) {
   return (
-    <svg height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M9 12.0005H15"
         stroke="currentColor"
@@ -44,7 +49,7 @@ function Paste({ size }: { size: number }) {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }
 
-export default Paste
+export default Paste;

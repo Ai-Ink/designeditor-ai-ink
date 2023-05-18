@@ -1,28 +1,22 @@
-import { useStyletron, styled } from "baseui"
-import { BASE_ITEMS, VIDEO_PANEL_ITEMS } from "~/constants/app-options"
-import useAppContext from "~/hooks/useAppContext"
-import Icons from "~/components/Icons"
-import { useTranslation } from "react-i18next"
-import useSetIsSidebarOpen from "~/hooks/useSetIsSidebarOpen"
-import useEditorType from "~/hooks/useEditorType"
-import Scrollable from "~/components/Scrollable"
-import { Block } from "baseui/block"
-
-const Container = styled("div", (props) => ({
-  width: "80px",
-  backgroundColor: props.$theme.colors.primary100,
-  display: "flex",
-  flex: "none",
-}))
+import React from 'react';
+import {Box} from '@chakra-ui/react';
+import {BASE_ITEMS, VIDEO_PANEL_ITEMS} from '~/constants/app-options';
+import useAppContext from '~/hooks/useAppContext';
+import Icons from '~/components/Icons';
+import {useTranslation} from 'react-i18next';
+import useSetIsSidebarOpen from '~/hooks/useSetIsSidebarOpen';
+import useEditorType from '~/hooks/useEditorType';
+import Scrollable from '~/components/Scrollable';
 
 const PanelsList = () => {
-  const { activePanel } = useAppContext()
-  const { t } = useTranslation("editor")
-  const editorType = useEditorType()
-  const PANEL_ITEMS = editorType === "VIDEO" ? VIDEO_PANEL_ITEMS : BASE_ITEMS
+  const {activePanel} = useAppContext();
+  const {t} = useTranslation('editor');
+  const editorType = useEditorType();
+  const PANEL_ITEMS = editorType === 'VIDEO' ? VIDEO_PANEL_ITEMS : BASE_ITEMS;
+
   return (
-    <Container>
-      <Scrollable autoHide={true}>
+    <Box width="80px" backgroundColor="primary.900" display="flex" flex="none">
+      <Scrollable autoHide>
         {PANEL_ITEMS.map((panelListItem) => (
           <PanelListItem
             label={t(`panels.panelsList.${panelListItem.id}`)}
@@ -33,48 +27,52 @@ const PanelsList = () => {
           />
         ))}
       </Scrollable>
-    </Container>
-  )
-}
+    </Box>
+  );
+};
 
-const PanelListItem = ({ label, icon, activePanel, name }: any) => {
-  const { setActivePanel } = useAppContext()
-  const setIsSidebarOpen = useSetIsSidebarOpen()
-  const [css, theme] = useStyletron()
-  // @ts-ignore
-  const Icon = Icons[icon]
+const PanelListItem = ({label, icon, activePanel, name}) => {
+  const {setActivePanel} = useAppContext();
+  const setIsSidebarOpen = useSetIsSidebarOpen();
+
+  const Icon = Icons[icon];
+
   return (
-    <Block
-      id="EditorPanelList"
+    <Box
+      id="EditorPanel"
       onClick={() => {
-        setIsSidebarOpen(true)
-        setActivePanel(name)
+        setIsSidebarOpen(true);
+        setActivePanel(name);
       }}
-      $style={{
-        width: "80px",
-        height: "80px",
-        backgroundColor: name === activePanel ? theme.colors.white : theme.colors.primary100,
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        justifyContent: "center",
-        fontFamily: "Poppins",
-        fontWeight: 500,
-        fontSize: "0.8rem",
-        userSelect: "none",
-        transition: "all 0.5s",
-        gap: "0.1rem",
-        ":hover": {
-          cursor: "pointer",
-          backgroundColor: theme.colors.white,
-          transition: "all 1s",
-        },
+      width="80px"
+      height="80px"
+      backgroundColor={name === activePanel ? 'white' : 'primary.900'}
+      display="flex"
+      alignItems="center"
+      flexDirection="column"
+      justifyContent="center"
+      fontFamily="Poppins"
+      fontWeight="semibold" // Adjusted fontWeight value
+      fontSize="0.8rem"
+      userSelect="none"
+      transition="all 0.5s"
+      gap="0.1rem"
+      _hover={{
+        cursor: 'pointer',
+        backgroundColor: 'white',
+        transition: 'all 1s',
       }}
     >
-      <Icon size={24} />
-      <div>{label}</div>
-    </Block>
-  )
-}
+      <Icon size={24} color={name === activePanel ? 'primary.900' : 'white'} />
+      <Box
+        fontWeight="bold"
+        color={name === activePanel ? 'primary.900' : 'white'}
+      >
+        {label}
+      </Box>{' '}
+      {/* Adjusted fontWeight value */}
+    </Box>
+  );
+};
 
-export default PanelsList
+export default PanelsList;
