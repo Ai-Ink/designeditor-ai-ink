@@ -37,7 +37,6 @@ export const loadFonts = (fonts: FontItem[]) => {
     Promise.all(promisesList)
       .then((res) => {
         res.forEach((uniqueFont) => {
-          console.log('Found Font: ', uniqueFont);
           if (uniqueFont && uniqueFont.family) {
             document.fonts.add(uniqueFont);
             resolve(true);

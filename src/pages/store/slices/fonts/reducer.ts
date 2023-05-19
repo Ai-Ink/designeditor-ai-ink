@@ -11,8 +11,8 @@ export interface FontsState {
 
 const initialState: FontsState = {
   fonts: predefinedFonts.canvasFonts.map((f) => ({
-    family: f.fontFamily,
-    url: f.fontURL,
+    fontFamily: f.fontFamily,
+    fontURL: f.fontURL,
     id: nanoid(),
     fullName: '',
     style: '',

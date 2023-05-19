@@ -13,6 +13,7 @@ import {useAppDispatch} from '@/store/store';
 import {queryFonts} from '@/store/slices/fonts/actions';
 import InfiniteScrolling from '@/components/InfiniteScrolling';
 import {useDebounce} from 'use-debounce';
+import FontPreviewCard from './FontPreviewCard';
 
 export default function () {
   const [hasMore, setHasMore] = React.useState(true);
@@ -26,31 +27,37 @@ export default function () {
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    const grouped = groupBy(fonts, 'family');
+    const grouped = groupBy(fonts, 'fontFamily');
     const standardFonts = Object.keys(grouped).map((key) => {
       const familyFonts = grouped[key];
       const standardFont = familyFonts.find((familyFont) =>
         familyFont.postScriptName.includes('-Regular'),
       );
+
       if (standardFont) {
         return standardFont;
       }
       return familyFonts[familyFonts.length - 1];
     });
+
+    console.log(standardFonts);
     setCommonFonts(standardFonts);
   }, [fonts]);
 
   const handleFontFamilyChange = async (x: any) => {
+    console.log(x);
     if (editor) {
       const font = {
-        name: x.postScriptName,
-        url: x.url,
+        postscriptName: x.postScriptName,
+        fontFamily: x.fontFamily,
+        fontURL: x.fontURL,
       };
       await loadFonts([font]);
 
       editor.objects.update({
-        fontFamily: x.postScriptName,
-        fontURL: font.url,
+        postscriptName: x.postscriptName,
+        fontFamily: x.fontFamily,
+        fontURL: font.fontURL,
       });
     }
   };
@@ -121,26 +128,31 @@ export default function () {
       <Scrollable>
         <Box padding="0 1.5rem" display="grid" gap="0.2rem">
           <InfiniteScrolling fetchData={fetchData} hasMore={hasMore}>
-            <Box display="grid">
+            <Box
+              display="grid"
+              gridTemplateColumns="repeat(auto-fit, minmax(200px, 1fr))"
+              gap={4}
+            >
               {commonFonts.map((font, index) => {
                 return (
-                  <div
+                  <Box
                     key={index}
                     onClick={() => handleFontFamilyChange(font)}
-                    className={css({
-                      height: '40px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      cursor: 'pointer',
-                      fontSize: '14px',
-                      ':hover': {
-                        backgroundColor: 'rgb(245,246,247)',
-                      },
-                    })}
+                    display="flex"
+                    alignItems="center"
+                    cursor="pointer"
+                    fontSize="14px"
+                    _hover={{
+                      backgroundColor: 'rgb(255, 246, 247)',
+                    }}
                     id={font.id}
                   >
-                    <img src={font.preview} alt={font.family} />
-                  </div>
+                    <FontPreviewCard
+                      fontName={font.postscriptName}
+                      fontFamily={font.fontFamily}
+                      previewSize={64}
+                    />
+                  </Box>
                 );
               })}
             </Box>

@@ -103,8 +103,6 @@ class ObjectImporter {
           fontURL,
         };
 
-        console.log(textOptions);
-
         // @ts-ignore
         const element = new fabric.StaticText(textOptions);
         element.set('fill', 'red');

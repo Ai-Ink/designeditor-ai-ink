@@ -6,17 +6,13 @@ export const getTextProperties = (
   object: Required<IStaticText>,
   fonts: IFontFamily[],
 ) => {
-  console.trace();
   const color = object.fill;
   const family = object.fontFamily;
-  console.log('Font to be searched: ' + object);
-  console.log('Fonts List that I have: ', fonts);
   const selectedFont = fonts.find(
     (sampleFont) => sampleFont.postScriptName === object.postscriptName,
   );
-  console.log('Selected Font: ', selectedFont);
-  const groupedFonts = groupBy(fonts, 'family');
-  const selectedFamily = groupedFonts[selectedFont!.family];
+  const groupedFonts = groupBy(fonts, 'fontFamily');
+  const selectedFamily = groupedFonts[selectedFont!.fontFamily];
   const hasBold = selectedFamily.find((font) =>
     font.postScriptName.includes('-Bold'),
   );
@@ -30,7 +26,7 @@ export const getTextProperties = (
   };
   return {
     color,
-    family: selectedFamily[0].family,
+    family: selectedFamily[0].fontFamily,
     bold: family.includes('Bold'),
     italic: family.includes('Italic'),
     underline: object.underline,

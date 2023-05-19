@@ -10,11 +10,17 @@ import Underline from '@/components/Icons/Underline';
 import TextAlignCenter from '@/components/Icons/TextAlignCenter';
 import {
   Button,
-  ButtonProps,
   Slider,
   SliderFilledTrack,
   SliderThumb,
   SliderTrack,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  Box,
+  Flex,
+  Tooltip,
 } from '@chakra-ui/react';
 import LetterCase from '@/components/Icons/LetterCase';
 import Spacing from '@/components/Icons/Spacing';
@@ -29,19 +35,12 @@ import {loadFonts} from '@/utils/fonts';
 import Scrollbar from '@layerhub-io/react-custom-scrollbar';
 import {useSelector} from 'react-redux';
 import {selectAllFonts} from '@/store/slices/fonts/selectors';
+import {FontItem} from '@/interfaces/common';
 
 const TEXT_ALIGNS = ['left', 'center', 'right', 'justify'];
 
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverBody,
-  Box,
-  Flex,
-  Tooltip,
-} from '@chakra-ui/react';
-import {FontItem} from '@/interfaces/common';
+// Interesting Text Editor example
+// https://codesandbox.io/s/chakra-slate-js-forked-44zi55?file=/src/components/components.tsx
 
 interface TextState {
   color: string;
@@ -77,7 +76,6 @@ export default function TextEditor() {
   const {setActiveSubMenu} = useAppContext();
   const editor = useEditor();
   const fonts = useSelector(selectAllFonts);
-  console.log(fonts);
 
   useEffect(() => {
     // @ts-ignore
@@ -250,46 +248,26 @@ export default function TextEditor() {
               height="24px"
               display="flex"
               alignItems="center"
+              variant="ghost"
               onClick={() => setActiveSubMenu('FontSelector')}
             >
-              <Button
-                borderWidth="1px"
-                borderColor="rgb(185,185,185)"
-                borderRadius="4px"
-                padding="0.2rem 0.45rem"
-                cursor="pointer"
-                fontWeight={500}
-                fontSize="14px"
-                gap="0.5rem"
-                height="24px"
-                display="flex"
-                alignItems="center"
-                onClick={() => setActiveSubMenu('FontSelector')}
-              >
-                {state.family}
-                <Box display="flex">
-                  <ChevronDownIcon size={22} />
-                </Box>
-              </Button>
+              {state.family}
+              <Box display="flex">
+                <ChevronDownIcon boxSize={22} />
+              </Box>
             </Button>
           </PopoverTrigger>
-          <PopoverContent>
-            <PopoverBody>
-              {/* Replace with font selector */}
-              Font Selector
-            </PopoverBody>
-          </PopoverContent>
         </Popover>
 
         <TextFontSize />
-        <Flex alignItems="center">
+        <Flex alignItems="center" display="flex" gridGap="1rem">
           <Tooltip label="Text color" placement="bottom" hasArrow>
             <Button
               onClick={() => setActiveSubMenu('TextFill')}
               size="mini"
-              //   variant="ghost"
+              variant="ghost"
             >
-              <TextColor color={state.color} size={22} />
+              <TextColor size={20} color="black" />
             </Button>
           </Tooltip>
 
@@ -299,9 +277,9 @@ export default function TextEditor() {
               disabled={!state.styleOptions.hasBold}
               onClick={makeBold}
               size="mini"
-              //   variant="ghost"
+              variant="ghost"
             >
-              <Bold size={20} color={state.color} />
+              <Bold size={22} color="black" />
             </Button>
           </Tooltip>
 
@@ -311,9 +289,9 @@ export default function TextEditor() {
               disabled={!state.styleOptions.hasItalic}
               onClick={makeItalic}
               size="mini"
-              //   variant="ghost"
+              variant="ghost"
             >
-              <Italic size={20} color={state.color} />
+              <Italic size={22} color="black" />
             </Button>
           </Tooltip>
 
@@ -324,9 +302,9 @@ export default function TextEditor() {
               }}
               onClick={makeUnderline}
               size="mini"
-              //   variant="ghost"
+              variant="ghost"
             >
-              <Underline size={24} color={state.color} />
+              <Underline size={22} color="black" />
             </Button>
           </Tooltip>
 
@@ -357,7 +335,14 @@ export default function TextEditor() {
             margin="0 4px"
           />
 
-          <Button onClick={() => setActiveSubMenu('TextEffects')} size="mini">
+          <Button
+            onClick={() => setActiveSubMenu('TextEffects')}
+            size="md"
+            colorScheme="blackButtonBg"
+            variant="solid"
+            bg="custom.blackButtonBg"
+            color="custom.blackButtonText"
+          >
             Effects
           </Button>
 
@@ -368,7 +353,15 @@ export default function TextEditor() {
             margin="0 4px"
           />
 
-          <Button size="mini">Animate</Button>
+          <Button
+            size="md"
+            colorScheme="blackButtonBg"
+            variant="solid"
+            bg="custom.blackButtonBg"
+            color="custom.blackButtonText"
+          >
+            Animate
+          </Button>
         </Flex>
       </Flex>
       <Common />
@@ -398,11 +391,11 @@ export function TextFontSize() {
     <Popover>
       <PopoverTrigger>
         <Button
-          //   width="80px"
+          width="60px"
           size="mini"
-          //   variant="ghost"
+          variant="outline"
           // @ts-ignore
-          rightIcon={<ChevronDownIcon size={22} />}
+          rightIcon={<ChevronDownIcon boxSize={22} />}
         >
           {value}
         </Button>
