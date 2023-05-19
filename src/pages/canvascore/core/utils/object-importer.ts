@@ -77,6 +77,7 @@ class ObjectImporter {
         const {
           textAlign,
           fontFamily,
+          postscriptName,
           fontSize,
           charSpacing,
           lineHeight,
@@ -94,14 +95,26 @@ class ObjectImporter {
           text: text ? text : 'Empty Text',
           ...(textAlign && {textAlign}),
           ...(fontFamily && {fontFamily}),
+          ...(postscriptName && {postscriptName}),
           ...(fontSize && {fontSize}),
           ...(charSpacing && {charSpacing}),
           ...(lineHeight && {lineHeight}),
           metadata,
           fontURL,
         };
+
+        console.log(textOptions);
+
         // @ts-ignore
         const element = new fabric.StaticText(textOptions);
+        element.set('fill', 'red');
+        // const element = new fabric.Text("I'm in Nosifer Font", {
+        //   fontFamily: 'Creepy',
+        // });
+        // var element = new fabric.IText("I'm in Comic Sans", {
+        //   fontFamily: 'Comic+Neue',
+        //   fontSize: 40,
+        // });
         updateObjectBounds(element, options);
         updateObjectShadow(element, item.shadow);
 

@@ -14,17 +14,23 @@ import {selectPublicComponents} from '@/store/slices/components/selectors';
 import api from '@/services/api';
 import {IComponent} from '@/interfaces/DesignEditor';
 
-const textOptions = {
+const font: FontItem = {
+  postscriptName: 'Nosifer',
+  fontFamily: 'Creepster',
+  fontURL: 'https://fonts.gstatic.com/s/nosifer/v20/ZGjXol5JTp0g5bxZaC0.ttf',
+};
+
+const textWithOptions = {
   id: nanoid(),
   type: 'StaticText',
   width: 420,
   text: 'Add some text',
   fontSize: 92,
-  fontFamily: 'OpenSans-Regular',
   textAlign: 'center',
   fontStyle: 'normal',
-  fontURL:
-    'https://fonts.gstatic.com/s/opensans/v27/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0C4nY1M2xLER.ttf',
+  fontFamily: font.fontFamily,
+  fontURL: font.fontURL,
+  postscriptName: font.postscriptName,
   fill: '#333333',
   metadata: {},
 };
@@ -36,25 +42,8 @@ export default function () {
 
   const addObject = async () => {
     if (editor) {
-      const font: FontItem = {
-        name: 'OpenSans-Regular',
-        url: 'https://fonts.gstatic.com/s/opensans/v27/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0C4nY1M2xLER.ttf',
-      };
       await loadFonts([font]);
-      const options = {
-        id: nanoid(),
-        type: 'StaticText',
-        width: 420,
-        text: 'Add some text',
-        fontSize: 92,
-        fontFamily: font.name,
-        textAlign: 'center',
-        fontStyle: 'normal',
-        fontURL: font.url,
-        fill: '#333333',
-        metadata: {},
-      };
-      editor.objects.add(options);
+      editor.objects.add(textWithOptions);
     }
   };
   const addComponent = async (component: any) => {
@@ -64,12 +53,13 @@ export default function () {
         component.objects.forEach((object: any) => {
           if (object.type === 'StaticText' || object.type === 'DynamicText') {
             fontItemsList.push({
-              name: object.fontFamily,
-              url: object.fontURL,
+              postscriptName: object.postscriptName,
+              fontFamily: object.fontFamily,
+              fontURL: object.fontURL,
             });
           }
         });
-        const filteredFonts = fontItemsList.filter((f) => !!f.url);
+        const filteredFonts = fontItemsList.filter((f) => !!f.fontURL);
         await loadFonts(filteredFonts);
       } else {
         if (
@@ -77,8 +67,9 @@ export default function () {
           component.type === 'DynamicText'
         ) {
           fontItemsList.push({
-            name: component.fontFamily,
-            url: component.fontURL,
+            postscriptName: component.postscriptName,
+            fontFamily: component.fontFamily,
+            fontURL: component.fontURL,
           });
           await loadFonts(fontItemsList);
         }
@@ -96,18 +87,20 @@ export default function () {
         object.objects.forEach((object: any) => {
           if (object.type === 'StaticText' || object.type === 'DynamicText') {
             fontItemsList.push({
-              name: object.fontFamily,
-              url: object.fontURL,
+              postscriptName: object.postscriptName,
+              fontFamily: object.fontFamily,
+              fontURL: object.fontURL,
             });
           }
         });
-        const filteredFonts = fontItemsList.filter((f) => !!f.url);
+        const filteredFonts = fontItemsList.filter((f) => !!f.fontURL);
         await loadFonts(filteredFonts);
       } else {
         if (object.type === 'StaticText') {
           fontItemsList.push({
-            name: object.fontFamily,
-            url: object.fontURL,
+            postscriptName: object.postscriptName,
+            fontFamily: object.fontFamily,
+            fontURL: object.fontURL,
           });
           await loadFonts(fontItemsList);
         }
@@ -124,12 +117,13 @@ export default function () {
         component.objects.forEach((object: any) => {
           if (object.type === 'StaticText' || object.type === 'DynamicText') {
             fontItemsList.push({
-              name: object.fontFamily,
-              url: object.fontURL,
+              postscriptName: object.postscriptName,
+              fontFamily: object.fontFamily,
+              fontURL: object.fontURL,
             });
           }
         });
-        const filteredFonts = fontItemsList.filter((f) => !!f.url);
+        const filteredFonts = fontItemsList.filter((f) => !!f.fontURL);
         await loadFonts(filteredFonts);
       } else {
         if (
@@ -137,8 +131,9 @@ export default function () {
           component.type === 'DynamicText'
         ) {
           fontItemsList.push({
-            name: component.fontFamily,
-            url: component.fontURL,
+            postscriptName: component.postscriptName,
+            fontFamily: component.fontFamily,
+            fontURL: component.fontURL,
           });
           await loadFonts(fontItemsList);
         }
@@ -166,7 +161,7 @@ export default function () {
       >
         Text
         <Flex onClick={() => setIsSidebarOpen(false)} cursor="pointer">
-          <AngleDoubleLeft size={18} />
+          <AngleDoubleLeft size={18} color="black" />
         </Flex>
       </Flex>
       <Scrollable>

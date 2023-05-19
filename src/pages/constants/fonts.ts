@@ -1,97 +1,134 @@
 export const editorFonts = [
   {
-    name: "Poppins",
-    url: "https://d3q7mfli5umxdg.cloudfront.net/UberMoveTextLight.otf",
-    options: { style: "normal", weight: 300 },
+    fontFamily: 'Poppins',
+    fontURL: 'https://d3q7mfli5umxdg.cloudfront.net/UberMoveTextLight.otf',
+    options: {style: 'normal', weight: 300},
   },
   {
-    name: "Poppins",
-    url: "https://d3q7mfli5umxdg.cloudfront.net/UberMoveTextRegular.otf",
-    options: { style: "normal", weight: 400 },
+    fontFamily: 'Poppins',
+    fontURL: 'https://d3q7mfli5umxdg.cloudfront.net/UberMoveTextRegular.otf',
+    options: {style: 'normal', weight: 400},
   },
   {
-    name: "Poppins",
-    url: "https://d3q7mfli5umxdg.cloudfront.net/UberMoveTextMedium.otf",
-    options: { style: "normal", weight: 500 },
+    fontFamily: 'Poppins',
+    fontURL: 'https://d3q7mfli5umxdg.cloudfront.net/UberMoveTextMedium.otf',
+    options: {style: 'normal', weight: 500},
   },
   {
-    name: "Poppins",
-    url: "https://d3q7mfli5umxdg.cloudfront.net/UberMoveTextBold.otf",
-    options: { style: "normal", weight: 700 },
+    fontFamily: 'Poppins',
+    fontURL: 'https://d3q7mfli5umxdg.cloudfront.net/UberMoveTextBold.otf',
+    options: {style: 'normal', weight: 700},
   },
-]
+];
+
+export const canvasFonts = [
+  {
+    postscriptName: 'OpenSans-Regular',
+    fontFamily: 'Open Sans',
+    fontURL:
+      'https://fonts.gstatic.com/s/opensans/v27/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0C4nY1M2xLER.ttf',
+  },
+  {
+    postscriptName: 'Nosifer',
+    fontFamily: 'Creepster',
+    fontURL: 'https://fonts.gstatic.com/s/nosifer/v20/ZGjXol5JTp0g5bxZaC0.ttf',
+  },
+  {
+    postscriptName: 'Arial',
+    fontFamily: 'Arial',
+    fontURL: 'https://fonts.gstatic.com/s/anton/v23/1Ptgg87LROyAm3Kz-C8.woff2',
+  },
+  {
+    postscriptName: 'Times New Roman',
+    fontFamily: 'Times New Roman',
+    fontURL: 'https://fonts.gstatic.com/s/anton/v23/1Ptgg87LROyAm3Kz-C8.woff2',
+  },
+  {
+    // Inter as replacement
+    postscriptName: 'Helvetica',
+    fontFamily: 'Helvetica',
+    fontURL:
+      'https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2',
+  },
+  {
+    // Anton  as replacement
+    postscriptName: 'Impact',
+    fontFamily: 'Impact',
+    fontURL: 'https://fonts.gstatic.com/s/anton/v23/1Ptgg87LROyAm3Kz-C8.woff2',
+  },
+];
 
 export const fontStyleLabels = {
-  "100": {
+  '100': {
     id: 0,
-    label: "Thin",
+    label: 'Thin',
   },
-  "100italic": {
+  '100italic': {
     id: 1,
-    label: "Thin Italic",
+    label: 'Thin Italic',
   },
-  "200": {
+  '200': {
     id: 2,
-    label: "ExtraLight",
+    label: 'ExtraLight',
   },
-  "200italic": {
+  '200italic': {
     id: 3,
-    label: "ExtraLight Italic",
+    label: 'ExtraLight Italic',
   },
-  "300": {
+  '300': {
     id: 4,
-    label: "Light",
+    label: 'Light',
   },
-  "300italic": {
+  '300italic': {
     id: 5,
-    label: "Light Italic",
+    label: 'Light Italic',
   },
   regular: {
     id: 6,
-    label: "Regular",
+    label: 'Regular',
   },
   italic: {
     id: 7,
-    label: "Regular Italic",
+    label: 'Regular Italic',
   },
-  "500": {
+  '500': {
     id: 8,
-    label: "Medium",
+    label: 'Medium',
   },
-  "500italic": {
+  '500italic': {
     id: 9,
-    label: "Medium Italic",
+    label: 'Medium Italic',
   },
-  "600": {
+  '600': {
     id: 10,
-    label: "SemiBold",
+    label: 'SemiBold',
   },
-  "600italic": {
+  '600italic': {
     id: 11,
-    label: "SemiBold Italic",
+    label: 'SemiBold Italic',
   },
-  "700": {
+  '700': {
     id: 12,
-    label: "Bold",
+    label: 'Bold',
   },
-  "700italic": {
+  '700italic': {
     id: 13,
-    label: "Bold Italic",
+    label: 'Bold Italic',
   },
-  "800": {
+  '800': {
     id: 14,
-    label: "ExtraBold",
+    label: 'ExtraBold',
   },
-  "800italic": {
+  '800italic': {
     id: 15,
-    label: "ExtraBold Italic",
+    label: 'ExtraBold Italic',
   },
-  "900": {
+  '900': {
     id: 16,
-    label: "Black",
+    label: 'Black',
   },
-  "900italic": {
+  '900italic': {
     id: 17,
-    label: "Black Italic",
+    label: 'Black Italic',
   },
-}
+};

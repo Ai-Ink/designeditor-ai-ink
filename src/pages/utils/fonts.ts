@@ -29,7 +29,7 @@ export const loadTemplateFonts = async (design: IScene) => {
 
 export const loadFonts = (fonts: FontItem[]) => {
   const promisesList = fonts.map((font) => {
-    return new FontFace(font.name, `url(${font.url})`)
+    return new FontFace(font.fontFamily, `url(${font.fontURL})`)
       .load()
       .catch((err) => err);
   });
@@ -37,12 +37,19 @@ export const loadFonts = (fonts: FontItem[]) => {
     Promise.all(promisesList)
       .then((res) => {
         res.forEach((uniqueFont) => {
+          console.log('Found Font: ', uniqueFont);
           if (uniqueFont && uniqueFont.family) {
             document.fonts.add(uniqueFont);
             resolve(true);
           }
         });
       })
-      .catch((err) => reject(err));
+      .catch((err) => {
+        console.log(
+          '---------------------------------------------------------------------',
+        );
+        console.log('Error loading fonts: ', err);
+        reject(err);
+      });
   });
 };

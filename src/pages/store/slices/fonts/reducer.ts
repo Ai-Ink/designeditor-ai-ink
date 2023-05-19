@@ -1,6 +1,8 @@
 import {IFontFamily} from '@/interfaces/editor';
 import {createReducer} from '@reduxjs/toolkit';
 import {queryFonts, setFonts} from './actions';
+import * as predefinedFonts from '@/constants/fonts';
+import {nanoid} from 'nanoid';
 
 export interface FontsState {
   fonts: IFontFamily[];
@@ -8,7 +10,16 @@ export interface FontsState {
 }
 
 const initialState: FontsState = {
-  fonts: [],
+  fonts: predefinedFonts.canvasFonts.map((f) => ({
+    family: f.fontFamily,
+    url: f.fontURL,
+    id: nanoid(),
+    fullName: '',
+    style: '',
+    postScriptName: f.postscriptName,
+    preview: '',
+    category: '',
+  })),
   result: [],
 };
 
