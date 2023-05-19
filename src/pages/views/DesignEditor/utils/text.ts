@@ -9,7 +9,7 @@ export const getTextProperties = (
   const color = object.fill;
   const family = object.fontFamily;
   const selectedFont = fonts.find(
-    (sampleFont) => sampleFont.postScriptName === object.postscriptName,
+    (sampleFont) => sampleFont.postScriptName === object.postScriptName,
   );
   const groupedFonts = groupBy(fonts, 'fontFamily');
   const selectedFamily = groupedFonts[selectedFont!.fontFamily];

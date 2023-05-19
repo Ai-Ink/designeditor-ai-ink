@@ -15,7 +15,7 @@ import api from '@/services/api';
 import {IComponent} from '@/interfaces/DesignEditor';
 
 const font: FontItem = {
-  postscriptName: 'Nosifer',
+  postScriptName: 'Nosifer',
   fontFamily: 'Creepster',
   fontURL: 'https://fonts.gstatic.com/s/nosifer/v20/ZGjXol5JTp0g5bxZaC0.ttf',
 };
@@ -30,7 +30,7 @@ const textWithOptions = {
   fontStyle: 'normal',
   fontFamily: font.fontFamily,
   fontURL: font.fontURL,
-  postscriptName: font.postscriptName,
+  postScriptName: font.postScriptName,
   fill: '#333333',
   metadata: {},
 };
@@ -53,7 +53,7 @@ export default function () {
         component.objects.forEach((object: any) => {
           if (object.type === 'StaticText' || object.type === 'DynamicText') {
             fontItemsList.push({
-              postscriptName: object.postscriptName,
+              postScriptName: object.postScriptName,
               fontFamily: object.fontFamily,
               fontURL: object.fontURL,
             });
@@ -67,7 +67,7 @@ export default function () {
           component.type === 'DynamicText'
         ) {
           fontItemsList.push({
-            postscriptName: component.postscriptName,
+            postScriptName: component.postScriptName,
             fontFamily: component.fontFamily,
             fontURL: component.fontURL,
           });
@@ -87,7 +87,7 @@ export default function () {
         object.objects.forEach((object: any) => {
           if (object.type === 'StaticText' || object.type === 'DynamicText') {
             fontItemsList.push({
-              postscriptName: object.postscriptName,
+              postScriptName: object.postScriptName,
               fontFamily: object.fontFamily,
               fontURL: object.fontURL,
             });
@@ -98,7 +98,7 @@ export default function () {
       } else {
         if (object.type === 'StaticText') {
           fontItemsList.push({
-            postscriptName: object.postscriptName,
+            postScriptName: object.postScriptName,
             fontFamily: object.fontFamily,
             fontURL: object.fontURL,
           });
@@ -117,7 +117,7 @@ export default function () {
         component.objects.forEach((object: any) => {
           if (object.type === 'StaticText' || object.type === 'DynamicText') {
             fontItemsList.push({
-              postscriptName: object.postscriptName,
+              postScriptName: object.postScriptName,
               fontFamily: object.fontFamily,
               fontURL: object.fontURL,
             });
@@ -131,7 +131,7 @@ export default function () {
           component.type === 'DynamicText'
         ) {
           fontItemsList.push({
-            postscriptName: component.postscriptName,
+            postScriptName: component.postScriptName,
             fontFamily: component.fontFamily,
             fontURL: component.fontURL,
           });

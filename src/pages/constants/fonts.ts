@@ -23,36 +23,36 @@ export const editorFonts = [
 
 export const canvasFonts = [
   {
-    postscriptName: 'OpenSans-Regular',
+    postScriptName: 'OpenSans-Regular',
     fontFamily: 'Open Sans',
     fontURL:
       'https://fonts.gstatic.com/s/opensans/v27/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0C4nY1M2xLER.ttf',
   },
   {
-    postscriptName: 'Nosifer',
+    postScriptName: 'Nosifer',
     fontFamily: 'Creepster',
     fontURL: 'https://fonts.gstatic.com/s/nosifer/v20/ZGjXol5JTp0g5bxZaC0.ttf',
   },
   {
-    postscriptName: 'Arial',
+    postScriptName: 'Arial',
     fontFamily: 'Arial',
     fontURL: 'https://fonts.gstatic.com/s/anton/v23/1Ptgg87LROyAm3Kz-C8.woff2',
   },
   {
-    postscriptName: 'Times New Roman',
+    postScriptName: 'Times New Roman',
     fontFamily: 'Times New Roman',
     fontURL: 'https://fonts.gstatic.com/s/anton/v23/1Ptgg87LROyAm3Kz-C8.woff2',
   },
   {
     // Inter as replacement
-    postscriptName: 'Helvetica',
+    postScriptName: 'Helvetica',
     fontFamily: 'Helvetica',
     fontURL:
       'https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2',
   },
   {
     // Anton  as replacement
-    postscriptName: 'Impact',
+    postScriptName: 'Impact',
     fontFamily: 'Impact',
     fontURL: 'https://fonts.gstatic.com/s/anton/v23/1Ptgg87LROyAm3Kz-C8.woff2',
   },

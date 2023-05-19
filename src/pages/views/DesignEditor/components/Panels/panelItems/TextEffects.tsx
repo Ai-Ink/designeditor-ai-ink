@@ -7,9 +7,15 @@ import {useActiveObject, useEditor} from '@/canvascore/react';
 import {TEXT_EFFECTS} from '@/constants/design-editor';
 import Outline from './Common/Outline';
 import Shadow from './Common/Shadow';
+import EffectPreviewCard from './EffectPreviewCard';
+
+//stackoverflow.com/questions/19726778/create-valley-text-text-with-curve-in-fabric-js
+// https://tympanus.net/Development/Arctext/
+// https://stackoverflow.com/questions/8974364/how-can-i-draw-a-text-along-arc-path-with-html-5-canvas
+// http://jsfiddle.net/Makallus/hyyvpp8g/
 
 const EFFECTS = {
-  None: {
+  NoEffect: {
     fill: '#333333',
     strokeWidth: 0,
     shadow: {
@@ -114,30 +120,30 @@ const TextEffects = () => {
         </Box>
       </Flex>
       <Scrollable>
-        <Box padding="0 1.5rem">
-          <Flex gridTemplateColumns="repeat(3, 80px)" gap="0.5rem">
+        <Box padding="0 1.5rem" display="grid" gap="0.2rem">
+          <Box
+            display="grid"
+            gridTemplateColumns="repeat(auto-fit, minmax(200px, 1fr))"
+            gap={4}
+          >
+            {/* <Flex gridTemplateColumns="repeat(3, 80px)" gap="0.5rem"> */}
             {TEXT_EFFECTS.map((effect, index) => (
               <Box style={{cursor: 'pointer'}} key={index}>
                 <Box
                   onClick={() => applyEffect(effect.name)}
-                  border="1px solid #afafaf"
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
-                  height="80px"
+                  _hover={{
+                    backgroundColor: 'rgb(255, 246, 247)',
+                  }}
                 >
-                  <img
-                    style={{width: '70px'}}
-                    src={effect.preview}
-                    alt={effect.name}
-                  />
-                </Box>
-                <Box textAlign="center" padding="0.5rem" fontSize="14px">
-                  {effect.name}
+                  <EffectPreviewCard effect={effect} />
                 </Box>
               </Box>
             ))}
-          </Flex>
+          </Box>
+          {/* </Flex> */}
           {/* <Box>
             <Outline />
             <Shadow />

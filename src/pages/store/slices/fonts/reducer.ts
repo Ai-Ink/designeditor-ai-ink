@@ -16,7 +16,7 @@ const initialState: FontsState = {
     id: nanoid(),
     fullName: '',
     style: '',
-    postScriptName: f.postscriptName,
+    postScriptName: f.postScriptName,
     preview: '',
     category: '',
   })),

@@ -80,6 +80,7 @@ class Objects extends Base {
     }
     const canvas = this.canvas;
     if (refObject) {
+      console.log(options);
       for (const property in options) {
         if (property === 'angle' || property === 'top' || property === 'left') {
           if (property === 'angle') {

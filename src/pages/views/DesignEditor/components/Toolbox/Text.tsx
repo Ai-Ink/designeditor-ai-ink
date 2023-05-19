@@ -354,13 +354,14 @@ export default function TextEditor() {
           />
 
           <Button
+            onClick={() => setActiveSubMenu('TextFill')}
             size="md"
             colorScheme="blackButtonBg"
             variant="solid"
             bg="custom.blackButtonBg"
             color="custom.blackButtonText"
           >
-            Animate
+            TextFill
           </Button>
         </Flex>
       </Flex>

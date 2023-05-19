@@ -4,7 +4,7 @@ export interface Page {
 }
 
 export interface FontItem {
-  postscriptName: string;
+  postScriptName: string;
   fontFamily: string;
   fontURL: string;
 }

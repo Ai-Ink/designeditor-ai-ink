@@ -105,7 +105,7 @@ export interface IStaticText extends LayerBaseOptions {
   fontURL?: string;
   textAlign?: string;
   fontFamily?: string;
-  postscriptName?: string;
+  postScriptName?: string;
   fontSize?: number;
   charSpacing?: number;
   lineHeight?: number;

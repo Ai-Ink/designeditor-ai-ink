@@ -1,12 +1,11 @@
 import React from 'react';
-import Search from '@/components/Icons/Search';
 import {Input, InputGroup, InputLeftElement, Box} from '@chakra-ui/react';
 import useAppContext from '@/hooks/useAppContext';
 import {useEditor} from '@/canvascore/react';
 import {loadFonts} from '@/utils/fonts';
 import {groupBy} from 'lodash';
 import Scrollable from '@/components/Scrollable';
-import {DeleteIcon} from '@chakra-ui/icons';
+import {DeleteIcon, Search2Icon, PhoneIcon} from '@chakra-ui/icons';
 import {useSelector} from 'react-redux';
 import {selectFonts} from '@/store/slices/fonts/selectors';
 import {useAppDispatch} from '@/store/store';
@@ -40,24 +39,22 @@ export default function () {
       return familyFonts[familyFonts.length - 1];
     });
 
-    console.log(standardFonts);
     setCommonFonts(standardFonts);
   }, [fonts]);
 
   const handleFontFamilyChange = async (x: any) => {
-    console.log(x);
     if (editor) {
       const font = {
-        postscriptName: x.postScriptName,
+        postScriptName: x.postScriptName,
         fontFamily: x.fontFamily,
         fontURL: x.fontURL,
       };
       await loadFonts([font]);
 
       editor.objects.update({
-        postscriptName: x.postscriptName,
+        postScriptName: x.postScriptName,
         fontFamily: x.fontFamily,
-        fontURL: font.fontURL,
+        fontURL: x.fontURL,
       });
     }
   };
@@ -113,12 +110,9 @@ export default function () {
       <Box padding="0 1.5rem 1rem">
         <InputGroup>
           <InputLeftElement pointerEvents="none">
-            <Search size={4} color="black" />
+            <Search2Icon color="gray.300" />
           </InputLeftElement>
           <Input
-            paddingLeft="2rem"
-            variant="flushed"
-            size="sm"
             placeholder="Search font"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -148,7 +142,7 @@ export default function () {
                     id={font.id}
                   >
                     <FontPreviewCard
-                      fontName={font.postscriptName}
+                      fontName={font.postScriptName}
                       fontFamily={font.fontFamily}
                       previewSize={64}
                     />
