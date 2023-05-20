@@ -56,6 +56,12 @@ export const canvasFonts = [
     fontFamily: 'Impact',
     fontURL: 'https://fonts.gstatic.com/s/anton/v23/1Ptgg87LROyAm3Kz-C8.woff2',
   },
+  {
+    postScriptName: 'Bebas Neue',
+    fontFamily: 'Bebas Neue',
+    fontURL:
+      'https://fonts.gstatic.com/s/bebasneue/v10/JTUSjIg69CK48gW7PXooxW4.ttf',
+  },
 ];
 
 export const fontStyleLabels = {

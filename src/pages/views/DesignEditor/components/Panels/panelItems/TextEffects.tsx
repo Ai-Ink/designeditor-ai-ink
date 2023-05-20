@@ -13,8 +13,13 @@ import EffectPreviewCard from './EffectPreviewCard';
 // https://tympanus.net/Development/Arctext/
 // https://stackoverflow.com/questions/8974364/how-can-i-draw-a-text-along-arc-path-with-html-5-canvas
 // http://jsfiddle.net/Makallus/hyyvpp8g/
+// Various SVG's for use: https://ninesummer.github.io/fabricjs.com/kitchensink
 
-const EFFECTS = {
+const JS_EFFECTS = {
+  CircularText: {},
+};
+
+const CSS_EFFECTS = {
   NoEffect: {
     fill: '#333333',
     strokeWidth: 0,
@@ -82,6 +87,59 @@ const EFFECTS = {
       enabled: true,
     },
   },
+  StrikeThrough: {
+    linethrough: 'linethrough',
+  },
+  Sliced: {
+    style: `background-color:powderblue;`,
+  },
+  // Sliced: {
+  //   style: `
+  //   .wrapper {
+  //     display: grid;
+  //     place-content: center;
+  //     background-color: var(--background-color);
+  //     min-height: 100vh;
+  //     font-family: "Oswald", sans-serif;
+  //     font-size: clamp(1.5rem, 1rem + 18vw, 15rem);
+  //     font-weight: 700;
+  //     text-transform: uppercase;
+  //     color: var(--text-color);
+  //     overflow: hidden;
+  //   }
+
+  //   .sliced-text {
+  //     position: relative;
+  //     z-index: 1;
+  //   }
+
+  //   .sliced-text:before,
+  //   .sliced-text:after {
+  //     content: attr(data-text);
+  //     position: absolute;
+  //     top: 0;
+  //     left: 0;
+  //     overflow: hidden;
+  //     color: var(--background-color);
+  //     background: var(--text-color);
+  //     z-index: -1;
+  //     width: 50%;
+  //     height: 100%;
+  //     transform-origin: left center;
+  //     transform-style: preserve-3d;
+  //   }
+
+  //   .sliced-text:before {
+  //     transform: perspective(500px) rotateY(0deg);
+  //     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  //   }
+
+  //   .sliced-text:after {
+  //     transform: perspective(500px) rotateY(180deg);
+  //     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  //   }
+  //   `,
+  // },
 };
 
 const TextEffects = () => {
@@ -99,9 +157,18 @@ const TextEffects = () => {
 
   const applyEffect = (name) => {
     if (editor) {
-      const effect = EFFECTS[name];
-      if (effect) {
-        editor.objects.update(effect);
+      if (CSS_EFFECTS.hasOwnProperty(name)) {
+        console.log('Found CSS Effect');
+        const effect = CSS_EFFECTS[name];
+        if (effect) {
+          editor.objects.update(effect);
+        }
+      } else {
+        const effect = JS_EFFECTS[name];
+        if (effect) {
+          console.log('Found JS Effect');
+          editor.objects.applyJsEffect(effect);
+        }
       }
     }
   };
@@ -126,7 +193,6 @@ const TextEffects = () => {
             gridTemplateColumns="repeat(auto-fit, minmax(200px, 1fr))"
             gap={4}
           >
-            {/* <Flex gridTemplateColumns="repeat(3, 80px)" gap="0.5rem"> */}
             {TEXT_EFFECTS.map((effect, index) => (
               <Box style={{cursor: 'pointer'}} key={index}>
                 <Box
@@ -144,10 +210,11 @@ const TextEffects = () => {
             ))}
           </Box>
           {/* </Flex> */}
-          {/* <Box>
+          {/* TODO: Check for these components and see the value */}
+          <Box>
             <Outline />
             <Shadow />
-          </Box> */}
+          </Box>
         </Box>
       </Scrollable>
     </Box>

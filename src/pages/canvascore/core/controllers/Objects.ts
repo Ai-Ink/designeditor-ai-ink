@@ -18,6 +18,9 @@ import {
 import ObjectImporter from '../utils/object-importer';
 import setObjectGradient, {setObjectShadow} from '../utils/fabric';
 import {loadImageFromURL} from '../utils/image-loader';
+import './effects/CircularText';
+import Vibes from './effects/Vibes';
+import Sliced from './effects/Sliced';
 
 class Objects extends Base {
   public clipboard: any;
@@ -67,6 +70,47 @@ class Objects extends Base {
       }, 500);
     }
   };
+
+  public applyJsEffect = (effect: any, id?: string) => {
+    console.log('Applied JS effect');
+    const frame = this.editor.frame.frame;
+    let refObject = this.canvas.getActiveObject();
+    if (id) {
+      refObject = this.findOneById(id);
+    }
+
+    // var vibesText = Vibes('Vibes', 5, null);
+    // this.canvas.add(vibesText);
+
+    // Create a Fabric.js Text object
+    var slicedText = Sliced('SLICED');
+
+    this.canvas.add(slicedText);
+    // this.editor.objects.add(slicedText);
+
+    console.log('Added the text object to the canvas');
+
+    // // Create a CurvedText object
+    // var curvedText = new fabric.CurvedText('Hello World!', {
+    //   radius: 200, // Set the radius of the curve
+    //   spacing: 20, // Set the spacing between characters
+    //   effect: 'curved', // Set the text effect to 'curved'
+    // });
+
+    // curvedText.set('fontSize', 30); // Set the font size to 30
+    // curvedText.set('fill', '#FF0000'); // Set the fill color to red
+    // this.canvas.add(curvedText); // Add the object to the canvas
+
+    // var text = new fabric.Text('GeeksforGeeks', {
+    //   skewY: 0,
+    //   skewX: 30,
+    // });
+
+    // this.canvas.add(text);
+
+    // this.editor.objects.add(text);
+  };
+
   /**
    *
    * @param options object properties to be updated
@@ -80,7 +124,6 @@ class Objects extends Base {
     }
     const canvas = this.canvas;
     if (refObject) {
-      console.log(options);
       for (const property in options) {
         if (property === 'angle' || property === 'top' || property === 'left') {
           if (property === 'angle') {
@@ -95,6 +138,25 @@ class Objects extends Base {
             );
             canvas.requestRenderAll();
           }
+        } else if (property === 'style') {
+          // // Apply the CSS styles to the Text object
+          // console.log('In style element');
+          // const text: fabric.Text = refObject as fabric.Text;
+          // const styleElement = document.createElement('style');
+          // styleElement.textContent = options['style'];
+          // document.head.appendChild(styleElement);
+          // const htmlElement = document.createElement('div');
+          // htmlElement.innerText = 'SLICED';
+          // htmlElement.className = 'sliced-text';
+          // htmlElement.setAttribute('data-text', 'SLICED');
+          // // Update the element property of the Text object
+          // text.set({
+          //   element: htmlElement,
+          // });
+          // text.set('style', styleElement);
+          // text.set({
+          //   style: `linethrough: true`,
+          // });
         } else if (property === 'clipToFrame') {
           if (options['clipToFrame']) {
             refObject.set('clipPath', frame);

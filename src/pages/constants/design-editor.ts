@@ -78,4 +78,19 @@ export const TEXT_EFFECTS = [
     name: 'Neon',
     preview: 'https://i.ibb.co/fHdD2mx/neon.webp',
   },
+  {
+    id: 7,
+    name: 'Sliced',
+    preview: '',
+  },
+  {
+    id: 8,
+    name: 'StrikeThrough',
+    preview: '',
+  },
+  {
+    id: 8,
+    name: 'CircularText',
+    preview: 'https://i.ibb.co/0jJQY5n/curved.webp',
+  },
 ];
