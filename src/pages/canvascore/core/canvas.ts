@@ -1,20 +1,23 @@
-import {fabric} from 'fabric';
-import {FabricCanvas} from './common/interfaces';
+/// <reference path="paper.d.ts" />
+
+import {PaperScope, Size, Point, Layer, View} from 'paper';
 import {EditorConfig} from '../types';
-import type {Editor} from '.';
+import {EventEmitter} from 'events';
+import Editor from './editor';
 
 class Canvas {
   private editor: Editor;
   public container: HTMLDivElement;
   public canvasContainer: HTMLDivElement;
   public canvasElement: HTMLCanvasElement;
-  public canvas: FabricCanvas;
+  public canvas: paper.Project;
   public canvasId: string;
   private options = {
     width: 0,
     height: 0,
   };
   private config: EditorConfig;
+  private eventHandler: any;
 
   constructor({
     id,
@@ -32,51 +35,45 @@ class Canvas {
   }
 
   public initialize = () => {
-    const canvas = new fabric.Canvas(this.canvasId, {
-      backgroundColor: this.config.background,
-      preserveObjectStacking: true,
-      fireRightClick: true,
-      height: this.config.size.height,
-      width: this.config.size.width,
+    const canvas = document.getElementById(this.canvasId) as HTMLCanvasElement;
+    const scope = new PaperScope();
+    scope.setup(canvas);
+
+    this.project = scope.project;
+    this.project.view.setViewSize(
+      new Size(this.config.size.width, this.config.size.height),
+    );
+
+    this.canvas.view.autoUpdate = true;
+    this.canvas.view.on('frame', () => {
+      this.editor.emit('canvas:updated');
     });
-    this.canvas = canvas as FabricCanvas;
 
-    this.canvas.disableEvents = function () {
-      if (this.__fire === undefined) {
-        this.__fire = this.fire;
-        // @ts-ignore
-        this.fire = function () {};
-      }
-    };
-
-    this.canvas.enableEvents = function () {
-      if (this.__fire !== undefined) {
-        this.fire = this.__fire;
-        this.__fire = undefined;
-      }
-    };
+    this.eventHandler = (event: Event) => event.preventDefault();
+    this.disableEvents();
   };
 
   public destroy = () => {
-    // this.canvas.dispose()
-    // this.dettachResizeObserver()
+    // Clean up any necessary resources here
+    this.enableEvents();
   };
 
   public resize({width, height}: any) {
-    this.canvas.setWidth(width).setHeight(height);
-    this.canvas.renderAll();
+    this.canvas.view.viewSize = new Size(width, height);
+    this.canvas.view.update();
+
     const diffWidth = width / 2 - this.options.width / 2;
     const diffHeight = height / 2 - this.options.height / 2;
 
     this.options.width = width;
     this.options.height = height;
 
-    const deltaPoint = new fabric.Point(diffWidth, diffHeight);
-    this.canvas.relativePan(deltaPoint);
+    const deltaPoint = new Point(diffWidth, diffHeight);
+    this.canvas.view.center = this.canvas.view.center.add(deltaPoint);
   }
 
   public getBoundingClientRect() {
-    const canvasEl = document.getElementById('canvas');
+    const canvasEl = document.getElementById(this.canvasId);
     const position = {
       left: canvasEl?.getBoundingClientRect().left,
       top: canvasEl?.getBoundingClientRect().top,
@@ -85,40 +82,30 @@ class Canvas {
   }
 
   public requestRenderAll() {
-    this.canvas.requestRenderAll();
+    this.canvas.view.update();
   }
 
-  public get backgroundColor() {
-    return this.canvas.backgroundColor;
+  public getBackgroundColor() {
+    const canvasEl = document.getElementById(this.canvasId);
+    const style = getComputedStyle(canvasEl);
+    return style.backgroundColor;
   }
 
   public setBackgroundColor(color: string) {
-    this.canvas.setBackgroundColor(color, () => {
-      this.canvas.requestRenderAll();
-      this.editor.emit('canvas:updated');
-    });
+    const canvasEl = document.getElementById(this.canvasId);
+    canvasEl.style.backgroundColor = color;
+    this.canvas.view.update();
+    this.editor.emit('canvas:updated');
   }
-}
 
-declare module 'fabric' {
-  namespace fabric {
-    interface Canvas {
-      __fire: any;
-      enableEvents: () => void;
-      disableEvents: () => void;
-    }
-    interface Object {
-      id: string;
-      name: string;
-      locked: boolean;
-      duration?: {
-        start?: number;
-        stop?: number;
-      };
-      _objects?: fabric.Object[];
-      metadata?: Record<string, any>;
-      clipPath?: undefined | null | fabric.Object;
-    }
+  public disableEvents() {
+    const canvasEl = document.getElementById(this.canvasId);
+    canvasEl.removeEventListener('wheel', this.eventHandler, false);
+  }
+
+  public enableEvents() {
+    const canvasEl = document.getElementById(this.canvasId);
+    canvasEl.addEventListener('wheel', this.eventHandler, {passive: false});
   }
 }
 

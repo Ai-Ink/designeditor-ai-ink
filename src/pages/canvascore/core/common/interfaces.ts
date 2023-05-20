@@ -1,28 +1,20 @@
-import fabric from 'fabric/fabric-impl';
-import {Editor} from '../editor';
+import {PaperScope, Size, Point, Rectangle} from 'paper';
+import Editor from '../editor';
 import {EditorConfig} from '@/canvascore/types';
 
 export type Direction = 'top' | 'left';
-export type Size = 'width' | 'height';
 export type ScaleType = 'fit' | 'fill';
 
-export interface FabricWheelEvent {
-  e: WheelEvent;
-  target?: Object | undefined;
-  subTargets?: Object[] | undefined;
-  button?: number | undefined;
-  isClick?: boolean | undefined;
-  pointer?: fabric.IPoint | undefined;
-  absolutePointer?: fabric.IPoint | undefined;
-  transform?:
-    | {
-        corner: string;
-        original: Object;
-        originX: string;
-        originY: string;
-        width: number;
-      }
-    | undefined;
+export interface PaperWheelEvent {
+  event: WheelEvent;
+  target?: any;
+  subTargets?: any[];
+  button?: number;
+  isClick?: boolean;
+  point?: paper.Point;
+  delta?: paper.Point;
+  rotation?: number;
+  scaling?: number;
 }
 
 export interface Dimension {
@@ -30,10 +22,8 @@ export interface Dimension {
   height: number;
 }
 
-// export interface RootHandlerOptions
-
 export interface ControllerOptions {
-  canvas: FabricCanvas;
+  canvas: PaperCanvas;
   config: EditorConfig;
   editor: Editor;
   state: EditorState;
@@ -44,14 +34,11 @@ export interface CanvasOptions {
   height: number;
 }
 
-export interface FabricCanvasOption {
+export type PaperCanvas<T extends any = paper.Project> = T & {
   wrapperEl: HTMLElement;
-}
+};
 
-export type FabricCanvas<T extends any = fabric.Canvas> = T &
-  FabricCanvasOption;
-
-//  Template
+// Template
 
 export interface Template {
   id: string;
@@ -70,11 +57,14 @@ export interface Template {
 
 export interface GradientOptions {
   angle: number;
-  colors: string[];
+  stops: string[];
 }
 
-export interface ShadowOptions extends fabric.IShadowOptions {
+export interface ShadowOptions {
   enabled: boolean;
+  blur: number;
+  offset: paper.Point;
+  color: paper.Color;
 }
 
 export interface EditorState {

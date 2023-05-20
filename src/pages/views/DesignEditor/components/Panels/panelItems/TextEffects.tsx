@@ -14,6 +14,7 @@ import EffectPreviewCard from './EffectPreviewCard';
 // https://stackoverflow.com/questions/8974364/how-can-i-draw-a-text-along-arc-path-with-html-5-canvas
 // http://jsfiddle.net/Makallus/hyyvpp8g/
 // Various SVG's for use: https://ninesummer.github.io/fabricjs.com/kitchensink
+// https://codepen.io/rodzyk/pen/dyjzExz - SVG Cross-Stitch Effect (Very nice & must include)
 
 const JS_EFFECTS = {
   CircularText: {},

@@ -1,4 +1,3 @@
-import Canvas from './canvas';
 import State from './state';
 import Frame from './controllers/Frame';
 import Zoom from './controllers/Zoom';
@@ -9,13 +8,13 @@ import EventManager from './event-manager';
 import Scene from './controllers/Scene';
 import Renderer from './controllers/Renderer';
 import Personalization from './controllers/Personalization';
-import {EditorState} from './common/interfaces';
+import {EditorState, PaperCanvas} from './common/interfaces';
 import {defaultEditorConfig} from './common/constants';
 import Guidelines from './controllers/Guidelines';
 import {EditorConfig} from '../types';
 
-export class Editor extends EventManager {
-  public canvas: Canvas;
+class Editor extends EventManager {
+  public canvas: PaperCanvas;
   public frame: Frame;
   public zoom: Zoom;
   public history: History;
@@ -28,6 +27,7 @@ export class Editor extends EventManager {
   protected events: Events;
   protected personalization: Personalization;
   protected guidelines: Guidelines;
+
   constructor({
     id,
     state,
@@ -51,17 +51,19 @@ export class Editor extends EventManager {
   }
 
   public initializeCanvas = () => {
-    const canvas = new Canvas({
-      id: this.canvasId,
-      config: this.config,
-      editor: this,
-    });
-    this.canvas = canvas;
+    const canvas = document.getElementById(this.canvasId) as HTMLCanvasElement;
+    const scope = new paper.PaperScope();
+    scope.setup(canvas);
+
+    this.canvas = scope.project;
+    this.project.view.setViewSize(
+      new Size(this.config.size.width, this.config.size.height),
+    );
   };
 
   public initializeControllers = () => {
     const options = {
-      canvas: this.canvas.canvas,
+      canvas: this.canvas,
       editor: this,
       config: this.config,
       state: this.state,
@@ -87,8 +89,11 @@ export class Editor extends EventManager {
   public destroy() {
     this.canvas.destroy();
   }
+
   // CONTEXT MENU
   public cancelContextMenuRequest = () => {
     this.state.setContextMenuRequest(null);
   };
 }
+
+export default Editor;
