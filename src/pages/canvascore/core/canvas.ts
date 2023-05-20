@@ -4,13 +4,14 @@ import {PaperScope, Size, Point, Layer, View} from 'paper';
 import {EditorConfig} from '../types';
 import {EventEmitter} from 'events';
 import Editor from './editor';
+import {PaperCanvas} from './common/interfaces';
 
 class Canvas {
   private editor: Editor;
   public container: HTMLDivElement;
   public canvasContainer: HTMLDivElement;
   public canvasElement: HTMLCanvasElement;
-  public canvas: paper.Project;
+  public canvas: PaperCanvas;
   public canvasId: string;
   private options = {
     width: 0,
@@ -39,10 +40,7 @@ class Canvas {
     const scope = new PaperScope();
     scope.setup(canvas);
 
-    this.project = scope.project;
-    this.project.view.setViewSize(
-      new Size(this.config.size.width, this.config.size.height),
-    );
+    this.canvas = scope.project as PaperCanvas;
 
     this.canvas.view.autoUpdate = true;
     this.canvas.view.on('frame', () => {

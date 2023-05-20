@@ -12,9 +12,10 @@ import {EditorState, PaperCanvas} from './common/interfaces';
 import {defaultEditorConfig} from './common/constants';
 import Guidelines from './controllers/Guidelines';
 import {EditorConfig} from '../types';
+import Canvas from './canvas';
 
-class Editor extends EventManager {
-  public canvas: PaperCanvas;
+export class Editor extends EventManager {
+  public canvas: Canvas;
   public frame: Frame;
   public zoom: Zoom;
   public history: History;
@@ -51,19 +52,17 @@ class Editor extends EventManager {
   }
 
   public initializeCanvas = () => {
-    const canvas = document.getElementById(this.canvasId) as HTMLCanvasElement;
-    const scope = new paper.PaperScope();
-    scope.setup(canvas);
-
-    this.canvas = scope.project;
-    this.project.view.setViewSize(
-      new Size(this.config.size.width, this.config.size.height),
-    );
+    const canvas = new Canvas({
+      id: this.canvasId,
+      config: this.config,
+      editor: this,
+    });
+    this.canvas = canvas;
   };
 
   public initializeControllers = () => {
     const options = {
-      canvas: this.canvas,
+      canvas: this.canvas.canvas,
       editor: this,
       config: this.config,
       state: this.state,
@@ -81,7 +80,8 @@ class Editor extends EventManager {
 
   public debug() {
     console.log({
-      objects: this.canvas.canvas.getObjects(),
+      objects: this.canvas.canvas.getItems({}),
+      // @ts-ignore
       json: this.canvas.canvas.toJSON(),
     });
   }
