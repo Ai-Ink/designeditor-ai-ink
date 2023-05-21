@@ -62,6 +62,7 @@ export class Editor extends EventManager {
 
   public initializeControllers = () => {
     const options = {
+      editorCanvas: this.canvas,
       canvas: this.canvas.canvas,
       editor: this,
       config: this.config,

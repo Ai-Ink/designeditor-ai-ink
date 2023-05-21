@@ -2,9 +2,9 @@
 
 import {PaperScope, Size, Point, Layer, View} from 'paper';
 import {EditorConfig} from '../types';
-import {EventEmitter} from 'events';
 import Editor from './editor';
 import {PaperCanvas} from './common/interfaces';
+import paper from 'paper';
 
 class Canvas {
   private editor: Editor;
@@ -13,6 +13,7 @@ class Canvas {
   public canvasElement: HTMLCanvasElement;
   public canvas: PaperCanvas;
   public canvasId: string;
+  public frameLayer: paper.Layer;
   private options = {
     width: 0,
     height: 0,
@@ -46,6 +47,10 @@ class Canvas {
     this.canvas.view.on('frame', () => {
       this.editor.emit('canvas:updated');
     });
+
+    this.canvasElement = canvas;
+    this.canvasContainer = this.canvasElement.parentElement as HTMLDivElement;
+    this.container = this.canvasContainer.parentElement as HTMLDivElement;
 
     this.eventHandler = (event: Event) => event.preventDefault();
     this.disableEvents();
@@ -104,6 +109,15 @@ class Canvas {
   public enableEvents() {
     const canvasEl = document.getElementById(this.canvasId);
     canvasEl.addEventListener('wheel', this.eventHandler, {passive: false});
+  }
+
+  public getParentElement() {
+    const canvasEl = document.getElementById(this.canvasId);
+    return canvasEl;
+  }
+
+  public setFrameLayer(layer: paper.Layer) {
+    this.frameLayer = layer;
   }
 }
 

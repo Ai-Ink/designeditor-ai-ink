@@ -1,13 +1,22 @@
 import {Editor} from '..';
 import {EditorState} from '../common/interfaces';
-import {ControllerOptions, FabricCanvas} from '../common/interfaces';
+import {ControllerOptions, PaperCanvas} from '../common/interfaces';
 import {EditorConfig} from '../../types';
+import Canvas from '../canvas';
 class Base {
-  protected canvas: FabricCanvas;
+  protected editorCanvas: Canvas;
+  protected canvas: PaperCanvas;
   protected config: EditorConfig;
   protected editor: Editor;
   protected state: EditorState;
-  constructor({canvas, config, editor, state}: ControllerOptions) {
+  constructor({
+    editorCanvas,
+    canvas,
+    config,
+    editor,
+    state,
+  }: ControllerOptions) {
+    this.editorCanvas = editorCanvas;
     this.canvas = canvas;
     this.config = config;
     this.editor = editor;

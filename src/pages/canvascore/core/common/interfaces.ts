@@ -1,6 +1,7 @@
 import {PaperScope, Size, Point, Rectangle} from 'paper';
 import Editor from '../editor';
 import {EditorConfig} from '@/canvascore/types';
+import Canvas from '../canvas';
 
 export type Direction = 'top' | 'left';
 export type ScaleType = 'fit' | 'fill';
@@ -23,6 +24,7 @@ export interface Dimension {
 }
 
 export interface ControllerOptions {
+  editorCanvas: Canvas;
   canvas: PaperCanvas;
   config: EditorConfig;
   editor: Editor;

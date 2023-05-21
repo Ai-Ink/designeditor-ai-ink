@@ -180,6 +180,7 @@ class Scene extends Base {
    * @returns Json Template
    */
   public importFromJSON = async (template: IScene) => {
+    console.log('ImportFromJSON: ', template);
     this.name = template.name;
     this.id = template.id;
     const frameParams = template.frame;
@@ -188,7 +189,6 @@ class Scene extends Base {
       width: frameParams.width,
       height: frameParams.height,
     });
-
     const frame = this.editor.frame.frame as any;
     const objectImporter = new ObjectImporter(this.editor);
     const updatedTemplateLayers = template.layers.map((layer) => {
@@ -202,18 +202,21 @@ class Scene extends Base {
     });
     for (const layer of updatedTemplateLayers as Required<ILayer[]>) {
       const element = await objectImporter.import(layer, frame);
+      console.log(element);
       if (element) {
         if (this.config.clipToFrame) {
           element.clipPath = frame as unknown as fabric.Object;
         }
-        this.canvas.add(element);
+        this.editorCanvas.frameLayer.addChild(element);
       } else {
         console.log('UNABLE TO LOAD OBJECT: ', layer);
       }
     }
     this.editor.zoom.zoomToFit();
     this.editor.objects.updateContextObjects();
-    this.editor.history.save();
+    // this.editor.history.save();
+    this.editor.zoom.zoomToFit();
+    console.log('Triggered importFromJSON for Scene');
   };
 
   public async importFromSVG(url: string) {

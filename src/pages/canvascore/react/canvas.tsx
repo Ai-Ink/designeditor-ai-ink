@@ -15,7 +15,7 @@ export const Canvas = (props: Props) => {
     const container = containerRef.current as HTMLDivElement;
     const {clientHeight, clientWidth} = container;
     const editor = new Editor({
-      id: 'layerhub_io_canvas',
+      id: 'ai_ink_canvas',
       config: {
         ...props.config,
         size: {
@@ -45,7 +45,7 @@ export const Canvas = (props: Props) => {
   }, []);
   return (
     <div
-      id="layerhub_io_canvas_container"
+      id="ai_ink_canvas_container"
       ref={containerRef}
       style={{flex: 1, position: 'relative', overflow: 'hidden'}}
     >
@@ -56,7 +56,7 @@ export const Canvas = (props: Props) => {
           width: '100%',
         }}
       >
-        <canvas id="layerhub_io_canvas"></canvas>
+        <canvas id="ai_ink_canvas"></canvas>
       </div>
     </div>
   );

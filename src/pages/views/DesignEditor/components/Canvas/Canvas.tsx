@@ -1,14 +1,10 @@
 import React from 'react';
 import {Canvas as LayerhubCanvas} from '@/canvascore/react';
-import Playback from '../Playback';
-import useDesignEditorContext from '@/hooks/useDesignEditorContext';
 import ContextMenu from '../ContextMenu';
 
 const Canvas = () => {
-  const {displayPlayback} = useDesignEditorContext();
   return (
     <div style={{flex: 1, display: 'flex', position: 'relative'}}>
-      {displayPlayback && <Playback />}
       <ContextMenu />
       <LayerhubCanvas
         config={{

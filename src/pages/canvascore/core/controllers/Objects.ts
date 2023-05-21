@@ -21,6 +21,7 @@ import {loadImageFromURL} from '../utils/image-loader';
 import './effects/CircularText';
 import Vibes from './effects/Vibes';
 import Sliced from './effects/Sliced';
+import * as paper from 'paper';
 
 class Objects extends Base {
   public clipboard: any;
@@ -200,15 +201,13 @@ class Objects extends Base {
 
   public clear = () => {
     const frame = this.editor.frame.frame;
-    this.canvas.getObjects().forEach((object) => {
-      if (object.type !== LayerType.FRAME) {
-        this.canvas.remove(object);
+    this.canvas.activeLayer.children.forEach((item) => {
+      if (item.data.type !== LayerType.FRAME) {
+        item.remove();
       }
     });
-    frame.set({
-      fill: '#ffffff',
-    });
-    this.canvas.renderAll();
+    frame.fillColor = new paper.Color('#ffffff');
+    this.canvas.view.update();
   };
 
   public reset = () => {
