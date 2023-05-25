@@ -5,8 +5,10 @@ import Footer from '@/views/DesignEditor/components/Footer';
 import Toolbox from '@/views/DesignEditor/components/Toolbox';
 import EditorContainer from '@/views/DesignEditor/components/EditorContainer';
 import ContextMenu from '@/views/DesignEditor/components/ContextMenu';
+import React from 'react';
 
-const GraphicEditor = () => {
+class GraphicEditor extends React.Component {
+
   return (
     <EditorContainer>
       <Navbar />
