@@ -35,7 +35,7 @@ Port.fromObject = (options: PortObject, callback: (obj: PortObject) => any) => {
   return callback(new Port(options));
 };
 
-if (window !== undefined) {
+if (typeof window !== 'undefined') {
   // @ts-ignore
   window.fabric.Port = Port;
 }

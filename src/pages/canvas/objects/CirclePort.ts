@@ -29,7 +29,7 @@ CirclePort.fromObject = (
   return callback(new CirclePort(options));
 };
 
-if (window !== undefined) {
+if (typeof window !== 'undefined') {
   // @ts-ignore
   window.fabric.CirclePort = CirclePort;
 }

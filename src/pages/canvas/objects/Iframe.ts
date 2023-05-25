@@ -78,7 +78,7 @@ Iframe.fromObject = (
   return callback(new Iframe(options.src, options));
 };
 
-if (window !== undefined) {
+if (typeof window !== 'undefined') {
   // @ts-ignore
   window.fabric.Iframe = Iframe;
 }

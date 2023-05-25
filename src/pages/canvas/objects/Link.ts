@@ -134,7 +134,7 @@ Link.fromObject = (options: LinkObject, callback: (obj: LinkObject) => any) => {
   return callback(new Link(fromNode, fromPort, toNode, toPort, options));
 };
 
-if (window !== undefined) {
+if (typeof window !== 'undefined') {
   // @ts-ignore
   window.fabric.Link = Link;
 }

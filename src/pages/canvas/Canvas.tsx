@@ -4,10 +4,6 @@ import ResizeObserver from 'resize-observer-polyfill';
 import {uuid} from 'uuidv4';
 import {defaults} from './constants';
 import Handler, {HandlerOptions} from './handlers/Handler';
-import './styles/canvas.css';
-import './styles/contextmenu.css';
-import './styles/fabricjs.css';
-import './styles/tooltip.css';
 import {FabricCanvas} from './utils';
 
 export interface CanvasInstance {

@@ -1,16 +1,17 @@
 import React from 'react';
-import {Canvas as LayerhubCanvas} from '@/canvascore/react';
+// import {Canvas as LayerhubCanvas} from '@/canvascore/react';
+import Canvas from '@/canvas/Canvas';
 import Playback from '../Playback';
 import useDesignEditorContext from '@/hooks/useDesignEditorContext';
 import ContextMenu from '../ContextMenu';
 
-const Canvas = () => {
+const CanvasUI = () => {
   const {displayPlayback} = useDesignEditorContext();
   return (
     <div style={{flex: 1, display: 'flex', position: 'relative'}}>
       {displayPlayback && <Playback />}
       <ContextMenu />
-      <LayerhubCanvas
+      <Canvas
         config={{
           background: '#f1f2f6',
           controlsPosition: {
@@ -28,4 +29,4 @@ const Canvas = () => {
   );
 };
 
-export default Canvas;
+export default CanvasUI;

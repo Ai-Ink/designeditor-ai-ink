@@ -36,7 +36,7 @@ Arrow.fromObject = (options: any, callback: any) => {
   return callback(new Arrow([x1, y1, x2, y2], options));
 };
 
-if (window !== undefined) {
+if (typeof window !== 'undefined') {
   // @ts-ignore
   window.fabric.Arrow = Arrow;
 }

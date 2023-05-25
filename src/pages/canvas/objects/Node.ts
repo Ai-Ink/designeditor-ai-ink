@@ -285,7 +285,7 @@ Node.fromObject = (options: NodeObject, callback: (obj: NodeObject) => any) => {
   return callback(new Node(options));
 };
 
-if (window !== undefined) {
+if (typeof window !== 'undefined') {
   // @ts-ignore
   window.fabric.FromPort = Port;
 

@@ -43,7 +43,7 @@ Gif.fromObject = (options: any, callback: (obj: any) => any) => {
   return callback(new Gif(options));
 };
 
-if (window !== undefined) {
+if (typeof window !== 'undefined') {
   // @ts-ignore
   window.fabric.Gif = Gif;
 }

@@ -77,7 +77,7 @@ Cube.fromObject = (options: CubeObject, callback: (obj: CubeObject) => any) => {
   return callback(new Cube(options));
 };
 
-if (window !== undefined) {
+if (typeof window !== 'undefined') {
   // @ts-ignore
   window.fabric.Cube = Cube;
 }

@@ -21,7 +21,7 @@ Line.fromObject = (options: any, callback: any) => {
   return callback(new Line([x1, y1, x2, y2], options));
 };
 
-if (window !== undefined) {
+if (typeof window !== 'undefined') {
   window.fabric.Line = Line;
 }
 

@@ -111,7 +111,7 @@ Svg.fromObject = (option: SvgOption, callback: (obj: SvgObject) => any) => {
   return callback(new Svg(option));
 };
 
-if (window !== undefined) {
+if (typeof window !== 'undefined') {
   // @ts-ignore
   window.fabric.Svg = Svg;
 }

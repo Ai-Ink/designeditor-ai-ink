@@ -55,7 +55,7 @@ CurvedLink.fromObject = (
   return callback(new CurvedLink(fromNode, fromPort, toNode, toPort, options));
 };
 
-if (window !== undefined) {
+if (typeof window !== 'undefined') {
   // @ts-ignore
   window.fabric.CurvedLink = CurvedLink;
 }

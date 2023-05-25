@@ -100,7 +100,7 @@ Element.fromObject = (
   return callback(new Element(options.code, options));
 };
 
-if (window !== undefined) {
+if (typeof window !== 'undefined') {
   // @ts-ignore
   window.fabric.Element = Element;
 }

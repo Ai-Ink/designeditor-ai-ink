@@ -60,7 +60,7 @@ OrthogonalLink.fromObject = (
   );
 };
 
-if (window !== undefined) {
+if (typeof window !== 'undefined') {
   // @ts-ignore
   window.fabric.OrthogonalLink = OrthogonalLink;
 }

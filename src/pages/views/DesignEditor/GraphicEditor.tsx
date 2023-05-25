@@ -1,6 +1,6 @@
 import Navbar from '@/views/DesignEditor/components/Navbar';
 import Panels from '@/views/DesignEditor/components/Panels';
-import Canvas from '@/views/DesignEditor/components/Canvas';
+import CanvasUI from '@/views/DesignEditor/components/Canvas';
 import Footer from '@/views/DesignEditor/components/Footer';
 import Toolbox from '@/views/DesignEditor/components/Toolbox';
 import EditorContainer from '@/views/DesignEditor/components/EditorContainer';
@@ -21,7 +21,7 @@ const GraphicEditor = () => {
           }}
         >
           <Toolbox />
-          <Canvas />
+          <CanvasUI />
           <Footer />
         </div>
       </div>
