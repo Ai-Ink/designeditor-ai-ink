@@ -27,15 +27,14 @@ const CanvasUI = () => {
           },
         }}
       />
-      // Inside your component render method
-      <Box className="rde-editor-footer-toolbar">
+      {/* <Box className="rde-editor-footer-toolbar">
         <CanvasFooter
           canvasRef={this.canvasRef}
           preview={preview}
           onChangePreview={onChangePreview}
           zoomRatio={zoomRatio}
         />
-      </Box>
+      </Box> */}
     </div>
   );
 };

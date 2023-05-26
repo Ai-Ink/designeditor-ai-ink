@@ -85,6 +85,7 @@ class ImageMapEditor extends Component {
     editing: false,
     descriptors: {},
     objects: undefined,
+    canvasRef: undefined,
   };
 
   componentDidMount() {
@@ -102,6 +103,12 @@ class ImageMapEditor extends Component {
     this.setState({
       selectedItem: null,
     });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.canvasRef !== this.state.canvasRef && this.itemsRef) {
+      this.itemsRef.setCanvasRef(this.state.canvasRef);
+    }
   }
 
   canvasHandlers = {
@@ -796,20 +803,20 @@ class ImageMapEditor extends Component {
     const title = <ImageMapTitle title={titleContent} action={action} />;
     const content = (
       <div className="rde-editor">
-        <ImageMapItems
+        {/* <ImageMapItems
           ref={(c) => {
             this.itemsRef = c;
           }}
-          canvasRef={this.canvasRef}
+          // canvasRef={this.state.canvasRef}
           descriptors={descriptors}
-        />
+        /> */}
         <div className="rde-editor-canvas-container">
           <div className="rde-editor-header-toolbar">
-            <ImageMapHeaderToolbar
+            {/* <ImageMapHeaderToolbar
               canvasRef={this.canvasRef}
               selectedItem={selectedItem}
               onSelect={onSelect}
-            />
+            /> */}
           </div>
           <div
             ref={(c) => {
@@ -820,6 +827,8 @@ class ImageMapEditor extends Component {
             <Canvas
               ref={(c) => {
                 this.canvasRef = c;
+                console.log('Canvas in the ImageMapEditor: ', c);
+                // this.setState({canvasRef: c ? c.canvas : null});
               }}
               className="rde-canvas"
               minZoom={30}
@@ -844,15 +853,15 @@ class ImageMapEditor extends Component {
             />
           </div>
           <div className="rde-editor-footer-toolbar">
-            <ImageMapFooterToolbar
+            {/* <ImageMapFooterToolbar
               canvasRef={this.canvasRef}
               preview={preview}
               onChangePreview={onChangePreview}
               zoomRatio={zoomRatio}
-            />
+            /> */}
           </div>
         </div>
-        <ImageMapConfigurations
+        {/* <ImageMapConfigurations
           canvasRef={this.canvasRef}
           onChange={onChange}
           selectedItem={selectedItem}
@@ -869,7 +878,7 @@ class ImageMapEditor extends Component {
           onTooltip={onTooltip}
           onClick={onClick}
           objects={objects}
-        />
+        /> */}
       </div>
     );
     return (

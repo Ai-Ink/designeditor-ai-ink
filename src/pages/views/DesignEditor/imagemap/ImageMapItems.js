@@ -39,9 +39,19 @@ class ImageMapItems extends Component {
     svgModalVisible: false,
   };
 
+  constructor(props) {
+    super(props);
+    this.canvasRef = React.createRef();
+  }
+
+  setCanvasRef = (canvasRef) => {
+    this.canvasRef = canvasRef;
+    // Handle the updated canvasRef as needed
+  };
+
   componentDidMount() {
-    const {canvasRef} = this.props;
-    this.waitForCanvasRender(canvasRef);
+    this.setState({canvasRef: this.canvasRef.current});
+    this.waitForCanvasRender(this.canvasRef);
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -89,7 +99,9 @@ class ImageMapItems extends Component {
 
   componentWillUnmount() {
     const {canvasRef} = this.props;
-    this.detachEventListener(canvasRef);
+    if (canvasRef !== null && canvasRef !== undefined) {
+      this.detachEventListener(canvasRef);
+    }
   }
 
   waitForCanvasRender = (canvas) => {
@@ -104,6 +116,15 @@ class ImageMapItems extends Component {
   };
 
   attachEventListener = (canvas) => {
+    console.log('AttachEventListener: ', canvas.canvas);
+    if (
+      canvas.canvas === null ||
+      canvas.canvas === undefined ||
+      canvas.canvas.wrapperEl === null ||
+      canvas.canvas.wrapperEl === undefined
+    ) {
+      return;
+    }
     canvas.canvas.wrapperEl.addEventListener(
       'dragenter',
       this.events.onDragEnter,
@@ -123,6 +144,7 @@ class ImageMapItems extends Component {
   };
 
   detachEventListener = (canvas) => {
+    console.log(canvas);
     canvas.canvas.wrapperEl.removeEventListener(
       'dragenter',
       this.events.onDragEnter,
@@ -284,9 +306,12 @@ class ImageMapItems extends Component {
   };
 
   renderItems = (items) => (
-    <Flex flexWrap="wrap" flexDirection="column" style={{width: '100%'}}>
-      {items.map((item) => this.renderItem(item))}
-    </Flex>
+    console.log('Items: ', items),
+    (
+      <Flex flexWrap="wrap" flexDirection="column" style={{width: '100%'}}>
+        {items.map((item) => this.renderItem(item))}
+      </Flex>
+    )
   );
 
   renderItem = (item, centered) =>

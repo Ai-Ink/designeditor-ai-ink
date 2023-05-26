@@ -1,2 +1,2 @@
-import CanvasUI from './Canvas';
+import CanvasUI from './CanvasUI';
 export default CanvasUI;

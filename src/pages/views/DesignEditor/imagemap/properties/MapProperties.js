@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Form, Collapse, useTheme} from '@chakra-ui/react';
+import {
+  Box,
+  Collapse,
+  useTheme,
+  FormControl,
+  FormLabel,
+  FormHelperText,
+} from '@chakra-ui/react';
+import {useForm} from 'react-hook-form';
 
 import PropertyDefinition from './PropertyDefinition';
 import Scrollbar from '../components/common/Scrollbar';
@@ -14,7 +22,7 @@ function MapProperties({canvasRef, form}) {
   if (canvasRef) {
     return (
       <Scrollbar>
-        <Form layout="horizontal">
+        <Box as="form">
           <Collapse
             bordered={false}
             bg="transparent"
@@ -28,16 +36,22 @@ function MapProperties({canvasRef, form}) {
                   header={PropertyDefinition.map[key].title}
                   showArrow={showArrow}
                 >
-                  <Component.render
-                    canvasRef={canvasRef}
-                    form={form}
-                    data={canvasRef.handler.workarea}
-                  />
+                  <FormControl>
+                    <FormLabel>{PropertyDefinition.map[key].title}</FormLabel>
+                    <Component.render
+                      canvasRef={canvasRef}
+                      form={form}
+                      data={canvasRef.handler.workarea}
+                    />
+                    <FormHelperText>
+                      {PropertyDefinition.map[key].description}
+                    </FormHelperText>
+                  </FormControl>
                 </Panel>
               );
             })}
           </Collapse>
-        </Form>
+        </Box>
       </Scrollbar>
     );
   }
@@ -51,12 +65,17 @@ MapProperties.propTypes = {
 };
 
 export default function ChakraMapProperties(props) {
-  const EnhancedMapProperties = Form.create({
-    onValuesChange: (changedValues, allValues) => {
-      const {onChange, selectedItem} = props;
-      onChange(selectedItem, changedValues, {workarea: allValues});
-    },
-  })(MapProperties);
+  const {onChange, selectedItem} = props;
 
-  return <EnhancedMapProperties {...props} />;
+  const {handleSubmit, control} = useForm();
+
+  const onSubmit = (data) => {
+    onChange(selectedItem, data, {workarea: data});
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <MapProperties canvasRef={props.canvasRef} form={control} />
+    </form>
+  );
 }
