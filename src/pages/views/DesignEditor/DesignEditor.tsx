@@ -6,6 +6,7 @@ import VideoEditor from '@/views/DesignEditor/VideoEditor';
 import useDesignEditorContext from '@/hooks/useDesignEditorContext';
 import Preview from '@/views/DesignEditor/components/Preview';
 import ContextMenu from '@/views/DesignEditor/components/ContextMenu';
+import ImageMapEditor from './imagemap';
 
 const DesignEditor = () => {
   const editorType = useEditorType();
@@ -19,7 +20,7 @@ const DesignEditor = () => {
       {
         {
           NONE: <SelectEditor />,
-          GRAPHIC: <GraphicEditor />,
+          GRAPHIC: <ImageMapEditor />,
         }[editorType]
       }
     </>

@@ -4,6 +4,8 @@ import Canvas from '@/canvas/Canvas';
 import Playback from '../Playback';
 import useDesignEditorContext from '@/hooks/useDesignEditorContext';
 import ContextMenu from '../ContextMenu';
+import {Box} from '@chakra-ui/react';
+import CanvasFooter from '../Footer/CanvasFooter';
 
 const CanvasUI = () => {
   const {displayPlayback} = useDesignEditorContext();
@@ -25,6 +27,15 @@ const CanvasUI = () => {
           },
         }}
       />
+      // Inside your component render method
+      <Box className="rde-editor-footer-toolbar">
+        <CanvasFooter
+          canvasRef={this.canvasRef}
+          preview={preview}
+          onChangePreview={onChangePreview}
+          zoomRatio={zoomRatio}
+        />
+      </Box>
     </div>
   );
 };

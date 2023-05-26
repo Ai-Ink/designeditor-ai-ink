@@ -8,27 +8,28 @@ import ContextMenu from '@/views/DesignEditor/components/ContextMenu';
 import React from 'react';
 
 class GraphicEditor extends React.Component {
-
-  return (
-    <EditorContainer>
-      <Navbar />
-      <div style={{display: 'flex', flex: 1}}>
-        <Panels />
-        <div
-          style={{
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            position: 'relative',
-          }}
-        >
-          <Toolbox />
-          <CanvasUI />
-          <Footer />
+  render() {
+    return (
+      <EditorContainer>
+        <Navbar />
+        <div style={{display: 'flex', flex: 1}}>
+          <Panels />
+          <div
+            style={{
+              flex: 1,
+              display: 'flex',
+              flexDirection: 'column',
+              position: 'relative',
+            }}
+          >
+            <Toolbox />
+            <CanvasUI />
+            <Footer />
+          </div>
         </div>
-      </div>
-    </EditorContainer>
-  );
-};
+      </EditorContainer>
+    );
+  }
+}
 
 export default GraphicEditor;
