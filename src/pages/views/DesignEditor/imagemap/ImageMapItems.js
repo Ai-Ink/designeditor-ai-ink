@@ -342,7 +342,7 @@ class ImageMapItems extends Component {
       svgModalVisible,
       svgOption,
     } = this.state;
-    const className = classNames('rde-editor-items', {
+    const className = classnames('rde-editor-items', {
       minimize: collapse,
     });
     return (
