@@ -1,71 +1,80 @@
 import React from 'react';
-import { Form, Slider, Select, InputNumber, Col, Row } from 'antd';
-import i18n from 'i18next';
+import {
+  FormControl,
+  FormLabel,
+  Slider,
+  Select,
+  InputNumber,
+  Grid,
+} from '@chakra-ui/react';
+import {useTranslation} from 'next-i18next';
 
-import ColorPicker from '../../../components/common/ColorPicker';
+import ColorPicker from '../components/common/ColorPicker';
 
-export default {
-	render(canvasRef, form, data) {
-		const { getFieldDecorator } = form;
-		return (
-			<React.Fragment>
-				<Form.Item label={i18n.t('imagemap.style.fill-color')} colon={false}>
-					{getFieldDecorator('fill', {
-						initialValue: data.fill || 'rgba(0, 0, 0, 1)',
-					})(<ColorPicker />)}
-				</Form.Item>
-				<Form.Item label={i18n.t('common.opacity')} colon={false}>
-					{getFieldDecorator('opacity', {
-						rules: [
-							{
-								type: 'number',
-								min: 0,
-								max: 1,
-							},
-						],
-						initialValue: data.opacity || 1,
-					})(<Slider min={0} max={1} step={0.1} />)}
-				</Form.Item>
-				<Form.Item label={i18n.t('imagemap.style.stroke-color')} colon={false}>
-					{getFieldDecorator('stroke', {
-						initialValue: data.stroke || 'rgba(255, 255, 255, 0)',
-					})(<ColorPicker />)}
-				</Form.Item>
-				<Form.Item label={i18n.t('imagemap.style.stroke-width')} colon={false}>
-					{getFieldDecorator('strokeWidth', {
-						initialValue: data.strokeWidth || 1,
-					})(
-						<Select showSearch style={{ width: '100%' }}>
-							{Array.from({ length: 12 }, (v, k) => {
-								const value = k + 1;
-								return (
-									<Select.Option key={value} value={value}>
-										{value}
-									</Select.Option>
-								);
-							})}
-						</Select>,
-					)}
-				</Form.Item>
-				{data.type === 'rect' ? (
-					<Row gutter={8}>
-						<Col md={24} lg={12}>
-							<Form.Item label={i18n.t('imagemap.style.rx')} colon={false}>
-								{getFieldDecorator('rx', {
-									initialValue: data.rx || 0,
-								})(<InputNumber min={0} />)}
-							</Form.Item>
-						</Col>
-						<Col md={24} lg={12}>
-							<Form.Item label={i18n.t('imagemap.style.ry')} colon={false}>
-								{getFieldDecorator('ry', {
-									initialValue: data.ry || 0,
-								})(<InputNumber min={0} />)}
-							</Form.Item>
-						</Col>
-					</Row>
-				) : null}
-			</React.Fragment>
-		);
-	},
-};
+export default function MyForm({canvasRef, form, data}) {
+  const {getFieldDecorator} = form;
+  const {t} = useTranslation();
+
+  return (
+    <>
+      <FormControl>
+        <FormLabel>{t('imagemap.style.fill-color')}</FormLabel>
+        {getFieldDecorator('fill', {
+          initialValue: data.fill || 'rgba(0, 0, 0, 1)',
+        })(<ColorPicker />)}
+      </FormControl>
+      <FormControl>
+        <FormLabel>{t('common.opacity')}</FormLabel>
+        {getFieldDecorator('opacity', {
+          rules: [
+            {
+              type: 'number',
+              min: 0,
+              max: 1,
+            },
+          ],
+          initialValue: data.opacity || 1,
+        })(<Slider min={0} max={1} step={0.1} />)}
+      </FormControl>
+      <FormControl>
+        <FormLabel>{t('imagemap.style.stroke-color')}</FormLabel>
+        {getFieldDecorator('stroke', {
+          initialValue: data.stroke || 'rgba(255, 255, 255, 0)',
+        })(<ColorPicker />)}
+      </FormControl>
+      <FormControl>
+        <FormLabel>{t('imagemap.style.stroke-width')}</FormLabel>
+        {getFieldDecorator('strokeWidth', {
+          initialValue: data.strokeWidth || 1,
+        })(
+          <Select>
+            {Array.from({length: 12}, (v, k) => {
+              const value = k + 1;
+              return (
+                <Select.Option key={value} value={value}>
+                  {value}
+                </Select.Option>
+              );
+            })}
+          </Select>,
+        )}
+      </FormControl>
+      {data.type === 'rect' && (
+        <Grid templateColumns="repeat(2, 1fr)" gap={8}>
+          <FormControl>
+            <FormLabel>{t('imagemap.style.rx')}</FormLabel>
+            {getFieldDecorator('rx', {
+              initialValue: data.rx || 0,
+            })(<InputNumber min={0} />)}
+          </FormControl>
+          <FormControl>
+            <FormLabel>{t('imagemap.style.ry')}</FormLabel>
+            {getFieldDecorator('ry', {
+              initialValue: data.ry || 0,
+            })(<InputNumber min={0} />)}
+          </FormControl>
+        </Grid>
+      )}
+    </>
+  );
+}

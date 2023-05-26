@@ -1,49 +1,54 @@
 import React from 'react';
-import { Form, Radio } from 'antd';
-import i18n from 'i18next';
+import {FormLabel, Radio, FormControl, Box} from '@chakra-ui/react';
+import {useFormContext} from 'react-hook-form';
+import {useTranslation} from 'react-i18next';
 
-import UrlModal from '../../../components/common/UrlModal';
-import FileUpload from '../../../components/common/FileUpload';
+import UrlModal from '../components/common/UrlModal';
+import FileUpload from '../components/common/FileUpload';
 
-export default {
-	render(canvasRef, form, data) {
-		const { getFieldDecorator } = form;
-		if (!data) {
-			return null;
-		}
-		const imageLoadType = data.imageLoadType || 'file';
-		return (
-			<React.Fragment>
-				<Form.Item label={i18n.t('imagemap.image.image-load-type')} colon={false}>
-					{getFieldDecorator('imageLoadType', {
-						initialValue: imageLoadType,
-					})(
-						<Radio.Group size="small">
-							<Radio.Button value="file">{i18n.t('imagemap.image.file-upload')}</Radio.Button>
-							<Radio.Button value="src">{i18n.t('imagemap.image.image-url')}</Radio.Button>
-						</Radio.Group>,
-					)}
-				</Form.Item>
-				{imageLoadType === 'file' ? (
-					<Form.Item label={i18n.t('common.file')} colon={false}>
-						{getFieldDecorator('file', {
-							rules: [
-								{
-									required: true,
-									message: i18n.t('validation.enter-property', { arg: i18n.t('common.file') }),
-								},
-							],
-							initialValue: data.file,
-						})(<FileUpload accept="image/*" />)}
-					</Form.Item>
-				) : (
-					<Form.Item>
-						{getFieldDecorator('src', {
-							initialValue: data.src,
-						})(<UrlModal form={form} />)}
-					</Form.Item>
-				)}
-			</React.Fragment>
-		);
-	},
+const ImageProperty = ({canvasRef, data}) => {
+  const {register} = useFormContext();
+  const {t} = useTranslation();
+
+  if (!data) {
+    return null;
+  }
+
+  const imageLoadType = data.imageLoadType || 'file';
+
+  return (
+    <>
+      <FormControl>
+        <FormLabel>{t('imagemap.image.image-load-type')}</FormLabel>
+        <Radio.Group
+          defaultValue={imageLoadType}
+          size="sm"
+          {...register('imageLoadType')}
+        >
+          <Radio.Button value="file">
+            {t('imagemap.image.file-upload')}
+          </Radio.Button>
+          <Radio.Button value="src">
+            {t('imagemap.image.image-url')}
+          </Radio.Button>
+        </Radio.Group>
+      </FormControl>
+
+      {imageLoadType === 'file' ? (
+        <FormControl>
+          <FormLabel>{t('common.file')}</FormLabel>
+          <FileUpload
+            accept="image/*"
+            {...register('file', {required: true})}
+          />
+        </FormControl>
+      ) : (
+        <FormControl>
+          <UrlModal formContext={register} defaultValue={data.src} />
+        </FormControl>
+      )}
+    </>
+  );
 };
+
+export default ImageProperty;

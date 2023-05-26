@@ -1,31 +1,21 @@
 import React from 'react';
-import { Form, Switch } from 'antd';
-import i18n from 'i18next';
+import {FormControl, FormLabel, Switch} from '@chakra-ui/react';
+import {useTranslation} from 'next-i18next';
 
-import CodeModal from '../../../components/common/CodeModal';
+export default function MyForm({canvasRef, form, data}) {
+  const {getFieldDecorator} = form;
+  const {t} = useTranslation();
 
-export default {
-	render(canvasRef, form, data) {
-		const { getFieldDecorator } = form;
-		return (
-			<React.Fragment>
-				<Form.Item label={i18n.t('imagemap.trigger.trigger-enabled')} colon={false}>
-					{getFieldDecorator('trigger.enabled', {
-						rules: [
-							{
-								type: 'boolean',
-							},
-						],
-						valuePropName: 'checked',
-						initialValue: data.trigger.enabled,
-					})(<Switch size="small" />)}
-				</Form.Item>
-				<Form.Item style={{ display: data.trigger.enabled ? 'block' : 'none' }}>
-					{getFieldDecorator('trigger.code', {
-						initialValue: data.trigger.code || 'return null;',
-					})(<CodeModal form={form} />)}
-				</Form.Item>
-			</React.Fragment>
-		);
-	},
-};
+  return (
+    <>
+      <FormControl>
+        <FormLabel>{t('imagemap.trigger.trigger-enabled')}</FormLabel>
+        {getFieldDecorator('trigger.enabled', {
+          rules: [{type: 'boolean'}],
+          valuePropName: 'checked',
+          initialValue: data.trigger.enabled,
+        })(<Switch size="sm" />)}
+      </FormControl>
+    </>
+  );
+}

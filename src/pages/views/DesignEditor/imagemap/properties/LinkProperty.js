@@ -1,52 +1,45 @@
 import React from 'react';
-import { Form, Select, Switch, Input } from 'antd';
-import i18n from 'i18next';
+import {useForm} from 'react-hook-form';
+import {FormLabel, Switch, Select, Input} from '@chakra-ui/react';
+import {useTranslation} from 'react-i18next';
 
-export default {
-	render(canvasRef, form, data) {
-		const { getFieldDecorator } = form;
-		return (
-			<React.Fragment>
-				<Form.Item label={i18n.t('imagemap.link.link-enabled')} colon={false}>
-					{getFieldDecorator('link.enabled', {
-						rules: [
-							{
-								required: true,
-								message: i18n.t('validation.enter-property', {
-									arg: i18n.t('imagemap.marker.link-enabled'),
-								}),
-							},
-						],
-						valuePropName: 'checked',
-						initialValue: data.link.enabled,
-					})(<Switch size="small" />)}
-				</Form.Item>
-				{data.link.enabled ? (
-					<React.Fragment>
-						<Form.Item label={i18n.t('common.state')} colon={false}>
-							{getFieldDecorator('link.state', {
-								initialValue: data.link.state || 'current',
-							})(
-								<Select>
-									<Select.Option value="current">{i18n.t('common.current')}</Select.Option>
-									<Select.Option value="new">{i18n.t('common.new')}</Select.Option>
-								</Select>,
-							)}
-						</Form.Item>
-						<Form.Item label={i18n.t('common.url')} colon={false}>
-							{getFieldDecorator('link.url', {
-								rules: [
-									{
-										required: true,
-										message: i18n.t('validation.enter-property', { arg: i18n.t('common.url') }),
-									},
-								],
-								initialValue: data.link.url || '',
-							})(<Input />)}
-						</Form.Item>
-					</React.Fragment>
-				) : null}
-			</React.Fragment>
-		);
-	},
-};
+export default function LinkForm({canvasRef, data}) {
+  const {register, handleSubmit} = useForm();
+  const {t} = useTranslation();
+
+  const onSubmit = (formData) => {
+    console.log(formData); // Handle form submission
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <FormLabel>{t('imagemap.link.link-enabled')}</FormLabel>
+      <Switch
+        {...register('link.enabled', {required: true})}
+        size="sm"
+        defaultChecked={data.link.enabled}
+      />
+
+      {data.link.enabled && (
+        <>
+          <FormLabel>{t('common.state')}</FormLabel>
+          <Select
+            defaultValue={data.link.state || 'current'}
+            {...register('link.state')}
+          >
+            <option value="current">{t('common.current')}</option>
+            <option value="new">{t('common.new')}</option>
+          </Select>
+
+          <FormLabel>{t('common.url')}</FormLabel>
+          <Input
+            defaultValue={data.link.url || ''}
+            {...register('link.url', {required: true})}
+          />
+        </>
+      )}
+
+      <button type="submit">{t('common.submit')}</button>
+    </form>
+  );
+}

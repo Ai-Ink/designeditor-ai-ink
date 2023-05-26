@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import {
   Collapse,
   Input,
-  notification,
   Box,
   Flex,
   IconButton,
+  Text,
+  Alert,
 } from '@chakra-ui/react';
 import {MinusIcon, AddIcon} from '@chakra-ui/icons';
 import classnames from 'classnames';
@@ -18,10 +19,10 @@ import Scrollbar from './components/common/Scrollbar';
 import SVGModal from './components/common/SVGModal';
 import {v4 as uuid} from 'uuid';
 
-notification.config({
-  top: 80,
-  duration: 2,
-});
+// notification.config({
+//   top: 80,
+//   duration: 2,
+// });
 
 class ImageMapItems extends Component {
   static propTypes = {
@@ -142,7 +143,7 @@ class ImageMapItems extends Component {
     onAddItem: (item, centered) => {
       const {canvasRef} = this.props;
       if (canvasRef.handler.interactionMode === 'polygon') {
-        notification.info({
+        Alert.info({
           message: 'Already drawing',
         });
         return;
@@ -166,7 +167,7 @@ class ImageMapItems extends Component {
     onDrawingItem: (item) => {
       const {canvasRef} = this.props;
       if (canvasRef.handler.interactionMode === 'polygon') {
-        notification.info({
+        Alert.info({
           message: 'Already drawing',
         });
         return;
@@ -264,7 +265,7 @@ class ImageMapItems extends Component {
             };
             this.handlers.onAddItem(item, false);
           } else {
-            notification.warn({
+            Alert.warn({
               message: 'Not supported file type',
             });
           }

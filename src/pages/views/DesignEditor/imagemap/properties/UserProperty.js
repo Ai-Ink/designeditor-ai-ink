@@ -1,16 +1,18 @@
 import React from 'react';
-import { Form } from 'antd';
-import EditTable from '../../../components/common/EditTable';
+import {FormControl} from '@chakra-ui/react';
+import EditTable from '../components/common/EditTable';
 
-export default {
-	render(canvasRef, form, data) {
-		const { getFieldDecorator } = form;
-		return (
-			<React.Fragment>
-				<Form.Item>
-					{getFieldDecorator('userProperty', {})(<EditTable userProperty={data.userProperty} form={form} />)}
-				</Form.Item>
-			</React.Fragment>
-		);
-	},
-};
+export default function MyForm({canvasRef, form, data}) {
+  const {getFieldDecorator} = form;
+
+  return (
+    <>
+      <FormControl>
+        {getFieldDecorator(
+          'userProperty',
+          {},
+        )(<EditTable userProperty={data.userProperty} form={form} />)}
+      </FormControl>
+    </>
+  );
+}

@@ -1,48 +1,62 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Collapse } from 'antd';
+import {Form, Collapse, useTheme} from '@chakra-ui/react';
 
 import PropertyDefinition from './PropertyDefinition';
-import Scrollbar from '../../../components/common/Scrollbar';
+import Scrollbar from '../components/common/Scrollbar';
 
-const { Panel } = Collapse;
+const {Panel} = Collapse;
 
-class MapProperties extends Component {
-	static propTypes = {
-		canvasRef: PropTypes.any,
-	};
+function MapProperties({canvasRef, form}) {
+  const theme = useTheme();
+  const showArrow = false;
 
-	render() {
-		const { canvasRef, form } = this.props;
-		const showArrow = false;
-		if (canvasRef) {
-			return (
-				<Scrollbar>
-					<Form layout="horizontal">
-						<Collapse bordered={false}>
-							{Object.keys(PropertyDefinition.map).map(key => {
-								return (
-									<Panel key={key} header={PropertyDefinition.map[key].title} showArrow={showArrow}>
-										{PropertyDefinition.map[key].component.render(
-											canvasRef,
-											form,
-											canvasRef.handler.workarea,
-										)}
-									</Panel>
-								);
-							})}
-						</Collapse>
-					</Form>
-				</Scrollbar>
-			);
-		}
-		return null;
-	}
+  if (canvasRef) {
+    return (
+      <Scrollbar>
+        <Form layout="horizontal">
+          <Collapse
+            bordered={false}
+            bg="transparent"
+            color={theme.colors.gray[800]}
+          >
+            {Object.keys(PropertyDefinition.map).map((key) => {
+              const Component = PropertyDefinition.map[key].component;
+              return (
+                <Panel
+                  key={key}
+                  header={PropertyDefinition.map[key].title}
+                  showArrow={showArrow}
+                >
+                  <Component.render
+                    canvasRef={canvasRef}
+                    form={form}
+                    data={canvasRef.handler.workarea}
+                  />
+                </Panel>
+              );
+            })}
+          </Collapse>
+        </Form>
+      </Scrollbar>
+    );
+  }
+
+  return null;
 }
 
-export default Form.create({
-	onValuesChange: (props, changedValues, allValues) => {
-		const { onChange, selectedItem } = props;
-		onChange(selectedItem, changedValues, { workarea: allValues });
-	},
-})(MapProperties);
+MapProperties.propTypes = {
+  canvasRef: PropTypes.any,
+  form: PropTypes.any,
+};
+
+export default function ChakraMapProperties(props) {
+  const EnhancedMapProperties = Form.create({
+    onValuesChange: (changedValues, allValues) => {
+      const {onChange, selectedItem} = props;
+      onChange(selectedItem, changedValues, {workarea: allValues});
+    },
+  })(MapProperties);
+
+  return <EnhancedMapProperties {...props} />;
+}

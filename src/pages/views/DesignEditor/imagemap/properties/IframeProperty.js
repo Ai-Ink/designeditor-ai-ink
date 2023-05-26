@@ -1,6 +1,6 @@
 import React from 'react';
 import {FormControl} from '@chakra-ui/react';
-import UrlModal from '../../../components/common/UrlModal';
+import UrlModal from '../components/common/UrlModal';
 
 const CustomForm = {
   render(canvasRef, form, data) {

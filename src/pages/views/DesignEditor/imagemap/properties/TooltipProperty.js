@@ -1,21 +1,23 @@
 import React from 'react';
-import { Form, Switch } from 'antd';
-import i18n from 'i18next';
+import {FormControl, FormLabel, Switch} from '@chakra-ui/react';
+import {useTranslation} from 'next-i18next';
 
-export default {
-	render(canvasRef, form, data) {
-		const { getFieldDecorator } = form;
-		if (!data) {
-			return null;
-		}
-		return (
-			<Form.Item label={i18n.t('imagemap.tooltip.tooltip-enabled')} colon={false}>
-				{getFieldDecorator('tooltip.enabled', {
-					rules: [{ type: 'boolean' }],
-					valuePropName: 'checked',
-					initialValue: data.tooltip.enabled,
-				})(<Switch size="small" />)}
-			</Form.Item>
-		);
-	},
-};
+export default function MyForm({canvasRef, form, data}) {
+  const {getFieldDecorator} = form;
+  const {t} = useTranslation();
+
+  if (!data) {
+    return null;
+  }
+
+  return (
+    <FormControl>
+      <FormLabel>{t('imagemap.tooltip.tooltip-enabled')}</FormLabel>
+      {getFieldDecorator('tooltip.enabled', {
+        rules: [{type: 'boolean'}],
+        valuePropName: 'checked',
+        initialValue: data.tooltip.enabled,
+      })(<Switch size="sm" />)}
+    </FormControl>
+  );
+}

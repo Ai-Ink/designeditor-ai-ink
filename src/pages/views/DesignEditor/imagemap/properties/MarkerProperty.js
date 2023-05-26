@@ -1,19 +1,24 @@
 import React from 'react';
-import { Form } from 'antd';
+import {FormControl} from '@chakra-ui/react';
+import IconChooser from '../components/icon/IconChooser';
+import {ChakraProvider} from '@chakra-ui/react';
 
-import IconChooser from '../../../components/icon/IconChooser';
+const MarkerProperty = ({canvasRef, form, data}) => {
+  const {getFieldDecorator} = form;
 
-export default {
-	render(canvasRef, form, data) {
-		const { getFieldDecorator } = form;
-		return (
-			<React.Fragment>
-				<Form.Item>
-					{getFieldDecorator('icon', {
-						initialValue: data.icon,
-					})(<IconChooser icon={data.icon} />)}
-				</Form.Item>
-			</React.Fragment>
-		);
-	},
+  return (
+    <>
+      <FormControl>
+        {getFieldDecorator('icon', {
+          initialValue: data.icon,
+        })(
+          <ChakraProvider>
+            <IconChooser icon={data.icon} />
+          </ChakraProvider>,
+        )}
+      </FormControl>
+    </>
+  );
 };
+
+export default MarkerProperty;

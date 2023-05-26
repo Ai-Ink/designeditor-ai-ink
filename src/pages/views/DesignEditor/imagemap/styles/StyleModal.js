@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Modal, Form, Input} from 'antd';
+import {Modal, FormControl, FormLabel, Input} from '@chakra-ui/react';
 import i18n from 'i18next';
 
 import Canvas from '../../../../canvas/Canvas';
@@ -91,15 +91,9 @@ class StyleModal extends Component {
       this.props;
     const {width, height} = this.state;
     return (
-      <Modal onOk={onOk} onCancel={onCancel} visible={visible}>
-        <Form.Item
-          label={i18n.t('common.title')}
-          required
-          colon={false}
-          hasFeedback
-          help={validateTitle.help}
-          validateStatus={validateTitle.validateStatus}
-        >
+      <Modal isOpen={visible} onClose={onCancel}>
+        <FormControl isRequired isInvalid={validateTitle.validateStatus}>
+          <FormLabel>{i18n.t('common.title')}</FormLabel>
           <Input
             value={style.title}
             onChange={(e) => {
@@ -110,7 +104,7 @@ class StyleModal extends Component {
               );
             }}
           />
-        </Form.Item>
+        </FormControl>
         {StyleProperty.render(this.canvasRef, form, style)}
         <div
           ref={(c) => {
@@ -131,9 +125,4 @@ class StyleModal extends Component {
   }
 }
 
-export default Form.create({
-  onValuesChange: (props, changedValues, allValues) => {
-    const {onChange} = props;
-    onChange(props, changedValues, allValues);
-  },
-})(StyleModal);
+export default StyleModal;
